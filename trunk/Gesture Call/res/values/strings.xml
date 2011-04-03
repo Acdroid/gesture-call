@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, main!</string>
+    <string name="app_name">Gesture Call</string>
+    
+    
+    
+    <!-- Miscelanea -->
+	<string name = "first_time_toast">This is the first time that you use VibrationSMS\n....</string>
+	
+</resources>
