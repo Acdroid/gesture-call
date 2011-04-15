@@ -3,6 +3,7 @@ package ac.gestureCall.util.gestures;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Set;
 
 import android.content.Context;
 import android.gesture.Gesture;
@@ -47,18 +48,28 @@ public class GesturesRecognizer implements OnGesturePerformedListener{
 	 *  como por ejemplo RECONOCEDOR_BASICO
 	 */
 	public GesturesRecognizer (int id, Context context, GestureOverlayView ol, Handler han,int tipo) throws Exception{
-		Log.d("RECONOCEDOR","En constructor");
-
+//		Log.d("DEBUG", "recognicer " + id);
+		
 		if (Store == null) {
 			Store = GestureLibraries.fromRawResource(context, id);
 		}
 		if (!Store.load()){
-			throw new Exception("No se ha podido cargar ningun gesto en la libreria", new Throwable("La libreria esta vacia o ha fallado al cargar."));
+			Log.d("DEBUG","Store.load == null");
+			if ( Store.getGestureEntries() == null)
+				throw new Exception("No se ha podido cargar ningun gesto en la libreria", new Throwable("La libreria esta vacia o ha fallado al cargar."));
 		}
 		overlay = ol;
 		overlay.addOnGesturePerformedListener(this);
 		handler = han;
 		tipoReconocedor = tipo;
+
+//		DEBUG
+//		Set<String> entradas = Store.getGestureEntries();
+//		int i = 1;
+//		for (String name :entradas){
+//			Log.d("DEBUG", i + " " + name);
+//			i++;
+//		}
 	}
 
 	/**
@@ -74,7 +85,9 @@ public class GesturesRecognizer implements OnGesturePerformedListener{
 	public GesturesRecognizer(GestureLibrary lib, GestureOverlayView ol, Handler han,int tipo) throws Exception{
 		Store = lib;
 		if ( !Store.load()){
-			throw new Exception("No se ha podido cargar ningun gesto en la libreria", new Throwable("La libreria esta vacia o ha fallado al cargar."));
+			Log.d("DEBUG","Store.load == null");
+			if ( Store.getGestureEntries() == null)
+				throw new Exception("No se ha podido cargar ningun gesto en la libreria", new Throwable("La libreria esta vacia o ha fallado al cargar."));
 		}
 		overlay = ol;
 		overlay.addOnGesturePerformedListener(this);
@@ -106,7 +119,9 @@ public class GesturesRecognizer implements OnGesturePerformedListener{
 			Store = GestureLibraries.fromFile(mStoreFile);
 		}
 		if (!Store.load()){
-			throw new Exception("No se ha podido cargar ningun gesto en la libreria", new Throwable("La libreria esta vacia o ha fallado al cargar."));
+			Log.d("DEBUG","Store.load == null");
+			if ( Store.getGestureEntries() == null)
+				throw new Exception("No se ha podido cargar ningun gesto en la libreria", new Throwable("La libreria esta vacia o ha fallado al cargar."));
 		}
 
 		overlay = ol;
@@ -123,6 +138,44 @@ public class GesturesRecognizer implements OnGesturePerformedListener{
 		//		}
 
 	}
+	
+	
+	/**
+	 * <b>GesturesRecognizer</b><br><br>
+	 *    private GesturesRecognizer()<br>
+	 * <ul>Constructor de la clase GesturesRecognizer</ul><br><br>
+	 * @param File storeFile fichero con la libreria de gestos.
+	 * @param GestureOverLayView donde se pinta la imagen
+	 * @param Handler para recoger las predicciones cuando se produzcan
+	 * @param Tipo de reconocedor a usar. Usar constantes de la clase 
+	 *  como por ejemplo RECONOCEDOR_BASICO
+	 */
+	public GesturesRecognizer(File storeFile, GestureOverlayView ol,Handler han,int tipo) throws Exception{
+		mStoreFile = storeFile;
+	
+		if (Store == null) {
+			Store = GestureLibraries.fromFile(mStoreFile);
+		}
+		if (!Store.load()){
+			Log.d("DEBUG","Store.load == null");
+			if ( Store.getGestureEntries() == null)
+				throw new Exception("No se ha podido cargar ningun gesto en la libreria", new Throwable("La libreria esta vacia o ha fallado al cargar."));
+		}
+
+		overlay = ol;
+		overlay.addOnGesturePerformedListener(this);
+		handler = han;
+		tipoReconocedor = tipo;
+		//DEBUG
+		//		Set<String> entradas = Store.getGestureEntries();
+		//		int i = 1;
+		//		for (String name :entradas){
+		//			Log.d("recognizer", i + " " + name);
+		//			i++;
+		//		}
+
+	}
+
 
 
 
@@ -152,15 +205,15 @@ public class GesturesRecognizer implements OnGesturePerformedListener{
 		if (predictions.size() > 0){
 			if (predictions.get(0).score > 1.0) {
 
-//				DEBUG <----
-								Iterator<Prediction> i = predictions.iterator();
-								int j=1;
-								Log.d("GESTOS " + j , "Nuevo gesto!!" );
-								while (i.hasNext()){
-									Prediction p = i.next();
-									Log.d("GESTOS " + j , p.name + " " + p.score );
-									j++;
-								}				
+				//				DEBUG <----
+				Iterator<Prediction> i = predictions.iterator();
+				int j=1;
+				Log.d("GESTOS " + j , "Nuevo gesto!!" );
+				while (i.hasNext()){
+					Prediction p = i.next();
+					Log.d("GESTOS " + j , p.name + " " + p.score );
+					j++;
+				}				
 
 				Message msg = new Message();
 				msg.obj = predictions.get(0).name;
@@ -182,7 +235,7 @@ public class GesturesRecognizer implements OnGesturePerformedListener{
 	 * <ul>Devuelve la libreria de Gestos</ul><br><br>
 	 * @return Libreria de gestos.
 	 */
-	public static GestureLibrary getStore() {
+	public GestureLibrary getStore() {
 		return Store;
 	}
 
