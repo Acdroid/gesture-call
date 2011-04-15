@@ -2,11 +2,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/hello"
-    />
+    android:layout_height="fill_parent">
+    
+        <android.gesture.GestureOverlayView
+			android:id="@+id/gestures"
+			android:layout_width="fill_parent"
+			android:layout_height="0dip"
+			android:layout_weight="1.0"
+			android:gravity="center"
+
+			android:gestureStrokeType="multiple"
+			android:eventsInterceptionEnabled="true" android:orientation="vertical">
+    
+
+		<TextView  
+		
+		        android:gravity="center"
+		    	android:layout_width="fill_parent"
+		    	android:layout_height="wrap_content"
+		    	android:layout_alignParentLeft="true"
+		    	android:textColor="@android:color/white"
+		    	android:textSize="22dip"
+		    	android:textStyle="bold"
+		    	android:paddingTop="20dip"
+		   		android:text="@string/makeGesture"/>
+		 <LinearLayout
+		 	android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:gravity="bottom"
+		    android:padding="5dip">
+		    
+		    <Button
+		    	style="@android:style/ButtonBar"
+		    	android:layout_width="fill_parent"
+		    	android:layout_height="wrap_content"
+		    	android:text="@string/ini_Button"
+		    	android:textStyle="bold"
+		    	android:onClick="clickAdd"></Button>
+		    
+		    </LinearLayout>
+	   		
+	   	</android.gesture.GestureOverlayView>
+	   	
+	   	
+	   		
+	   		
+
 </LinearLayout>

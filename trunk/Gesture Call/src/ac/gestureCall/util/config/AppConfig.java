@@ -1,9 +1,14 @@
 
 package ac.gestureCall.util.config;
 
+import java.io.File;
+import java.io.IOException;
+
 import ac.gestureCall.R;
 import ac.gestureCall.util.mToast.mToast;
 import android.content.Context;
+import android.os.Environment;
+import android.util.Log;
 
 /**
  * AppConfig.java 30/03/2011
@@ -17,7 +22,10 @@ import android.content.Context;
  */
 public class AppConfig extends MSharedPreferences{
 	public static final String FIRST_TIME = "first_time";
+	public static final String NAME = "GestureCall";
 
+	private static final String dir = Environment.getExternalStorageDirectory() + "/GestureCall";
+	private final String fich = dir + "/gestures";
 
 
 	public AppConfig(Context mContext, String name){
@@ -34,7 +42,60 @@ public class AppConfig extends MSharedPreferences{
 			//Valores por defecto
 			put(false,FIRST_TIME); //Flag para indicar que no es la primera vez que se usa
 
+			createStructure(dir, fich);
+
+
 		}
 
 	}
+
+
+	/**
+	 * Crea la estructura hasta el archivo deseado
+	 * 
+	 * @param dirPath El directorio completo donde esta el archivo sin el nombre del archivo
+	 * @param fullPath
+	 * @throws NoContactFileException 
+	 * 
+	 * */
+	public static void createStructure(String dirPath, String fullPath){
+
+		File file = new File(fullPath);
+
+
+		File directory = new File(dirPath);		    	
+
+		//Intentamos crear los directorios si no existen ya
+		if (!directory.exists()) {
+			boolean okDir  = directory.mkdirs();
+
+			if (!okDir) {
+				Log.e("ConfigBackend", "Unable to create directory: "+dirPath);
+				//throw new NoFileException("Unable to create directory: "+dirPath);
+			}
+		}
+
+		//Intentamos pues crear el archivo
+		boolean okFile;
+		try {
+			okFile = file.createNewFile();
+
+
+			if (!okFile) {
+				Log.e("ConfigBackend", "Unable to create file: "+fullPath);
+				//throw new NoFileException("Unable to create file: "+fullPath);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+
+		Log.i("ConfigBackend", "Config file created");
+
+
+
+	}
+
 }

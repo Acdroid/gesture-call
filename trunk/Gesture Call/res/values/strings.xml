@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, main!</string>
     <string name="app_name">Gesture Call</string>
+    <string name = "makeGesture">Make gesture to call</string>
     
-    
+    <!--  Button -->
+    <string name = "ini_Button">Add gesture</string>
+    <string name = "button_done">Create</string>
+    <string name = "cancelGesture">Cancel</string>
     
     <!-- Miscelanea -->
-	<string name = "first_time_toast">This is the first time that you use VibrationSMS\n....</string>
+	<string name = "first_time_toast">This is the first time you use Gesture Call\n....</string>
+	<string name = "gesto_anadido">Gesture add correctly</string>
 	
 </resources>

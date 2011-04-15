@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Gesture Call</string>
+    <string name = "makeGesture">Haz un gesto para llamar</string>
+    
+    
+    <!--  Button -->
+    <string name = "ini_Button">Añadir gesto</string>
+    <string name = "button_done">Crear</string>
+    <string name = "cancelGesture">Cancelar</string>
+    
+    <!-- Miscelanea -->
+	<string name = "first_time_toast">Esta es la primera vez que usas Gesture Call\n....</string>
+	<string name = "gesto_anadido">Gesto añadido Correctamente</string>
+	
+	
+</resources>
