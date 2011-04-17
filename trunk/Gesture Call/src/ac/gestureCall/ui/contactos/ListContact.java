@@ -16,7 +16,7 @@ import android.database.Cursor;
 import android.gesture.GestureLibrary;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Data;
 import android.util.Log;
 import android.view.View;
@@ -31,7 +31,8 @@ import android.widget.Toast;
 public final class ListContact extends ListActivity
 {
 	public static final int ID = 2;
-	
+	public static final String KEY_NAME ="NAME";
+	public static final String KEY_PHONE ="PHONE";
 	public GestureLibrary store;
 
 	public Cursor cursor;
@@ -70,16 +71,29 @@ public final class ListContact extends ListActivity
 	private Cursor getContacts()
 	{
         // Run query
-        Uri uri = ContactsContract.Contacts.CONTENT_URI;
-        String[] projection = new String[] {
-                ContactsContract.Contacts._ID,
-                ContactsContract.Contacts.DISPLAY_NAME
-        };
-        String selection = ContactsContract.Contacts.IN_VISIBLE_GROUP + " = '1'";
-        
-        String[] selectionArgs = null;
-        String sortOrder = ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
+//        Uri uri = ContactsContract.Contacts.CONTENT_URI;
+//        String[] projection = new String[] {
+//                ContactsContract.Contacts._ID,
+//                ContactsContract.Contacts.DISPLAY_NAME
+//        };
+//        String selection = ContactsContract.Contacts.IN_VISIBLE_GROUP + " = '1'";
+//        
+//        String[] selectionArgs = null;
+//        String sortOrder = ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
 
+		
+		Uri uri =  Data.CONTENT_URI;
+		String[] projection = new String []{
+				Data._ID,
+				Data.DISPLAY_NAME,
+				Phone.NUMBER,
+				Phone.TYPE 
+		};
+		String selection = Data.MIMETYPE + "='" + Phone.CONTENT_ITEM_TYPE + "' AND "
+        		+ Phone.NUMBER + " IS NOT NULL";
+		
+		String[] selectionArgs = null;
+		String sortOrder = Data.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
         return managedQuery(uri, projection, selection, selectionArgs, sortOrder);
     }
 
@@ -91,7 +105,12 @@ public final class ListContact extends ListActivity
 		Toast.makeText(this, "click", Toast.LENGTH_SHORT).show();
 		Intent i = new Intent(ListContact.this,CreadorGestos.class);
 		String nombre = cursor.getString(cursor.getColumnIndex(Data.DISPLAY_NAME));
-		i.putExtra("NOMBRE", nombre);
+		String phone= cursor.getString(cursor.getColumnIndex(Phone.NUMBER));
+		
+		Log.d("DEBUG","phone " + phone);
+		
+		i.putExtra(KEY_NAME, nombre);
+		i.putExtra(KEY_PHONE, phone);
 		startActivityForResult(i, ID);
 	}
 	

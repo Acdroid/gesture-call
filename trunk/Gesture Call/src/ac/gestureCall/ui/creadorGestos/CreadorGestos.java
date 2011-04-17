@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import ac.gestureCall.R;
 import ac.gestureCall.ui.main;
+import ac.gestureCall.ui.contactos.ListContact;
 import ac.gestureCall.util.mToast.mToast;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -34,6 +35,7 @@ public class CreadorGestos extends Activity {
 	public Gesture gestureActual=null;
 	public TextView texto;
 	public String nombreContacto="";
+	public String phoneContacto="";
 
 	private static final int LETRA_NUEVA = 1;
 	private static final int OK_ERROR= 2;
@@ -50,7 +52,8 @@ public class CreadorGestos extends Activity {
 
 		Bundle bundle = getIntent().getExtras();
 		if(bundle!=null){
-			nombreContacto = bundle.getString("NOMBRE");
+			nombreContacto = bundle.getString(ListContact.KEY_NAME);
+			phoneContacto = bundle.getString(ListContact.KEY_PHONE);
 			texto.setText(nombreContacto);
 		}
 
@@ -92,8 +95,8 @@ public class CreadorGestos extends Activity {
 
 			store = main.getStore();
 			
-			store.removeEntry(nombreContacto);
-			store.addGesture(nombreContacto, mGesture);
+			store.removeEntry(phoneContacto);
+			store.addGesture(phoneContacto, mGesture);
 			store.save();
 
 			mToast.Make(this, getResources().getString(R.string.gesto_anadido),0);
