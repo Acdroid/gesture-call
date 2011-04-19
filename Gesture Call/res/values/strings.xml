@@ -8,8 +8,69 @@
     <string name = "button_done">Create</string>
     <string name = "cancelGesture">Cancel</string>
     
+    <!--  Menu -->
+    <string name ="salir">Exit</string>
+    <string name ="opciones">Options</string>
+    <string name ="menu_edit">Gestures</string>
+    
+    <!--  Dialog -->
+    <string name = "di_salir">"Are you sure you want exit?"</string>
+    
     <!-- Miscelanea -->
 	<string name = "first_time_toast">This is the first time you use Gesture Call\n....</string>
 	<string name = "gesto_anadido">Gesture add correctly</string>
+	<string name = "yes">Yes</string>
+	<string name = "no">No</string>
+	
+	<!-- Label, button used to add a gestures -->
+	<string name="button_add">Entrenar</string>
+	<!-- Label, button used to reload all gestures -->
+	<string name="button_reload">Recargar</string>
+	<!-- Label, button used to cancel the operation of adding a gesture -->
+	<string name="button_discard">Atrás</string>
+	<!-- Label, button used to save a gesture newly created -->
+	<string name="button_doneeeeee">Añadir</string>
+
+
+
+
+
+	<!-- Label, prompt asking the user to enter the name of the gesture -->
+	<string name="prompt_gesture_name">Nombre</string>
+	<!-- Error message, informs the user he needs to enter a name before saving 
+		a gesture -->
+	<string name="error_missing_name">Debes introducir un nombre</string>
+	<string name="error_missing_sms">No se pueden mandar SMS vacios</string>
+	<!-- success message, tells the user where the gesture was saved -->
+	<string name="save_success">Gesto guardado en %s</string>
+	<!-- Buttons in Rename gesture dialog box -->
+	<string name="rename_action">OK</string>
+	<!-- Buttons in Rename gesture dialog box -->
+	<string name="cancel_action">Cancel</string>
+	<!-- Message displayed when the user opens the gestures settings screen -->
+	<string name="gestures_loading">Cargando gestos...</string>
+	<!-- Message displayed when the user has no gestures -->
+	<string name="gestures_empty">No hay gestos</string>
+	<!-- Title of the screen used to view/manage gestures -->
+	<string name="gestures_activity">Gestos</string>
+	<!-- Noun, menu item used to rename a gesture -->
+	<string name="gestures_rename">Renombrar</string>
+	<!-- Noun, menu item used to remove a gesture -->
+	<string name="gestures_delete">Borrar</string>
+	<!-- Message displayed when a gesture is successfully deleted -->
+	<string name="gestures_delete_success">Gesto Borrado</string>
+	<!-- Title of dialog box -->
+	<string name="gestures_rename_title">Renombrar gesto</string>
+	<!-- Label of gesture name field in Rename gesture dialog box -->
+	<string name="gestures_rename_label">Nombre del Gesto</string>
+	<!-- Message, displayed when the sdcard cannot be found, 1st parameter is 
+		the name of the file that stores the gestures -->
+	<string name="gestures_error_loading">No se puede cargar %s. Asegurate de que la tarjeta
+		SD está montada.</string>
+
+	
+	
+	
+	
 	
 </resources>

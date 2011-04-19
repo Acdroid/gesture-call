@@ -28,6 +28,15 @@
 	       		android:textColor="@color/black"
 	       		android:textStyle="bold" 
 	       		android:maxLines="1"/>
+	        <TextView android:text="@+id/item_lista_numero"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:id="@+id/item_lista_numero"
+	            android:singleLine="true"
+	            android:ellipsize="marquee"
+	       		android:textSize="18dip"
+	       		android:textColor="@android:color/darker_gray"
+	       		android:textStyle="bold"/>
 	       		
 	</LinearLayout>
 </LinearLayout>

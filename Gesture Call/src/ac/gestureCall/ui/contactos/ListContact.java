@@ -51,9 +51,10 @@ public final class ListContact extends ListActivity
 		startManagingCursor(cursor);
 		String[] fields = new String[] {
 				Data.DISPLAY_NAME,
+				Phone.NUMBER
 		};
 
-        int[] to = new int[] { R.id.item_lista_nombre};
+        int[] to = new int[] { R.id.item_lista_nombre,R.id.item_lista_numero};
 
 		SimpleCursorAdapter adapter = new mySimpleCursorAdapter(this, R.layout.item_lista_contactos, cursor,
 				fields, to);

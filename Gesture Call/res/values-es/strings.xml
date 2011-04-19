@@ -9,9 +9,20 @@
     <string name = "button_done">Crear</string>
     <string name = "cancelGesture">Cancelar</string>
     
+    <!--  Menu -->
+    <string name ="salir">Salir</string>
+    <string name ="opciones">Opciones</string>
+    <string name ="menu_edit">Gestos</string>
+    
+    <!--  Dialog -->
+    <string name = "di_salir">"¿Seguro que quieres salir de la aplicación?"</string>
+    
     <!-- Miscelanea -->
 	<string name = "first_time_toast">Esta es la primera vez que usas Gesture Call\n....</string>
 	<string name = "gesto_anadido">Gesto añadido Correctamente</string>
+	<string name = "yes">Sí</string>
+	<string name = "no">No</string>
+	
 	
 	
 </resources>
