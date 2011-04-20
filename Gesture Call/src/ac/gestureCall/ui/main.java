@@ -26,6 +26,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
+
 public class main extends Activity {
     
 	public static final String NO_PREDICCION = "Sin_Resultado";
@@ -35,9 +39,12 @@ public class main extends Activity {
 	public static final int RESULT_REALOAD_GESTURES = 3;
 	public static final int ID = 0;
 	public static final int DIALOG_SALIR = 0;
+	public static final String MY_AD_UNIT_ID = "a14daeadcc3acb6";
 	
 	public GestureOverlayView overlay;
 	public static GesturesRecognizer gr;
+	
+	public AdView adView;
 	
 	private final String dir = Environment.getExternalStorageDirectory() + "/GestureCall";
 	private final String fich = "gestures";
@@ -65,6 +72,10 @@ public class main extends Activity {
     private void init(){
     	
     	mContext = this;
+    	
+        // Look up the AdView as a resource and load a request.
+        adView = (AdView)this.findViewById(R.id.Publicidad);
+        adView.loadAd(new AdRequest());
     	
     	AppConfig ap = new AppConfig(this, AppConfig.NAME);
     	overlay = (GestureOverlayView)findViewById(R.id.gestures);
