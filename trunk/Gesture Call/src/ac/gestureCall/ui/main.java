@@ -30,6 +30,9 @@ public class main extends Activity {
     
 	public static final String NO_PREDICCION = "Sin_Resultado";
 	public static final int RESULT_OK = 0;
+	public static final int RESULT_ERROR = 1;
+	public static final int RESULT_SALIR = 2;
+	public static final int RESULT_REALOAD_GESTURES = 3;
 	public static final int ID = 0;
 	public static final int DIALOG_SALIR = 0;
 	
@@ -123,13 +126,32 @@ public class main extends Activity {
 			return true;
 		case R.id.me_gestures:
 			Intent i = new Intent(main.this,GestureBuilderActivity.class);
-			mContext.startActivity(i);
+			((Activity) mContext).startActivityForResult(i,ID);
 			return true;
 		case R.id.me_opciones:
 			mToast.Make(this, "Pulsado opciones en general", 0);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
+		}
+	}
+	
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == ID){
+			switch (resultCode){
+			case RESULT_OK:
+				break;
+			case RESULT_ERROR:
+				break;
+			case RESULT_SALIR:
+				main.this.finish();
+			case RESULT_REALOAD_GESTURES:
+				break;
+			default:
+				
+			}
+			
+		getStore().load();
 		}
 	}
 

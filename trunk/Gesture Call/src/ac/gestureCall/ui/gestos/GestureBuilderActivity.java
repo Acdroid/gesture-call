@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import ac.gestureCall.R;
+import ac.gestureCall.ui.main;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
@@ -84,7 +85,7 @@ public class GestureBuilderActivity extends ListActivity {
         setListAdapter(mAdapter);
 
         if (sStore == null) {
-            sStore = GestureLibraries.fromFile(mStoreFile);
+            sStore = main.getStore();
         }
         mEmpty = (TextView) findViewById(android.R.id.empty);
         loadGestures();

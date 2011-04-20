@@ -4,19 +4,19 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/colorBackground"
+   
     >
     <ListView android:id="@android:id/list" 
     
     	 android:layout_width="fill_parent"
          android:layout_height="wrap_content"
          android:layout_weight="1"
-         android:cacheColorHint="@color/colorBackground"
+         android:cacheColorHint="#FFFFFFFF"
          android:fastScrollEnabled="true"
          />
          <TextView
 		    android:id="@android:id/empty"
 		    android:layout_width="fill_parent"
 		    android:layout_height="fill_parent"
-		    android:text="no se han encontrado registros"  />
+		    android:text="no se han encontrado registros"  /> 
 </LinearLayout>
