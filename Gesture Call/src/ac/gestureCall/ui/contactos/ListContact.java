@@ -6,6 +6,10 @@
 package ac.gestureCall.ui.contactos;
 
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
+
 import ac.gestureCall.R;
 import ac.gestureCall.ui.main;
 import ac.gestureCall.ui.creadorGestos.CreadorGestos;
@@ -130,12 +134,15 @@ public final class ListContact extends ListActivity
 	private class mySimpleCursorAdapter extends SimpleCursorAdapter{
 
 		private Context mContext;
+		Set<String> gestosNoNull;
+		
 
 		public mySimpleCursorAdapter(Context context, int layout, Cursor c,
 				String[] from, int[] to) {
 			super(context, layout, c, from, to);
 
 			this.mContext = context;
+			gestosNoNull = store.getGestureEntries();			
 		}
 
 		@Override
@@ -144,24 +151,29 @@ public final class ListContact extends ListActivity
 			//Cambiamos el color de fondo
 			LinearLayout l = (LinearLayout) view.findViewById(R.id.lay_item);
 			TextView t = (TextView) view.findViewById(R.id.item_lista_nombre);
-			if (cursor.getPosition() % 2 == 0){
-				l.setBackgroundResource(android.R.color.background_dark);
-				t.setTextColor(mContext.getResources().getColor(android.R.color.white));
-			}
-			else{
-				l.setBackgroundResource(android.R.color.background_light);
-				t.setTextColor(mContext.getResources().getColor(android.R.color.background_dark));
-			}
+			t.setTextColor(mContext.getResources().getColor(android.R.color.white));
+//			if (cursor.getPosition() % 2 == 0){
+//				l.setBackgroundResource(R.drawable.linearlayout_color_gradient_down);
+//				
+//			}
+//			else{
+//				l.setBackgroundResource(R.drawable.linearlayout_color_gradient_up);
+//			}
 			super.bindView(view, context, cursor);
 			
 			//Comprobamos si hay gesto o no
-			String contacto =t.getText().toString();
-			Log.d("DEBUG","asdf " + contacto);
-			if (store.getGestures(contacto) != null){
-				ImageView i = (ImageView)view.findViewById(R.id.item_list_image);
+			
+			
+			TextView t2 = (TextView) view.findViewById(R.id.item_lista_numero);
+			String phone =t2.getText().toString();
+			Log.d("DEBUG", phone + " " + gestosNoNull.contains(phone));
+			ImageView i = (ImageView)view.findViewById(R.id.item_list_image);
+			if (gestosNoNull.contains(phone) == true){
+				Log.d("DEBUG", "entro");
 				i.setImageResource(R.drawable.btn_check_on);
-				
-				
+			}
+			else{
+				i.setImageResource(R.drawable.btn_check_off);
 			}
 		}
 	}

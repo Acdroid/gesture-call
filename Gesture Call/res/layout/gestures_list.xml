@@ -6,7 +6,7 @@
     android:layout_height="fill_parent"
 
     android:orientation="vertical"
-    android:background="@color/colorBackground">
+    android:background="@drawable/linearlayout_color_gradient_down">
 
     <ListView
         android:id="@android:id/list"
@@ -14,7 +14,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="1.0"
-        android:background="@color/colorBackground"/>
+        android:background="@drawable/linearlayout_color_gradient_down"/>
 
     <TextView
         android:id="@android:id/empty"
