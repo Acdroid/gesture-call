@@ -35,13 +35,47 @@
 		    android:gravity="bottom"
 		    android:padding="5dip">
 		    
-		    <Button
-		    	style="@android:style/ButtonBar"
-		    	android:layout_width="fill_parent"
-		    	android:layout_height="wrap_content"
-		    	android:text="@string/ini_Button"
-		    	android:textStyle="bold"
-		    	android:onClick="clickAdd"></Button>
+		    
+		    <LinearLayout
+		        style="@android:style/ButtonBar"
+		
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		
+		        android:orientation="horizontal">
+		
+		        <Button
+		            android:id="@+id/ButtonBar"
+		                
+		            android:layout_width="0dip"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1"
+		
+		            android:onClick="clickAdd"
+		            android:text="@string/ini_Button"/>
+		    
+		        <Button
+		        	android:id="@+id/main_button_edit"
+		            android:layout_width="0dip"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1"
+		            
+		            android:onClick="clickEdit"
+		            android:text="@string/button_edit_gesture" />
+		            
+		        <Button
+		        	android:id="@+id/main_button_options"
+		            android:layout_width="0dip"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1"
+		            
+		            android:onClick="clickOpciones"
+		            android:text="@string/opciones" />
+		            
+		            
+		    
+		    </LinearLayout>
+		    
 		    <com.google.ads.AdView
  	 			android:id="@+id/Publicidad"
                 android:layout_width="fill_parent"

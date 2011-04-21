@@ -21,7 +21,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="1.0"
-		android:textColor="@color/black"
+		android:textColor="@color/white"
         android:gravity="center"
         android:text="@string/gestures_loading"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -32,30 +32,49 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
 
-        android:orientation="horizontal">
+        android:orientation="vertical">
+        
+        <TextView
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:text="@string/info_list_gestos"
+        	android:textStyle="bold"
+        	android:textColor="@color/black"
+        	android:gravity="center"
+        	android:padding="5dip"></TextView>
+        
+        
+        <LinearLayout
+	
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	
+	        android:orientation="horizontal">
+	        <Button
+	            android:id="@+id/reloadButton"
+	            android:onClick="reloadGestures"
+	
+	            android:layout_width="0dip"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	
+	            android:enabled="false"
+	            android:text="@string/button_reload" />
+	
+	        <Button
+	        	android:id="@+id/gb_button_volver"
+	            android:onClick="clickReturn"
+	
+	            android:layout_width="0dip"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            
+	            android:enabled="false"
+	
+	            android:text="@string/button_volver" />
 
-        <Button
-            android:id="@+id/addButton"
-            android:onClick="addGesture"
 
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-
-            android:enabled="false"
-            android:text="@string/button_add" />
-
-        <Button
-            android:id="@+id/reloadButton"
-            android:onClick="reloadGestures"
-
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-
-            android:enabled="false"
-            android:text="@string/button_reload" />
-
+		</LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
