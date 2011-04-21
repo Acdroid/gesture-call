@@ -6,7 +6,8 @@
     <!--  Button -->
     <string name = "ini_Button">Add gesture</string>
     <string name = "button_done">Create</string>
-    <string name = "cancelGesture">Cancel</string>
+    <string name = "cancelGesture">Cancel Gesture</string>
+    <string name = "cancelGesture2">Return</string>
     
     <!--  Menu -->
     <string name ="salir">Exit</string>

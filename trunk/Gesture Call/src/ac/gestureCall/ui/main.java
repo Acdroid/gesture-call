@@ -37,6 +37,7 @@ public class main extends Activity {
 	public static final int RESULT_ERROR = 1;
 	public static final int RESULT_SALIR = 2;
 	public static final int RESULT_REALOAD_GESTURES = 3;
+	public static final int RESULT_GESTO_ADD_OK = 4;
 	public static final int ID = 0;
 	public static final int DIALOG_SALIR = 0;
 	public static final String MY_AD_UNIT_ID = "a14daeadcc3acb6";
@@ -157,12 +158,13 @@ public class main extends Activity {
 			case RESULT_SALIR:
 				main.this.finish();
 			case RESULT_REALOAD_GESTURES:
+				getStore().load();
 				break;
 			default:
 				
 			}
 			
-		getStore().load();
+			getStore().load();
 		}
 	}
 

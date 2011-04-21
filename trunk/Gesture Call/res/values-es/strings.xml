@@ -7,7 +7,8 @@
     <!--  Button -->
     <string name = "ini_Button">Añadir gesto</string>
     <string name = "button_done">Crear</string>
-    <string name = "cancelGesture">Cancelar</string>
+    <string name = "cancelGesture">Cancelar Gesto</string>
+    <string name = "cancelGesture2">Volver</string>
     
     <!--  Menu -->
     <string name ="salir">Salir</string>
