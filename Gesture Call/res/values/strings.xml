@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Gesture Call</string>
-    <string name = "makeGesture">Make gesture to call</string>
+    <string name = "makeGesture">Make a gesture to call a contact</string>
     
     <!--  Button -->
-    <string name = "ini_Button">Add gesture</string>
+    <string name = "ini_Button">Add</string>
     <string name = "button_done">Create</string>
     <string name = "cancelGesture">Cancel Gesture</string>
     <string name = "cancelGesture2">Return</string>
+    <string name = "button_volver">Return</string>
+    <string name = "button_edit_gesture">Gestures</string>
     
     <!--  Menu -->
     <string name ="salir">Exit</string>
     <string name ="opciones">Options</string>
     <string name ="menu_edit">Gestures</string>
-    
+  
     <!--  Dialog -->
-    <string name = "di_salir">"Are you sure you want exit?"</string>
+    <string name = "di_salir">"Are you sure that you want to exit?"</string>
+    <string name="gestures_edit">Edit Gesture</string>
+    <string name="gestures_delete">Delete</string>
     
     <!-- Miscelanea -->
 	<string name = "first_time_toast">This is the first time you use Gesture Call\n....</string>
-	<string name = "gesto_anadido">Gesture add correctly</string>
+	<string name = "gesto_anadido">Gesture correctly added</string>
 	<string name = "yes">Yes</string>
 	<string name = "no">No</string>
+	<string name = "no_gesto">The gesture has not been recognized</string>
+	<string name = "info_list_gestos">Long click on an item to edit options</string>
 	
 	<!-- Label, button used to add a gestures -->
 	<string name="button_add">Entrenar</string>
@@ -55,9 +61,9 @@
 	<!-- Title of the screen used to view/manage gestures -->
 	<string name="gestures_activity">Gestos</string>
 	<!-- Noun, menu item used to rename a gesture -->
-	<string name="gestures_rename">Renombrar</string>
+	
 	<!-- Noun, menu item used to remove a gesture -->
-	<string name="gestures_delete">Borrar</string>
+	
 	<!-- Message displayed when a gesture is successfully deleted -->
 	<string name="gestures_delete_success">Gesto Borrado</string>
 	<!-- Title of dialog box -->

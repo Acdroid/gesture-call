@@ -1,6 +1,7 @@
 package ac.gestureCall.ui.gestos;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -9,6 +10,8 @@ import java.util.Set;
 
 import ac.gestureCall.R;
 import ac.gestureCall.ui.main;
+import ac.gestureCall.ui.contactos.ListContact;
+import ac.gestureCall.ui.creadorGestos.CreadorGestos;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
@@ -16,16 +19,20 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.gesture.Gesture;
-import android.gesture.GestureLibraries;
 import android.gesture.GestureLibrary;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.Data;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -46,8 +53,9 @@ public class GestureBuilderActivity extends ListActivity {
     private static final int STATUS_CANCELLED = 1;
     private static final int STATUS_NO_STORAGE = 2;
     private static final int STATUS_NOT_LOADED = 3;
+    private static final int ID = 3;
 
-    private static final int MENU_ID_RENAME = 1;
+    private static final int MENU_ID_EDIT = 1;
     private static final int MENU_ID_REMOVE = 2;
 
     private static final int DIALOG_RENAME_GESTURE = 1;
@@ -74,6 +82,9 @@ public class GestureBuilderActivity extends ListActivity {
     private Dialog mRenameDialog;
     private EditText mInput;
     private NamedGesture mCurrentRenameGesture;
+    
+    public ArrayList<String> nombres;
+    public ArrayList<String> numeros;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +116,12 @@ public class GestureBuilderActivity extends ListActivity {
     	
 //        Intent intent = new Intent(this, EntrenadorGestos.class);
 //        startActivityForResult(intent, REQUEST_NEW_GESTURE);
+    }
+    
+    public void clickReturn(View v){
+    	sStore.save();
+    	setResult(main.RESULT_REALOAD_GESTURES);
+    	GestureBuilderActivity.this.finish();
     }
 
     @Override
@@ -184,7 +201,7 @@ out:        for (String name : entries) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
         menu.setHeaderTitle(((TextView) info.targetView).getText());
 
-        menu.add(0, MENU_ID_RENAME, 0, R.string.gestures_rename);
+        menu.add(0, MENU_ID_EDIT, 0, R.string.gestures_edit);
         menu.add(0, MENU_ID_REMOVE, 0, R.string.gestures_delete);
     }
 
@@ -195,8 +212,8 @@ out:        for (String name : entries) {
         final NamedGesture gesture = (NamedGesture) menuInfo.targetView.getTag();
 
         switch (item.getItemId()) {
-            case MENU_ID_RENAME:
-                renameGesture(gesture);
+            case MENU_ID_EDIT:
+                editGesture(gesture);
                 return true;
             case MENU_ID_REMOVE:
                 deleteGesture(gesture);
@@ -206,9 +223,19 @@ out:        for (String name : entries) {
         return super.onContextItemSelected(item);
     }
 
-    private void renameGesture(NamedGesture gesture) {
-        mCurrentRenameGesture = gesture;
-        showDialog(DIALOG_RENAME_GESTURE);
+    private void editGesture(NamedGesture gesture) {
+        
+    	Intent i = new Intent(GestureBuilderActivity.this,CreadorGestos.class);
+		String nombre = encuentraNombre(gesture.name);
+		String phone= gesture.name;
+		
+		Log.d("DEBUG","phone " + phone);
+		
+		i.putExtra(ListContact.KEY_NAME, nombre);
+		i.putExtra(ListContact.KEY_PHONE, phone);
+		startActivityForResult(i, ID);
+    	
+    	
     }
 
     @Override
@@ -304,12 +331,67 @@ out:        for (String name : entries) {
 
         Toast.makeText(this, R.string.gestures_delete_success, Toast.LENGTH_SHORT).show();
     }
+    
+    public String encuentraNombre(String number){
+        String aux = "";
+        int index = 0;
+        
+        for(String i : numeros){
+        	if(i.equals(number)){
+        		aux = nombres.get(index);
+        		break;
+        	}
+        	index++;
+        		
+        }
+        
+        if (aux.equals(""))
+        	return number;
+        else
+        	return aux;
+    }
 
     private class GesturesLoadTask extends AsyncTask<Void, NamedGesture, Integer> {
         private int mThumbnailSize;
         private int mThumbnailInset;
         private int mPathColor;
 
+        public void crearArraysNumerosNombres(){
+        	
+        	numeros = new ArrayList<String>();
+        	nombres = new ArrayList<String>();
+        	
+        	Uri uri =  Data.CONTENT_URI;
+    		String[] projection = new String []{
+    					Data.DISPLAY_NAME
+    		};
+    		String[] selectionArgs = null;
+    		String sortOrder = Data.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
+        	
+        	final Set<String> entradas = sStore.getGestureEntries();
+        	for (String g : entradas){
+        		numeros.add(g);
+        		
+        		String selection = Phone.NUMBER +"='" + g + "'";
+        		Cursor c =  managedQuery(uri, projection, selection, selectionArgs, sortOrder);
+        		startManagingCursor(c);
+        		if(c.moveToFirst()){ 
+        			nombres.add(c.getString(c.getColumnIndex(Data.DISPLAY_NAME)));       			
+        		}
+        		else{
+        			nombres.add(g);
+        		}
+        			
+        		
+        	}
+        	Log.d("DEBUG","empioezo");
+        	for(String s : nombres){
+        		Log.d("DEBUG",s);
+        	}
+        	
+        	
+        }
+        
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -319,9 +401,10 @@ out:        for (String name : entries) {
             mThumbnailInset = (int) resources.getDimension(R.dimen.gesture_thumbnail_inset);
             mThumbnailSize = (int) resources.getDimension(R.dimen.gesture_thumbnail_size);
 
-            findViewById(R.id.addButton).setEnabled(false);
+            findViewById(R.id.gb_button_volver).setEnabled(false);
             findViewById(R.id.reloadButton).setEnabled(false);
             
+              
             mAdapter.setNotifyOnChange(false);            
             mAdapter.clear();
         }
@@ -333,6 +416,8 @@ out:        for (String name : entries) {
                 return STATUS_NO_STORAGE;
             }
 
+            crearArraysNumerosNombres();
+            
             final GestureLibrary store = sStore;
 
             if (store.load()) {
@@ -382,7 +467,7 @@ out:        for (String name : entries) {
                 mEmpty.setText(getString(R.string.gestures_error_loading,
                         mStoreFile.getAbsolutePath()));
             } else {
-                findViewById(R.id.addButton).setEnabled(true);
+                findViewById(R.id.gb_button_volver).setEnabled(true);
                 findViewById(R.id.reloadButton).setEnabled(true);
                 checkForEmpty();
             }
@@ -416,9 +501,12 @@ out:        for (String name : entries) {
 
             final NamedGesture gesture = getItem(position);
             final TextView label = (TextView) convertView;
+            
+            String aux = encuentraNombre(gesture.name);
 
             label.setTag(gesture);
-            label.setText(gesture.name);
+            //label.setText(gesture.name);
+            label.setText(aux);
             label.setCompoundDrawablesWithIntrinsicBounds(mThumbnails.get(gesture.gesture.getID()),
                     null, null, null);
 

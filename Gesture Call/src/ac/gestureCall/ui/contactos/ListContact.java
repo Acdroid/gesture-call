@@ -27,7 +27,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public final class ListContact extends ListActivity
@@ -105,7 +104,6 @@ public final class ListContact extends ListActivity
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		Toast.makeText(this, "click", Toast.LENGTH_SHORT).show();
 		Intent i = new Intent(ListContact.this,CreadorGestos.class);
 		String nombre = cursor.getString(cursor.getColumnIndex(Data.DISPLAY_NAME));
 		String phone= cursor.getString(cursor.getColumnIndex(Phone.NUMBER));

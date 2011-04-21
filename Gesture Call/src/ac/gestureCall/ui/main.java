@@ -1,6 +1,8 @@
 package ac.gestureCall.ui;
 
 
+import java.util.HashMap;
+
 import ac.gestureCall.R;
 import ac.gestureCall.ui.contactos.ListContact;
 import ac.gestureCall.ui.gestos.GestureBuilderActivity;
@@ -61,7 +63,8 @@ public class main extends Activity {
 	
 	public Context mContext;
 	
-    @Override
+
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
@@ -137,8 +140,7 @@ public class main extends Activity {
 			showDialog(DIALOG_SALIR);
 			return true;
 		case R.id.me_gestures:
-			Intent i = new Intent(main.this,GestureBuilderActivity.class);
-			((Activity) mContext).startActivityForResult(i,ID);
+			clickEdit(null);
 			return true;
 		case R.id.me_opciones:
 			mToast.Make(this, "Pulsado opciones en general", 0);
@@ -173,7 +175,7 @@ public class main extends Activity {
     public void call(String prediccion){
     	
     	if (prediccion.equals("")){
-    		mToast.Make(this, "No se ha reconocido el gesto", 0);
+    		mToast.Make(this, getResources().getString(R.string.no_gesto), 0);
     		return;
     	}
     	
@@ -186,12 +188,21 @@ public class main extends Activity {
     }
     
     public void clickAdd(View v){
-    	mToast.Make(this, "Añadir gesto",0);
     	Intent i = new Intent(main.this,ListContact.class);
     	startActivityForResult(i, ID);
+    }
+    
+    public void clickEdit(View v){
+		Intent i = new Intent(main.this,GestureBuilderActivity.class);
+		startActivityForResult(i,ID);
+    }
+    
+    public void clickOpciones(View v){
+    	
     }
     
     public static GestureLibrary getStore(){
     	return gr.getStore();    	
     }
+    
 }

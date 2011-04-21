@@ -3,7 +3,6 @@ package ac.gestureCall.util.gestures;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Set;
 
 import android.content.Context;
 import android.gesture.Gesture;
@@ -54,7 +53,6 @@ public class GesturesRecognizer implements OnGesturePerformedListener{
 			Store = GestureLibraries.fromRawResource(context, id);
 		}
 		if (!Store.load()){
-			Log.d("DEBUG","Store.load == null");
 			if ( Store.getGestureEntries() == null)
 				throw new Exception("No se ha podido cargar ningun gesto en la libreria", new Throwable("La libreria esta vacia o ha fallado al cargar."));
 		}
