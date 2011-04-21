@@ -12,11 +12,8 @@ import ac.gestureCall.R;
 import ac.gestureCall.ui.main;
 import ac.gestureCall.ui.contactos.ListContact;
 import ac.gestureCall.ui.creadorGestos.CreadorGestos;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -31,7 +28,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Data;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -40,7 +36,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,9 +53,7 @@ public class GestureBuilderActivity extends ListActivity {
     private static final int MENU_ID_EDIT = 1;
     private static final int MENU_ID_REMOVE = 2;
 
-    private static final int DIALOG_RENAME_GESTURE = 1;
 
-    private static final int REQUEST_NEW_GESTURE = 1;
     
     // Type: long (id)
     private static final String GESTURES_INFO_ID = "gestures.info_id";
@@ -69,6 +62,7 @@ public class GestureBuilderActivity extends ListActivity {
 
     private final Comparator<NamedGesture> mSorter = new Comparator<NamedGesture>() {
         public int compare(NamedGesture object1, NamedGesture object2) {
+        	//FIXME para ordenar por nombre     	
             return object1.name.compareTo(object2.name);
         }
     };
@@ -79,8 +73,6 @@ public class GestureBuilderActivity extends ListActivity {
     private GesturesLoadTask mTask;
     private TextView mEmpty;
 
-    private Dialog mRenameDialog;
-    private EditText mInput;
     private NamedGesture mCurrentRenameGesture;
     
     public ArrayList<String> nombres;
@@ -130,7 +122,7 @@ public class GestureBuilderActivity extends ListActivity {
         
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
-                case REQUEST_NEW_GESTURE:
+                case main.RESULT_GESTO_ADD_OK:
                     loadGestures();
                     break;
             }
@@ -154,7 +146,6 @@ public class GestureBuilderActivity extends ListActivity {
             mTask = null;
         }
 
-        cleanupRenameDialog();
     }
 
     private void checkForEmpty() {
@@ -238,85 +229,6 @@ out:        for (String name : entries) {
     	
     }
 
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        if (id == DIALOG_RENAME_GESTURE) {
-            return createRenameDialog();
-        }
-        return super.onCreateDialog(id);
-    }
-
-    @Override
-    protected void onPrepareDialog(int id, Dialog dialog) {
-        super.onPrepareDialog(id, dialog);
-        if (id == DIALOG_RENAME_GESTURE) {
-            mInput.setText(mCurrentRenameGesture.name);
-        }
-    }
-
-    private Dialog createRenameDialog() {
-        final View layout = View.inflate(this, R.layout.dialog_rename, null);
-        mInput = (EditText) layout.findViewById(R.id.name);
-        ((TextView) layout.findViewById(R.id.label)).setText(R.string.gestures_rename_label);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setIcon(0);
-        builder.setTitle(getString(R.string.gestures_rename_title));
-        builder.setCancelable(true);
-        builder.setOnCancelListener(new Dialog.OnCancelListener() {
-            public void onCancel(DialogInterface dialog) {
-                cleanupRenameDialog();
-            }
-        });
-        builder.setNegativeButton(getString(R.string.cancel_action),
-            new Dialog.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    cleanupRenameDialog();
-                }
-            }
-        );
-        builder.setPositiveButton(getString(R.string.rename_action),
-            new Dialog.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    changeGestureName();
-                }
-            }
-        );
-        builder.setView(layout);
-        return builder.create();
-    }
-
-    private void changeGestureName() {
-        final String name = mInput.getText().toString();
-        if (!TextUtils.isEmpty(name)) {
-            final NamedGesture renameGesture = mCurrentRenameGesture;
-            final GesturesAdapter adapter = mAdapter;
-            final int count = adapter.getCount();
-
-            // Simple linear search, there should not be enough items to warrant
-            // a more sophisticated search
-            for (int i = 0; i < count; i++) {
-                final NamedGesture gesture = adapter.getItem(i);
-                if (gesture.gesture.getID() == renameGesture.gesture.getID()) {
-                    sStore.removeGesture(gesture.name, gesture.gesture);
-                    gesture.name = mInput.getText().toString();
-                    sStore.addGesture(gesture.name, gesture.gesture);
-                    break;
-                }
-            }
-
-            adapter.notifyDataSetChanged();
-        }
-        mCurrentRenameGesture = null;
-    }
-
-    private void cleanupRenameDialog() {
-        if (mRenameDialog != null) {
-            mRenameDialog.dismiss();
-            mRenameDialog = null;
-        }
-        mCurrentRenameGesture = null;
-    }
 
     private void deleteGesture(NamedGesture gesture) {
         sStore.removeGesture(gesture.name, gesture.gesture);
