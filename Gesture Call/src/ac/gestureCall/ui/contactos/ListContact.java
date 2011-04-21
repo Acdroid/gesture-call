@@ -6,8 +6,6 @@
 package ac.gestureCall.ui.contactos;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Set;
 
 import ac.gestureCall.R;
@@ -121,14 +119,29 @@ public final class ListContact extends ListActivity
 	
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
         
-        if (resultCode == RESULT_OK) {
-        	setResult(main.RESULT_OK);
-            ListContact.this.finish();
-        }
         
-    }
+        if (requestCode == ID){
+			switch (resultCode){
+			case main.RESULT_OK:
+				break;
+			case main.RESULT_ERROR:
+				break;
+			case main.RESULT_SALIR:
+				setResult(main.RESULT_SALIR);
+				ListContact.this.finish();
+			case main.RESULT_GESTO_ADD_OK:
+				setResult(main.RESULT_OK);
+				ListContact.this.finish();
+				break;
+			default:
+				super.onActivityResult(requestCode, resultCode, data);
+			}
+			
+			
+		}
+	}
+        
 	
 	
 	private class mySimpleCursorAdapter extends SimpleCursorAdapter{

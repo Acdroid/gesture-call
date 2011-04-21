@@ -1,34 +1,27 @@
 package ac.gestureCall.ui.creadorGestos;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import ac.gestureCall.R;
 import ac.gestureCall.ui.main;
 import ac.gestureCall.ui.contactos.ListContact;
 import ac.gestureCall.util.mToast.mToast;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.gesture.Gesture;
 import android.gesture.GestureLibrary;
 import android.gesture.GestureOverlayView;
-import android.gesture.Prediction;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 public class CreadorGestos extends Activity {
 	private static final float LENGTH_THRESHOLD = 120.0f;
 
 	private Gesture mGesture;
 	private View mDoneButton;
+	public Button ButtonCancel;
 	public GestureLibrary store;
 
 	public Context mContext;
@@ -36,10 +29,10 @@ public class CreadorGestos extends Activity {
 	public TextView texto;
 	public String nombreContacto="";
 	public String phoneContacto="";
+	
+	public GestureOverlayView overlay;
 
-	private static final int LETRA_NUEVA = 1;
-	private static final int OK_ERROR= 2;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,8 +40,12 @@ public class CreadorGestos extends Activity {
 		setContentView(R.layout.create_gesture);
 
 		mDoneButton = (Button)findViewById(R.id.done);
+		ButtonCancel = (Button) findViewById(R.id.cg_button_cancel);
+		//Asignamos al boton el texto volver
+		ButtonCancel.setText(getResources().getString(R.string.cancelGesture2));
 		texto = (TextView)findViewById(R.id.create_gesture_text);
 		mContext = this;
+		overlay = (GestureOverlayView)findViewById(R.id.cg_overlay);
 
 		Bundle bundle = getIntent().getExtras();
 		if(bundle!=null){
@@ -57,7 +54,6 @@ public class CreadorGestos extends Activity {
 			texto.setText(nombreContacto);
 		}
 
-		GestureOverlayView overlay = (GestureOverlayView) findViewById(R.id.gestures_overlay);
 		overlay.addOnGestureListener(new GesturesProcessor());
 	}
 
@@ -76,20 +72,25 @@ public class CreadorGestos extends Activity {
 
 		mGesture = savedInstanceState.getParcelable("gesture");
 		if (mGesture != null) {
-			final GestureOverlayView overlay =
-				(GestureOverlayView) findViewById(R.id.gestures_overlay);
-			overlay.post(new Runnable() {
+				overlay.post(new Runnable() {
 				public void run() {
 					overlay.setGesture(mGesture);
 				}
 			});
 
-			Log.d("Entrenador","onRestoreInstanceEstate");
-
 			mDoneButton.setEnabled(true);
+			ButtonCancel.setText(getResources().getString(R.string.cancelGesture));
 		}
+		ButtonCancel.setText(getResources().getString(R.string.cancelGesture2));
+		mDoneButton.setEnabled(false);
 	}
 
+	/**
+	 * 
+	 * Metodo de apoyo para doneGesture
+	 * 
+	 * @param v boton que activa el metodo
+	 */
 	public void addGesture(View v) {
 		if (mGesture != null) {
 
@@ -100,19 +101,42 @@ public class CreadorGestos extends Activity {
 			store.save();
 
 			mToast.Make(this, getResources().getString(R.string.gesto_anadido),0);
-			setResult(main.RESULT_OK);
+			setResult(main.RESULT_GESTO_ADD_OK);
 			CreadorGestos.this.finish();
 		}
 
 	}
 
+	/**
+	 * 
+	 * Metodo al que se llama cuadno se pulsa el boton 
+	 * cancelar. Si no hay gesto en la pantalla se vuelve
+	 * para atrás.
+	 * Si hay un gesto en la pantalla se cancela.
+	 * 
+	 * @param v boton que activa el metodo
+	 */
 	public void cancelGesture(View v) {
-		setResult(main.RESULT_OK);
-		finish();
-
-
+		
+		if (overlay.getGesture() == null){
+			setResult(main.RESULT_OK);
+			finish();
+		}
+		else{
+			overlay.clear(true);
+			mDoneButton.setEnabled(false);
+			ButtonCancel.setText(getResources().getString(R.string.cancelGesture2));
+		}
 	}
 
+	
+	/**
+	 * 
+	 * Metodo al que se llama cuadno se pulsa el añadir. Guarda y asigna
+	 * el gesto al contacto seleccionado.
+	 * 
+	 * @param v boton que activa el metodo
+	 */
 	public void doneGesture(View v) {		
 		gestureActual = mGesture;
 		addGesture(v);
@@ -125,6 +149,7 @@ public class CreadorGestos extends Activity {
 		public void onGestureStarted(GestureOverlayView overlay, MotionEvent event) {
 			mDoneButton.setEnabled(false);
 			mGesture = null;
+			ButtonCancel.setText(getResources().getString(R.string.cancelGesture));
 		}
 
 		public void onGesture(GestureOverlayView overlay, MotionEvent event) {
@@ -136,6 +161,7 @@ public class CreadorGestos extends Activity {
 				overlay.clear(false);
 			}
 			mDoneButton.setEnabled(true);
+			
 
 		}
 
