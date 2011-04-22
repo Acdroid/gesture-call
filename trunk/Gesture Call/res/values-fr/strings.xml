@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Gesture Call</string>
+    <string name = "makeGesture">Faites un geste pour appeler un contact</string>
+    
+    <!--  Button -->
+    <string name = "ini_Button">Ajouter</string>
+    <string name = "button_done">Créer</string>
+    <string name = "cancelGesture">Annuler le geste</string>
+    <string name = "cancelGesture2">Retour</string>
+    <string name = "button_volver">Retour</string>
+    <string name = "button_edit_gesture">Gestes</string>
+    <string name="button_reload">Recharger</string>
+    
+    <!--  Menu -->
+    <string name ="salir">Sortir</string>
+    <string name ="opciones">Options</string>
+    <string name ="menu_edit">Gestes</string>
+  
+    <!--  Dialog -->
+    <string name = "di_salir">Voulez-vous réellement sortir ?</string>
+    <string name="gestures_edit">Editer geste</string>
+    <string name="gestures_delete">Effacer</string>
+    
+    <!-- Miscelanea -->
+	<string name = "first_time_toast">C\'est la première fois que vous utilisez Gesture Call\n....</string>
+	<string name = "gesto_anadido">Geste ajouté correctement</string>
+	<string name = "yes">Oui</string>
+	<string name = "no">Non</string>
+	<string name = "no_gesto">Le geste n\'as pas été reconnu</string>
+	<string name = "info_list_gestos">Long click sur un élément pour modifier ses options</string>
+	<string name="gestures_loading">Chargement des gestes...</string>
+	<string name="gestures_empty">Pas de gestes</string>
+	<string name="gestures_activity">Gestes</string>
+	<string name="gestures_delete_success">Geste effacé</string>
+	<string name="gestures_error_loading">Impossible de charger %s. Verifier que vous avez un carte SD.</string>
+
+	
+	
+	
+	
+	
+</resources>
