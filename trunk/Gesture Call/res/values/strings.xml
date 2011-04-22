@@ -9,6 +9,7 @@
     <string name = "cancelGesture">Cancel Gesture</string>
     <string name = "cancelGesture2">Return</string>
     <string name = "button_volver">Return</string>
+    <string name = "button_save">Save</string>
     <string name = "button_edit_gesture">Gestures</string>
     <string name="button_reload">Reload</string>
     
@@ -38,7 +39,10 @@
 	<string name="gestures_delete_success">Gesture Deleted</string>
 	<string name="gestures_error_loading">Could not load %s. Make sure you have a mounted SD card.</string>
 
-	
+	<!-- Preferencias -->
+	<string name ="pref_main">Program Preferences</string>
+	<string name ="pref_ask">Ask before call</string>
+	<string name ="pref_ask_summary">When making a gesture, it will require confirmation before calling</string>
 	
 	
 	

@@ -9,6 +9,7 @@
     <string name = "cancelGesture">Annuler le geste</string>
     <string name = "cancelGesture2">Retour</string>
     <string name = "button_volver">Retour</string>
+    <string name = "button_save">Enregistrer</string>
     <string name = "button_edit_gesture">Gestes</string>
     <string name="button_reload">Recharger</string>
     
@@ -39,7 +40,10 @@
 	<string name="gestures_error_loading">Impossible de charger %s. Verifier que vous avez un carte SD.</string>
 
 	
-	
+	<!-- Preferencias -->
+	<string name ="pref_main">Préférences du programme</string>
+	<string name ="pref_ask">Demander avant d appeler</string>
+	<string name ="pref_ask_summary">Après faire un geste, il sera necessaire confirmer l appel</string>
 	
 	
 	
