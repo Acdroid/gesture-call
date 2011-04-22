@@ -3,6 +3,7 @@ package ac.gestureCall.ui;
 
 import ac.gestureCall.R;
 import ac.gestureCall.exceptions.NoPreferenceException;
+import ac.gestureCall.preferences.Preferences;
 import ac.gestureCall.ui.contactos.ListContact;
 import ac.gestureCall.ui.gestos.GestureBuilderActivity;
 import ac.gestureCall.util.config.AppConfig;
@@ -22,8 +23,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.Data;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -87,6 +89,33 @@ public class main extends Activity {
     	
     	mContext = this;
     	
+    	
+    	
+    	//Iniciamos el dialog
+    	dialogCall = new Dialog(mContext);
+		dialogCall.setContentView(R.layout.dialog_b4_call);
+		//dialogCall.setTitle(mContext.getResources().getString(R.string.dialog_sure));
+		Button buttonDialog= (Button) dialogCall.findViewById(R.id.dialog_button_yes);
+		
+		
+		
+		buttonDialog.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				CheckBox c = (CheckBox)dialogCall.findViewById(R.id.dialog_check);
+				if(c.isChecked()){
+					getAp().put(false, AppConfig.AVISO_AL_LLAMAR);
+				}
+				String url = "tel:" + getPrediccionActual();
+				Intent i = new Intent(Intent.ACTION_CALL, Uri.parse(url));
+				startActivityForResult(i,ID);
+				dialogCall.dismiss();
+
+			}
+		});
+    	
+    	
         // Look up the AdView as a resource and load a request.
         adView = (AdView)this.findViewById(R.id.Publicidad);
         adView.loadAd(new AdRequest());
@@ -131,45 +160,6 @@ public class main extends Activity {
 			return alert;
 			
 		case DIALOG_CALL:
-			dialogCall = new Dialog(mContext);
-			dialogCall.setContentView(R.layout.dialog_b4_call);
-			//dialogCall.setTitle(mContext.getResources().getString(R.string.dialog_sure));
-			Button buttonDialog= (Button) dialogCall.findViewById(R.id.dialog_button_yes);
-			TextView t = (TextView)dialogCall.findViewById(R.id.dialog_text_contact);
-			
-			Uri uri =  Data.CONTENT_URI;
-    		String[] projection = new String []{
-    					Data.DISPLAY_NAME
-    		};
-    		String[] selectionArgs = null;
-    		String sortOrder = Data.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
-    		String selection = Phone.NUMBER +"='" + getPrediccionActual() + "'";
-    		Cursor c =  managedQuery(uri, projection, selection, selectionArgs, sortOrder);
-    		startManagingCursor(c);
-    		if(c.moveToFirst()){ 
-    			t.setText(c.getString(c.getColumnIndex(Data.DISPLAY_NAME)));       			
-    		}
-    		else{
-    			t.setText(getPrediccionActual());
-    		}
-			
-			
-			
-			buttonDialog.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					CheckBox c = (CheckBox)dialogCall.findViewById(R.id.dialog_check);
-					if(c.isChecked()){
-						getAp().put(false, AppConfig.AVISO_AL_LLAMAR);
-					}
-					String url = "tel:" + getPrediccionActual();
-					Intent i = new Intent(Intent.ACTION_CALL, Uri.parse(url));
-					startActivityForResult(i,ID);
-					dialogCall.dismiss();
-
-				}
-			});
 			
 			return dialogCall;
 		default:
@@ -201,7 +191,7 @@ public class main extends Activity {
 			clickEdit(null);
 			return true;
 		case R.id.me_opciones:
-			mToast.Make(this, "Pulsado opciones en general", 0);
+			clickOpciones(null);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -240,6 +230,26 @@ public class main extends Activity {
     	try {
 			if (ap.getBool(AppConfig.AVISO_AL_LLAMAR)){
 				prediccionActual = prediccion;
+				
+				
+				TextView t = (TextView)dialogCall.findViewById(R.id.dialog_text_contact);
+				
+				Uri uri =  Data.CONTENT_URI;
+				String[] projection = new String []{
+							Data.DISPLAY_NAME
+				};
+				String[] selectionArgs = null;
+				String sortOrder = Data.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
+				String selection = Phone.NUMBER +"='" + getPrediccionActual() + "'";
+				Cursor c =  managedQuery(uri, projection, selection, selectionArgs, sortOrder);
+				startManagingCursor(c);
+				if(c.moveToFirst()){ 
+					Log.d("DEBUG",c.getString(c.getColumnIndex(Data.DISPLAY_NAME)));
+					t.setText(c.getString(c.getColumnIndex(Data.DISPLAY_NAME)));       			
+				}
+				else{
+					t.setText(getPrediccionActual());
+				}
 				showDialog(DIALOG_CALL);
 				
 			}
@@ -268,6 +278,8 @@ public class main extends Activity {
     }
     
     public void clickOpciones(View v){
+    	Intent i = new Intent(this,Preferences.class);
+    	startActivityForResult(i, ID);
     	
     }
     

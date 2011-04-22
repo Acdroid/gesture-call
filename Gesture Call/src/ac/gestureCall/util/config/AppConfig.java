@@ -5,9 +5,9 @@ import java.io.File;
 import java.io.IOException;
 
 import ac.gestureCall.R;
-import ac.gestureCall.util.mToast.mToast;
 import android.content.Context;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 /**
@@ -34,8 +34,8 @@ public class AppConfig extends MSharedPreferences{
 
 		//Comprobamos si es la primera vez que se llama alconstructor, en tal caso
 		//se guardan los valores iniciales
-		//if(!pref.contains(FIRST_TIME)){
-			mToast.Make(mContext,mContext.getResources().getString(R.string.first_time_toast), 1);
+		if(!pref.contains(FIRST_TIME)){
+			//mToast.Make(mContext,mContext.getResources().getString(R.string.first_time_toast), 1);
 
 			//Procedemos a cargar los valores por primera vez en las preferencias.
 			//Estos valores son por defecto
@@ -50,7 +50,7 @@ public class AppConfig extends MSharedPreferences{
 
 		}
 
-	//}
+	}
 
 
 	/**
