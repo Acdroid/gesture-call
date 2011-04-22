@@ -78,15 +78,17 @@ public class WidgetService extends Service{
      */
     @Override
     public void onStart(Intent intent, int startId) {
-
+    	Log.d("DEBUG","una acción y tal pascual1");
         //recogemos la accion
         String action = intent.getAction();
+        Log.d("DEBUG",action + " una acción y tal pascual");
+        
         if(UNA_ACCION.equals(action)){
             //hacemos lo que tengamos que hacer, por ejemplo poner una variable a 0
-        	Log.d("DEBUG","una acción y tal pascual");
+        	Log.d("DEBUG","una acción y tal pascual2");
             value = 0;
         }
-        
+        Log.d("DEBUG","una acción y tal pascual3");
         //llamamos al método que hace la notificación (se podría hacer desde aquí
         //directamente pero es bueno trabajar por capas, además este método lo podremos
         //utilizar si decidimos también utilizar el BroadcastReceiver
@@ -103,7 +105,7 @@ public class WidgetService extends Service{
      private void notifyChange(String what) {
         Intent i = new Intent(what);
         sendBroadcast(i);
-
+        Log.d("DEBUG","una acción y tal pascual55");
         mAppWidgetProvider.notifyChange(this, what);
      }
 

@@ -23,6 +23,7 @@ import android.util.Log;
 public class AppConfig extends MSharedPreferences{
 	public static final String FIRST_TIME = "first_time";
 	public static final String NAME = "GestureCall";
+	public static final String AVISO_AL_LLAMAR = "ask_before_call";
 
 	private static final String dir = Environment.getExternalStorageDirectory() + "/GestureCall";
 	private final String fich = dir + "/gestures";
@@ -33,21 +34,23 @@ public class AppConfig extends MSharedPreferences{
 
 		//Comprobamos si es la primera vez que se llama alconstructor, en tal caso
 		//se guardan los valores iniciales
-		if(!pref.contains(FIRST_TIME)){
+		//if(!pref.contains(FIRST_TIME)){
 			mToast.Make(mContext,mContext.getResources().getString(R.string.first_time_toast), 1);
 
 			//Procedemos a cargar los valores por primera vez en las preferencias.
 			//Estos valores son por defecto
 
-			//Valores por defecto
+			//Valores por defectos
 			put(false,FIRST_TIME); //Flag para indicar que no es la primera vez que se usa
+			put(true,AVISO_AL_LLAMAR);
+			
 
 			createStructure(dir, fich);
 
 
 		}
 
-	}
+	//}
 
 
 	/**

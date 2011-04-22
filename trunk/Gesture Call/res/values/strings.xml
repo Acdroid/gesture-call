@@ -21,6 +21,9 @@
     <string name = "di_salir">Do you really want to exit?</string>
     <string name="gestures_edit">Edit Gesture</string>
     <string name="gestures_delete">Delete</string>
+    <string name="dialog_bc_seriusly">Do you really want to call</string>
+    <string name="dialog_no_more">Do not show this message again</string>
+    <string name="dialog_sure">Are you sure?</string>
     
     <!-- Miscelanea -->
 	<string name = "first_time_toast">This is the first time you use Gesture Call\n....</string>

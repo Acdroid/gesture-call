@@ -1,9 +1,8 @@
 package ac.gestureCall.ui;
 
 
-import java.util.HashMap;
-
 import ac.gestureCall.R;
+import ac.gestureCall.exceptions.NoPreferenceException;
 import ac.gestureCall.ui.contactos.ListContact;
 import ac.gestureCall.ui.gestos.GestureBuilderActivity;
 import ac.gestureCall.util.config.AppConfig;
@@ -15,6 +14,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.gesture.GestureLibrary;
 import android.gesture.GestureOverlayView;
 import android.net.Uri;
@@ -22,14 +22,19 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.ContactsContract.Data;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
 import com.google.ads.AdView;
 
 public class main extends Activity {
@@ -42,12 +47,15 @@ public class main extends Activity {
 	public static final int RESULT_GESTO_ADD_OK = 4;
 	public static final int ID = 0;
 	public static final int DIALOG_SALIR = 0;
+	public static final int DIALOG_CALL = 1;
 	public static final String MY_AD_UNIT_ID = "a14daeadcc3acb6";
 	
 	public GestureOverlayView overlay;
 	public static GesturesRecognizer gr;
 	
 	public AdView adView;
+	
+	public  AppConfig ap;
 	
 	private final String dir = Environment.getExternalStorageDirectory() + "/GestureCall";
 	private final String fich = "gestures";
@@ -60,6 +68,8 @@ public class main extends Activity {
 
 	};
 	
+	public Dialog dialogCall;
+	public String prediccionActual="";
 	
 	public Context mContext;
 	
@@ -81,7 +91,7 @@ public class main extends Activity {
         adView = (AdView)this.findViewById(R.id.Publicidad);
         adView.loadAd(new AdRequest());
 
-        AppConfig ap = new AppConfig(this, AppConfig.NAME);
+        ap = new AppConfig(this, AppConfig.NAME);
     	overlay = (GestureOverlayView)findViewById(R.id.gestures);
     	
     	try {
@@ -119,12 +129,60 @@ public class main extends Activity {
 			});
 			AlertDialog alert = builder.create();
 			return alert;
+			
+		case DIALOG_CALL:
+			dialogCall = new Dialog(mContext);
+			dialogCall.setContentView(R.layout.dialog_b4_call);
+			//dialogCall.setTitle(mContext.getResources().getString(R.string.dialog_sure));
+			Button buttonDialog= (Button) dialogCall.findViewById(R.id.dialog_button_yes);
+			TextView t = (TextView)dialogCall.findViewById(R.id.dialog_text_contact);
+			
+			Uri uri =  Data.CONTENT_URI;
+    		String[] projection = new String []{
+    					Data.DISPLAY_NAME
+    		};
+    		String[] selectionArgs = null;
+    		String sortOrder = Data.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
+    		String selection = Phone.NUMBER +"='" + getPrediccionActual() + "'";
+    		Cursor c =  managedQuery(uri, projection, selection, selectionArgs, sortOrder);
+    		startManagingCursor(c);
+    		if(c.moveToFirst()){ 
+    			t.setText(c.getString(c.getColumnIndex(Data.DISPLAY_NAME)));       			
+    		}
+    		else{
+    			t.setText(getPrediccionActual());
+    		}
+			
+			
+			
+			buttonDialog.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					CheckBox c = (CheckBox)dialogCall.findViewById(R.id.dialog_check);
+					if(c.isChecked()){
+						getAp().put(false, AppConfig.AVISO_AL_LLAMAR);
+					}
+					String url = "tel:" + getPrediccionActual();
+					Intent i = new Intent(Intent.ACTION_CALL, Uri.parse(url));
+					startActivityForResult(i,ID);
+					dialogCall.dismiss();
+
+				}
+			});
+			
+			return dialogCall;
 		default:
 			return dialog = null;
 		}
 	}
     
     
+	public AppConfig getAp() {
+		return ap;
+	}
+
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
@@ -179,11 +237,23 @@ public class main extends Activity {
     		return;
     	}
     	
-    	String url = "tel:" + prediccion;
-        Intent i = new Intent(Intent.ACTION_CALL, Uri.parse(url));
-        startActivityForResult(i,ID);
-    	
-    	mToast.Make(this, "Quieres llamar a : " + prediccion, 0);
+    	try {
+			if (ap.getBool(AppConfig.AVISO_AL_LLAMAR)){
+				prediccionActual = prediccion;
+				showDialog(DIALOG_CALL);
+				
+			}
+			else{
+			
+				String url = "tel:" + prediccion;
+				Intent i = new Intent(Intent.ACTION_CALL, Uri.parse(url));
+				startActivityForResult(i,ID);
+			}
+		} catch (NoPreferenceException e) {
+			String url = "tel:" + prediccion;
+			Intent i = new Intent(Intent.ACTION_CALL, Uri.parse(url));
+			startActivityForResult(i,ID);
+		}
 
     }
     
@@ -204,5 +274,10 @@ public class main extends Activity {
     public static GestureLibrary getStore(){
     	return gr.getStore();    	
     }
+
+
+	public String getPrediccionActual() {
+		return prediccionActual;
+	}
     
 }
