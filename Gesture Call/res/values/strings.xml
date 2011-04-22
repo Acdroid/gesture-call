@@ -11,7 +11,6 @@
     <string name = "button_volver">Return</string>
     <string name = "button_edit_gesture">Gestures</string>
     <string name="button_reload">Reload</string>
-
     
     <!--  Menu -->
     <string name ="salir">Exit</string>
@@ -19,7 +18,7 @@
     <string name ="menu_edit">Gestures</string>
   
     <!--  Dialog -->
-    <string name = "di_salir">"Are you sure that you want to exit?"</string>
+    <string name = "di_salir">Do you really want to exit?</string>
     <string name="gestures_edit">Edit Gesture</string>
     <string name="gestures_delete">Delete</string>
     
@@ -29,7 +28,7 @@
 	<string name = "yes">Yes</string>
 	<string name = "no">No</string>
 	<string name = "no_gesto">The gesture has not been recognized</string>
-	<string name = "info_list_gestos">Long click on an item to edit options</string>
+	<string name = "info_list_gestos">Long click on an item to edit its options</string>
 	<string name="gestures_loading">Loading gestures...</string>
 	<string name="gestures_empty">No Gestures</string>
 	<string name="gestures_activity">Gestures</string>
