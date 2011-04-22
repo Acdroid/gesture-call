@@ -28,7 +28,7 @@
 	<string name = "yes">Sí</string>
 	<string name = "no">No</string>
 	<string name = "no_gesto">No se ha reconocido el gesto</string>
-	<string name = "info_list_gestos">Pulsación larga para opciones de edición</string>
+	<string name = "info_list_gestos">Pulsación larga para editar el Gesto</string>
 	<string name="gestures_loading">Cargando gestos...</string>
 	<string name="gestures_empty">No hay gestos</string>
 	<string name="gestures_activity">Gestos</string>
