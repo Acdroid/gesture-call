@@ -104,7 +104,7 @@ public class WidgetMain  extends AppWidgetProvider{
         //el nuevo valor evaluado por el servicio tras el pulsamiento de un botón
         //views.setTextViewText("El nuevo valor es:" + service.getValue());
         
-       Log.d("DEBUG","pulsación o algo?");
+   
         
         //llama al método que actualiza las vistas
         pushUpdate(service, appWidgetIds, views);
@@ -131,7 +131,6 @@ public class WidgetMain  extends AppWidgetProvider{
         intent.setComponent(serviceName);
         pendingIntent = PendingIntent.getService(context, 0, intent, 0);
         views.setOnClickPendingIntent(R.id.widget_imagebutton, pendingIntent);
-                
     }
         
     /**
