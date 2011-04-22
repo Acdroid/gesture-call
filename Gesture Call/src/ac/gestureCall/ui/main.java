@@ -80,8 +80,8 @@ public class main extends Activity {
         // Look up the AdView as a resource and load a request.
         adView = (AdView)this.findViewById(R.id.Publicidad);
         adView.loadAd(new AdRequest());
-    	
-    	AppConfig ap = new AppConfig(this, AppConfig.NAME);
+
+        AppConfig ap = new AppConfig(this, AppConfig.NAME);
     	overlay = (GestureOverlayView)findViewById(R.id.gestures);
     	
     	try {
