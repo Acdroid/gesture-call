@@ -28,7 +28,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Data;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -220,7 +219,6 @@ out:        for (String name : entries) {
 		String nombre = encuentraNombre(gesture.name);
 		String phone= gesture.name;
 		
-		Log.d("DEBUG","phone " + phone);
 		
 		i.putExtra(ListContact.KEY_NAME, nombre);
 		i.putExtra(ListContact.KEY_PHONE, phone);
@@ -296,11 +294,6 @@ out:        for (String name : entries) {
         			
         		
         	}
-        	Log.d("DEBUG","empioezo");
-        	for(String s : nombres){
-        		Log.d("DEBUG",s);
-        	}
-        	
         	
         }
         
