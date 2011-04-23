@@ -47,7 +47,6 @@ public class GesturesRecognizer implements OnGesturePerformedListener{
 	 *  como por ejemplo RECONOCEDOR_BASICO
 	 */
 	public GesturesRecognizer (int id, Context context, GestureOverlayView ol, Handler han,int tipo) throws Exception{
-//		Log.d("DEBUG", "recognicer " + id);
 		
 		if (Store == null) {
 			Store = GestureLibraries.fromRawResource(context, id);

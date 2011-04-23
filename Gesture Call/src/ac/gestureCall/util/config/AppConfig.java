@@ -4,10 +4,8 @@ package ac.gestureCall.util.config;
 import java.io.File;
 import java.io.IOException;
 
-import ac.gestureCall.R;
 import android.content.Context;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 /**
@@ -73,7 +71,7 @@ public class AppConfig extends MSharedPreferences{
 			boolean okDir  = directory.mkdirs();
 
 			if (!okDir) {
-				Log.e("ConfigBackend", "Unable to create directory: "+dirPath);
+				Log.e("GestureCall_AC", "Unable to create directory: "+dirPath);
 				//throw new NoFileException("Unable to create directory: "+dirPath);
 			}
 		}
@@ -85,7 +83,7 @@ public class AppConfig extends MSharedPreferences{
 
 
 			if (!okFile) {
-				Log.e("ConfigBackend", "Unable to create file: "+fullPath);
+				Log.e("GestureCall_AC", "Unable to create file: "+fullPath);
 				//throw new NoFileException("Unable to create file: "+fullPath);
 			}
 		} catch (IOException e) {
@@ -95,7 +93,7 @@ public class AppConfig extends MSharedPreferences{
 
 
 
-		Log.i("ConfigBackend", "Config file created");
+		Log.i("GestureCall_AC", "Config file created");
 
 
 

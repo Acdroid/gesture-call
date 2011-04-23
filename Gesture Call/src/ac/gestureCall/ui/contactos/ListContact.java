@@ -20,10 +20,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Data;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -108,7 +106,6 @@ public final class ListContact extends ListActivity
 		String nombre = cursor.getString(cursor.getColumnIndex(Data.DISPLAY_NAME));
 		String phone= cursor.getString(cursor.getColumnIndex(Phone.NUMBER));
 		
-		Log.d("DEBUG","phone " + phone);
 		
 		i.putExtra(KEY_NAME, nombre);
 		i.putExtra(KEY_PHONE, phone);
@@ -160,7 +157,7 @@ public final class ListContact extends ListActivity
 		public void bindView(View view, Context context, Cursor cursor) {
 
 			//Cambiamos el color de fondo
-			LinearLayout l = (LinearLayout) view.findViewById(R.id.lay_item);
+			//LinearLayout l = (LinearLayout) view.findViewById(R.id.lay_item);
 			TextView t = (TextView) view.findViewById(R.id.item_lista_nombre);
 			t.setTextColor(mContext.getResources().getColor(android.R.color.white));
 //			if (cursor.getPosition() % 2 == 0){
@@ -177,10 +174,8 @@ public final class ListContact extends ListActivity
 			
 			TextView t2 = (TextView) view.findViewById(R.id.item_lista_numero);
 			String phone =t2.getText().toString();
-			Log.d("DEBUG", phone + " " + gestosNoNull.contains(phone));
 			ImageView i = (ImageView)view.findViewById(R.id.item_list_image);
 			if (gestosNoNull.contains(phone) == true){
-				Log.d("DEBUG", "entro");
 				i.setImageResource(R.drawable.btn_check_on);
 			}
 			else{
