@@ -9,7 +9,7 @@
     <string name = "cancelGesture">Cancel Gesture</string>
     <string name = "cancelGesture2">Return</string>
     <string name = "button_volver">Return</string>
-    <string name = "button_save">Save</string>
+    <string name = "button_save">Speichern</string>
     <string name = "button_edit_gesture">Gestures</string>
     <string name="button_reload">Reload</string>
     
@@ -25,13 +25,12 @@
     <string name="dialog_bc_seriusly">Do you really want to call</string>
     <string name="dialog_no_more">Do not show this message again</string>
     <string name="dialog_sure">Are you sure?</string>
-    <string name="calling">Calling...</string>
     
     <!-- Miscelanea -->
 	<string name = "first_time_toast">This is the first time you use Gesture Call\n....</string>
 	<string name = "gesto_anadido">Gesture correctly added</string>
-	<string name = "yes">Yes</string>
-	<string name = "no">No</string>
+	<string name = "yes">Ja</string>
+	<string name = "no">Nein</string>
 	<string name = "no_gesto">The gesture has not been recognized</string>
 	<string name = "info_list_gestos">Long click on an item to edit its options</string>
 	<string name="gestures_loading">Loading gestures...</string>
@@ -39,7 +38,6 @@
 	<string name="gestures_activity">Gestures</string>
 	<string name="gestures_delete_success">Gesture Deleted</string>
 	<string name="gestures_error_loading">Could not load %s. Make sure you have a mounted SD card.</string>
-	
 
 	<!-- Preferencias -->
 	<string name ="pref_main">Program Preferences</string>

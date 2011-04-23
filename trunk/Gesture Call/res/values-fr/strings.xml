@@ -25,6 +25,7 @@
     <string name="dialog_bc_seriusly">Voulez-vous appeler </string>
     <string name="dialog_no_more">Ne plus montrer ce message</string> 
     <string name="dialog_sure">Êtes-vous sûr ?</string>
+    <string name="calling">Appel...</string>
     
     <!-- Miscelanea -->
 	<string name = "first_time_toast">C\'est la première fois que vous utilisez Gesture Call\n....</string>

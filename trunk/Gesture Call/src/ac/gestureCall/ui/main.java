@@ -94,7 +94,7 @@ public class main extends Activity {
     	//Iniciamos el dialog
     	dialogCall = new Dialog(mContext);
 		dialogCall.setContentView(R.layout.dialog_b4_call);
-		//dialogCall.setTitle(mContext.getResources().getString(R.string.dialog_sure));
+		dialogCall.setTitle(mContext.getResources().getString(R.string.calling));
 		Button buttonDialog= (Button) dialogCall.findViewById(R.id.dialog_button_yes);
 		
 		

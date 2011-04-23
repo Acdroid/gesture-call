@@ -26,6 +26,7 @@
        <string name = "di_salir">"Estàs segur de voler sortir de l'aplicació?"</string>
        <string name="gestures_edit">Modificar Gest</string>
        <string name="gestures_delete">Eliminar</string>
+       <string name="calling">Trucant...</string>
        
        <!-- Miscelanea -->
     <string name = "first_time_toast">Aquesta és la primera vegada que fas servir Gesture Call\n....</string>
