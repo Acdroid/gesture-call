@@ -47,7 +47,7 @@ public class GestureBuilderActivity extends ListActivity {
     private static final int STATUS_CANCELLED = 1;
     private static final int STATUS_NO_STORAGE = 2;
     private static final int STATUS_NOT_LOADED = 3;
-    private static final int ID = 3;
+    private static final int ID = 5;
 
     private static final int MENU_ID_EDIT = 1;
     private static final int MENU_ID_REMOVE = 2;

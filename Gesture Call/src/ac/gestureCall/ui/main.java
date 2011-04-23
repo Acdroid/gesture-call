@@ -244,10 +244,10 @@ public class main extends Activity {
 				Cursor c =  managedQuery(uri, projection, selection, selectionArgs, sortOrder);
 				startManagingCursor(c);
 				if(c.moveToFirst()){ 
-					t.setText(c.getString(c.getColumnIndex(Data.DISPLAY_NAME)));       			
+					t.setText(c.getString(c.getColumnIndex(Data.DISPLAY_NAME)) + "?");       			
 				}
 				else{
-					t.setText(getPrediccionActual());
+					t.setText(getPrediccionActual() + "?");
 				}
 				showDialog(DIALOG_CALL);
 				
