@@ -21,8 +21,10 @@ import android.os.Bundle;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Data;
 import android.view.View;
+import android.widget.AlphabetIndexer;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SectionIndexer;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
@@ -139,20 +141,37 @@ public final class ListContact extends ListActivity
         
 	
 	
-	private class mySimpleCursorAdapter extends SimpleCursorAdapter{
+	private class mySimpleCursorAdapter extends SimpleCursorAdapter implements SectionIndexer{
 
 		private Context mContext;
 		Set<String> gestosNoNull;
-		
+		AlphabetIndexer alphaIndexer;
 
 		public mySimpleCursorAdapter(Context context, int layout, Cursor c,
 				String[] from, int[] to) {
 			super(context, layout, c, from, to);
 
 			this.mContext = context;
-			gestosNoNull = store.getGestureEntries();			
+			gestosNoNull = store.getGestureEntries();	
+			alphaIndexer=new AlphabetIndexer(c,c.getColumnIndex(Data.DISPLAY_NAME), " ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 		}
 
+		@Override
+		public int getPositionForSection(int section) {
+			return alphaIndexer.getPositionForSection(section);
+		}
+
+		@Override
+		public int getSectionForPosition(int position) {
+			return alphaIndexer.getSectionForPosition(position);
+		}
+
+		@Override
+		public Object[] getSections() {
+			return alphaIndexer.getSections();
+		}
+
+		
 		@Override
 		public void bindView(View view, Context context, Cursor cursor) {
 

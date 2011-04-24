@@ -119,8 +119,8 @@ public class GestureBuilderActivity extends ListActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         
-        if (resultCode == RESULT_OK) {
-            switch (requestCode) {
+        if (requestCode == ID) {
+            switch (resultCode) {
                 case main.RESULT_GESTO_ADD_OK:
                     loadGestures();
                     break;
