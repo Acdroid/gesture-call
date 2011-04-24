@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Gesture Call</string>
+
+	
+	    <string name = "makeGesture">電話する為にゼスチャーを入れてください</string>
+    
+    <!--  Button -->
+    <string name = "ini_Button">追加</string>
+    <string name = "button_done">作成</string>
+    <string name = "cancelGesture">キャンセル</string>
+    <string name = "cancelGesture2">戻る</string>
+    <string name = "button_volver">戻る</string>
+    <string name = "button_save">セーブ</string>
+    <string name = "button_edit_gesture">ゼスチャーのリスト</string>
+    <string name= "button_reload">リロード</string>
+    
+    <!--  Menu -->
+    <string name ="salir">終了</string>
+    <string name ="opciones">設定</string>
+    <string name ="menu_edit">ゼスチャーのリスト</string>
+    
+    <!--  Dialog -->
+    <string name = "di_salir">終了を確認してください</string>
+    <string name="gestures_edit">ゼスチャーを更新する</string>
+    <string name="gestures_delete">削除</string>
+    <string name="dialog_bc_seriusly">誰に電話をかけるか</string>
+    <string name="dialog_no_more">このメッセージはまた見せない</string>
+    <string name="dialog_sure">確認してください</string>
+    <string name="calling">電話中</string>
+    
+    <!-- Miscelanea -->
+	<string name = "first_time_toast">Gesture Callの使用は初めて\n</string>
+	<string name = "gesto_anadido">ゼスチャーを正しく加わった</string>
+	<string name = "yes">はい</string>
+	<string name = "no">いいえ</string>
+	<string name = "no_gesto">このゼスチャーを認識できない</string>
+	<string name = "info_list_gestos">変更に長いプレスしてください</string>
+	<string name="gestures_loading">ローディング中</string>
+	<string name="gestures_empty">まだゼスチャーがない</string>
+	<string name="gestures_activity">ゼスチャーのリスト</string>
+	<string name="gestures_delete_success">ゼスチャーを削除した</string>
+	<string name="gestures_error_loading">%sはローディングできない。SDカードをチェックしてください</string>
+		
+	<!-- Preferencias -->
+	<string name ="pref_main">設定</string>
+	<string name ="pref_ask">通話の前に確認を頼む</string>
+	<string name ="pref_ask_summary">ゼスチャーをすると確認を頼む</string>
+</resources>
