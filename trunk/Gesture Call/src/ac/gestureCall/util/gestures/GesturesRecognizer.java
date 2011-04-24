@@ -2,7 +2,7 @@ package ac.gestureCall.util.gestures;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Iterator;
+
 
 import android.content.Context;
 import android.gesture.Gesture;
@@ -202,20 +202,43 @@ public class GesturesRecognizer implements OnGesturePerformedListener{
 		if (predictions.size() > 0){
 			if (predictions.get(0).score > 1.0) {
 
-				//				DEBUG <----
-				Iterator<Prediction> i = predictions.iterator();
-				int j=1;
-				Log.d("GESTOS " + j , "Nuevo gesto!!" );
-				while (i.hasNext()){
-					Prediction p = i.next();
-					Log.d("GESTOS " + j , p.name + " " + p.score );
-					j++;
-				}				
+//				//				DEBUG <----
+//				Iterator<Prediction> h = predictions.iterator();
+//				int j=1;
+//				Log.d("GESTOS " + j , "Nuevo gesto!!" );
+//				while (h.hasNext()){
+//					Prediction p = h.next();
+//					Log.d("GESTOS " + j , p.name + " " + p.score );
+//					j++;
+//				}
+				
+//				for (String g : Store.getGestureEntries()){
+//					
+//					if (g.equals(predictions.get(0).name)){
+//						Log.d("GESTOS ", g + " " + predictions.get(0) );
+//						Message msg = new Message();
+//						msg.obj = predictions.get(0).name;
+//						handler.sendMessage(msg);
+//						return;
+//					}
+//				}
+				int i = 0;
+				while( (i < predictions.size()) && (predictions.get(i).score > 1.0) ){
+					for (String g : Store.getGestureEntries()){
+						if (g.equals(predictions.get(i).name)){
+							Message msg = new Message();
+							msg.obj = predictions.get(i).name;
+							handler.sendMessage(msg);
+							return;
+						}
+					}
+					
+					
+					i++;
+				}
 
-				Message msg = new Message();
-				msg.obj = predictions.get(0).name;
-				handler.sendMessage(msg);
-				return;
+
+				
 			}
 		}
 

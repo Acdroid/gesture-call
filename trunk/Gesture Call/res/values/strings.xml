@@ -39,6 +39,7 @@
 	<string name="gestures_activity">Gestures</string>
 	<string name="gestures_delete_success">Gesture Deleted</string>
 	<string name="gestures_error_loading">Could not load %s. Make sure you have a mounted SD card.</string>
+	<string name="error_no_libreria">There are a fatal error. Gesture Library not found!</string>
 	
 
 	<!-- Preferencias -->
