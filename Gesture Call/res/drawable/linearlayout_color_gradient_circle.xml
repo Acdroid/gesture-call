@@ -7,10 +7,5 @@
         android:gradientRadius="300"
         android:centerX="0.6"
         android:centerY="0.3"/>
-        
-    <padding android:left="7dp"
-        android:top="7dp"
-        android:right="7dp"
-        />
     <corners android:radius="8dp" />
 </shape>

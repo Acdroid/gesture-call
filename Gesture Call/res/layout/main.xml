@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/linearlayout_color_gradient_circle">
+    android:background="@drawable/linearlayout_color_gradient_down">
     
         <android.gesture.GestureOverlayView
 			android:id="@+id/gestures"
