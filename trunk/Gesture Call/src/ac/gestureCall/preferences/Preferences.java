@@ -8,7 +8,11 @@ import ac.gestureCall.exceptions.NoPreferenceException;
 import ac.gestureCall.ui.main;
 import ac.gestureCall.util.config.AppConfig;
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 
@@ -33,7 +37,7 @@ public class Preferences extends Activity{
 
 		}
         
-    }
+    }	
     
 	
 	public void clickReturn(View v){
@@ -46,5 +50,49 @@ public class Preferences extends Activity{
 		setResult(main.RESULT_OK);
 		Preferences.this.finish();
 	}
+	
+	
+	
+	
+	//Menu para los créditos
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_creditos, menu);
+		return true;
+	}
+    
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		// Handle item selection
+		switch (item.getItemId()) {
+		
+		
+			case R.id.me_creditos:
+				
+				
+				Dialog dialog = new Dialog(this);
+				dialog.setContentView(R.layout.credits_layout);
+				dialog.setTitle("Credits:");
+				
+				dialog.show();
+				
+				
+				
+				return true;
+		
+				
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 }

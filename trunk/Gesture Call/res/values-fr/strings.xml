@@ -39,6 +39,7 @@
 	<string name="gestures_activity">Gestes</string>
 	<string name="gestures_delete_success">Geste effacé</string>
 	<string name="gestures_error_loading">Impossible de charger %s. Verifier que vous avez un carte SD.</string>
+	<string name="error_no_libreria">Erreur, impossible de trouver Gestures Library.</string>
 
 	
 	<!-- Preferencias -->
