@@ -25,6 +25,7 @@
        <!--  Dialog -->
        <string name = "di_salir">"Estàs segur de voler sortir de l'aplicació?"</string>
        <string name="gestures_edit">Modificar Gest</string>
+       <string name="dialog_bc_seriusly">Trucar a</string>
        <string name="gestures_delete">Eliminar</string>
        <string name="calling">Trucant...</string>
        
@@ -42,6 +43,9 @@
     <string name="gestures_activity">Gestos</string>
     <string name="gestures_delete_success">Gest Eliminat</string>
     <string name="gestures_error_loading">No es pot carregar %s. Assegura\'t de que la targeta SD està muntada.</string>
+    <string name="error_no_libreria">No s\'ha pogut carregar Gestures Library</string>
+    
+    
     
     </resources>
     

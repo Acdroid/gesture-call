@@ -25,7 +25,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Data;
-import android.util.Log;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,7 +34,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
@@ -127,7 +127,7 @@ public class main extends Activity {
     		//gr = new GesturesRecognizer(mStoreFile, this, overlay,handler,GesturesRecognizer.RECONOCEDOR_BASICO);
     		gr = new GesturesRecognizer(dir,fich, overlay, handler, GesturesRecognizer.RECONOCEDOR_BASICO);
 		} catch (Exception e) {
-			mToast.Make(this,getResources().getString(R.string.error_no_libreria), 1);
+			Toast.makeText(this, e.getMessage() + "\nNo esta habilitado el reconocedor de gestos.",Toast.LENGTH_SHORT).show();
 		} //Reconocedor, lo cargamos con la base de datos de accesos directos
 		
     	
@@ -208,12 +208,12 @@ public class main extends Activity {
 			case RESULT_SALIR:
 				main.this.finish();
 			case RESULT_REALOAD_GESTURES:
-			
 				getStore().load();
 				break;
 			default:
 				
 			}
+			
 			getStore().load();
 		}
 	}
@@ -244,10 +244,10 @@ public class main extends Activity {
 				Cursor c =  managedQuery(uri, projection, selection, selectionArgs, sortOrder);
 				startManagingCursor(c);
 				if(c.moveToFirst()){ 
-					t.setText(c.getString(c.getColumnIndex(Data.DISPLAY_NAME)) + "?");       			
+					t.setText(c.getString(c.getColumnIndex(Data.DISPLAY_NAME)));       			
 				}
 				else{
-					t.setText(getPrediccionActual() + "?");
+					t.setText(getPrediccionActual());
 				}
 				showDialog(DIALOG_CALL);
 				
