@@ -28,7 +28,10 @@ Translations:\n
  Luis Lorenzo Salgado Urbano\n
  \n
  ·German:\n
- Adrián Antoñana Gómez\n"
+ Adrián Antoñana Gómez\n
+ \n 
+·Mandarin Chinese:\n
+ Yang Wei\n"
                     	
                     	android:id="@+id/textView1" android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
                 </LinearLayout>
@@ -44,8 +47,5 @@ Translations:\n
  \n
 ·Korean:\n
  Mina Park\n
-\n 
-·Mandarin Chinese:\n
- Yang Wei\n"
     
     -->
