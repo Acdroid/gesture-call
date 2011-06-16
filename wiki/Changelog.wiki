@@ -1,4 +1,4 @@
-#ChangeLog
+#Changelog
 
 = Cambios de las versiones de Gesture call pro  para cuando se suban al market recordar todos los cambios realizados =
 
