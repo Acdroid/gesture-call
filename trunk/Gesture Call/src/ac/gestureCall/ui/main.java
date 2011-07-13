@@ -52,7 +52,7 @@ public class main extends Activity {
 	public static final int DIALOG_CALL = 1;
 	public static final String MY_AD_UNIT_ID = "a14daeadcc3acb6";
 	
-	public GestureOverlayView overlay;
+	public GestureOverlayView overlay; 
 	public static GesturesRecognizer gr;
 	
 	public AdView adView;
@@ -117,8 +117,8 @@ public class main extends Activity {
     	
     	
         // Look up the AdView as a resource and load a request.
-        adView = (AdView)this.findViewById(R.id.Publicidad);
-        adView.loadAd(new AdRequest());
+//        adView = (AdView)this.findViewById(R.id.Publicidad);
+//        adView.loadAd(new AdRequest());
 
         ap = new AppConfig(this, AppConfig.NAME);
     	overlay = (GestureOverlayView)findViewById(R.id.gestures);
@@ -283,7 +283,7 @@ public class main extends Activity {
     }
     
     public void clickDonate(View v){
-    	
+    	mToast.Make(mContext, "Dona!", 0);
     }
     
     public static GestureLibrary getStore(){
