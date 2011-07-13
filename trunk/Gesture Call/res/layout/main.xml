@@ -36,6 +36,15 @@
 
 		    android:orientation="vertical">
 		    
+		    <Button
+		    	android:layout_width="wrap_content"
+		    	android:layout_height="wrap_content" 
+		    	
+		    	
+		    	android:text="@string/donate"
+		    	android:onClick="clickDonate"
+		    />
+		    
 		    
 		    <LinearLayout
 		        style="@android:style/ButtonBar"
@@ -81,6 +90,8 @@
  	 			android:id="@+id/Publicidad"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                
+                ads:adUnitId="a14daeadcc3acb6"
 			/>
 		    
 		    </LinearLayout>

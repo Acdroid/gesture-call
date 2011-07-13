@@ -9,6 +9,8 @@ import ac.gestureCall.ui.main;
 import ac.gestureCall.util.config.AppConfig;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -51,6 +53,38 @@ public class Preferences extends Activity{
 		Preferences.this.finish();
 	}
 	
+	public void clickAbout(View v){
+		Dialog dialog = new Dialog(this);
+		dialog.setContentView(R.layout.credits_layout);
+		dialog.setTitle("Credits:");
+		
+		dialog.show();
+	}
+	
+	public void clickContact(View v){
+		Intent i = new Intent(Intent.ACTION_SEND);
+		i.setType("plain/text");
+		i.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"aracemcskyline@gmail.com"});
+		startActivity(Intent.createChooser(i, "Send mail..."));
+		
+		
+	}
+	
+	
+	public void clickNovedades(View v){
+		Dialog dialog = new Dialog(this);
+		dialog.setContentView(R.layout.whats_new);
+		dialog.setTitle("Whats new");
+		
+		dialog.show();
+	}
+	
+	
+	public void clickDonate(View v){
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setData(Uri.parse("market://details?id=ac.gestureCallPro"));
+		startActivity(intent);
+	}
 	
 	
 	
