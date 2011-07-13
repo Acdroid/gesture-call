@@ -5,52 +5,23 @@
                 <LinearLayout android:id="@+id/linearLayout2" android:layout_width="match_parent" android:layout_height="match_parent">
                     <TextView
                     	android:text="
--Acdroid-\n
-·Concept, Idea and Development:\n
- Marcos Trujillo Seoane\n
- Carlos Díaz Cánovas\n
-\n
-·Further Testing:\n
- Renat Kunafin\n
-\n
-Translations:\n
-\n
-·Spanish:\n
- Marcos Trujillo Seoane\n
-\n
-·English and French:\n
- Carlos Díaz Cánovas\n
- \n
- ·Italian:\n
- Javier Torán Zufía\n
- Jesús Varela Torres\n
- \n
-·Catalan:\n
- Daniel Aguilera Morales\n
- \n
- ·Korean:\n
- Mina Park\n
- \n
-·Japanese:\n
- Luis Lorenzo Salgado Urbano\n
- \n
- ·German:\n
- Adrián Antoñana Gómez\n
- \n 
-·Mandarin Chinese:\n
- Yang Wei\n
- \n
-·Thai and Malay\n
- 'El Dani et al'\n
- \n
- ·Russian:\n
-  Renat Kunafin\n\n
-AND TO YOU FOR DOWNLOADING\n
-      GESTURE CALL\n
-         THANX!!
+- Gesture Call -\n
+\n\n
+◘  Version 1.2\n\n
+• New Languages\n
+  Russian\n
+  Korean\n
+• New button Donate\n
+• Interface improvements\n
+• New method to contact with the developers\n
+  (send us feedback, ideas, bugs ... )\n
+• Bug fix
   
+\n\n
+
+\n\n\n
   
-  \n\n\n"                 	
+"                 	
                     	android:id="@+id/textView1" android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
                 </LinearLayout>
             </ScrollView>

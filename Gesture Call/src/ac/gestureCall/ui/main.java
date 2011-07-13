@@ -282,6 +282,10 @@ public class main extends Activity {
     	
     }
     
+    public void clickDonate(View v){
+    	
+    }
+    
     public static GestureLibrary getStore(){
     	return gr.getStore();    	
     }
