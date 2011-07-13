@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:ads="http://schemas.android.com/apk/res/ac.gestureCall"
+	xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
 	android:id="@+id/lay_main"
     android:orientation="vertical"
     android:layout_width="fill_parent"
@@ -90,17 +90,11 @@
  	 			android:id="@+id/Publicidad"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                
+
                 ads:adUnitId="a14daeadcc3acb6"
-			/>
+		        ads:adSize="BANNER"
+		        ads:loadAdOnCreate="true"/>
 		    
-		    </LinearLayout>
-
-
-   		
-	   	</android.gesture.GestureOverlayView>
-	   	
-
- 		
-
+		</LinearLayout>
+	</android.gesture.GestureOverlayView>
 </LinearLayout>

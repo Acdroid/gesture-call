@@ -57,7 +57,7 @@ public class WidgetMain  extends AppWidgetProvider{
      */
     private void defaultAppWidget(Context context, int[] appWidgetIds) {
         final Resources res = context.getResources();
-        final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);
+        final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_simple);
         
         //en los Widgets se trabaja con RemoteViews y no Views directamente por lo que
         //recogeremos las RemoteViews siempre e inicializaremos los valores de nuestras
