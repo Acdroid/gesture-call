@@ -31,7 +31,7 @@
 				    <CheckBox
 				    	style="@style/OptionsCheckbox"
 					  	android:id="@+id/pref_check"
-					  	android:onClick="clickCheckBoxAfterCall">
+					  	>
 					</CheckBox>
 					
 					<LinearLayout style="@style/OptionsLayoutGroupText">
