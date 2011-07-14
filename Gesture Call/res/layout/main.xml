@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/linearlayout_color_gradient_down">
+    android:background="@drawable/linearlayout_color_gradient_up">
     
         <android.gesture.GestureOverlayView
 			android:id="@+id/gestures"
@@ -34,17 +34,26 @@
 		    android:layout_height="fill_parent"
 		    android:gravity="bottom"
 
+
 		    android:orientation="vertical">
 		    
-		    <Button
-		    	android:layout_width="wrap_content"
-		    	android:layout_height="wrap_content" 
-		    	
-		    	
-		    	android:text="@string/donate"
-		    	android:onClick="clickDonate"
-		    />
-		    
+		     <LinearLayout
+			 	android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:gravity="right"
+			    android:paddingBottom="8dip"
+			    android:paddingRight="15dip">
+			    <Button
+			    	android:layout_width="wrap_content"
+			    	android:layout_height="50dip" 
+			    	
+			    	
+			    	android:text="@string/donate"
+			    	android:textStyle="bold"
+			    	android:textColor="@color/white"
+			    	android:onClick="clickDonate"
+			    	android:background="@drawable/button_semitransparente"/>
+		    </LinearLayout>
 		    
 		    <LinearLayout
 		        style="@android:style/ButtonBar"

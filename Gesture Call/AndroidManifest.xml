@@ -39,6 +39,7 @@
            android:name="android.appwidget.provider"
            android:resource="@xml/widget_simple_conf" />
     </receiver>
+	<activity android:name=".ui.donate.Donate"></activity>
     
     </application>
 </manifest>
