@@ -4,7 +4,7 @@
 
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    
+    android:background="@drawable/linearlayout_color_gradient_up"
     android:orientation="vertical">
 
     <LinearLayout

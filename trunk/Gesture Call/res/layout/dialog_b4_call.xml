@@ -34,9 +34,9 @@
   		android:layout_below="@+id/dialog_text_contact"
   		android:layout_alignLeft="@+id/dialog_text_contact"
   		android:layout_alignRight="@+id/dialog_text_contact"
-  		android:src="@drawable/android_duda"
+  		android:src="@drawable/call_confirm"
 	  	android:layout_width="fill_parent"
-	  	android:layout_height="wrap_content">
+	  	android:layout_height="85dip">
   	</ImageView>
   	
   	<Button
