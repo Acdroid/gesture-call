@@ -5,6 +5,7 @@ import ac.gestureCall.R;
 import ac.gestureCall.exceptions.NoPreferenceException;
 import ac.gestureCall.preferences.Preferences;
 import ac.gestureCall.ui.contactos.ListContact;
+import ac.gestureCall.ui.donate.Donate;
 import ac.gestureCall.ui.gestos.GestureBuilderActivity;
 import ac.gestureCall.util.config.AppConfig;
 import ac.gestureCall.util.gestures.GesturesRecognizer;
@@ -283,7 +284,8 @@ public class main extends Activity {
     }
     
     public void clickDonate(View v){
-    	mToast.Make(mContext, "Dona!", 0);
+    	Intent i = new Intent(this,Donate.class);
+    	startActivity(i);
     }
     
     public static GestureLibrary getStore(){
