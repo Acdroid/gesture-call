@@ -5,3 +5,11 @@
 = v1.2 =
 
  * Añadidos Ruso y Koreano
+
+ * Arreglos en la interfaz
+
+ * Nueva actividad Donate para motivar la donación (más botón donate en el  main
+
+ * Arreglo de bugs
+
+ * Nuevas opciones de "novedades" "about us" "contacta"
