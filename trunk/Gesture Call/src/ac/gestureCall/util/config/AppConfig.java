@@ -172,6 +172,7 @@ public class AppConfig extends MSharedPreferences{
 	/**
 	 * Primera version de las opciones con la opcion de
 	 * aviso al llamar e inclusion de la version
+	 * 1.2.2
 	 */
 	private void makeV2(){		
 		//put(true,DEVELOPERS); //SOLO PARA DESARROLLADORES, PONER A FALSE!
@@ -191,7 +192,7 @@ public class AppConfig extends MSharedPreferences{
 	
 	/**
 	 * Para el desarrollo por si se quieren probar cosas
-	 * Por ejemplo para a�adir nuevas opciones
+	 * Por ejemplo para agnadir nuevas opciones
 	 * durante el desarrollo
 	 */
 	private void makeDevelopers(){

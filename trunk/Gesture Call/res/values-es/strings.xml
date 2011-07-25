@@ -16,7 +16,7 @@
     <string name ="pref_themes">Selecciona el Tema para la App</string>
     <string name ="pref_themes_summary">Elige el estilo para la aplicación. Hay 5 temas disponibles: Gris, Azul, Verde, Negro y Blanco</string>
     <string name ="pref_novedades">Novedades</string>
-    <string name ="pref_novedades_summary">Novedades de la versión 2.0</string>
+    <string name ="pref_novedades_summary">Novedades de la versión</string>
     <string name ="pref_about">Créditos</string>
     <string name ="pref_about_summary">Conoce un poco sobre los que hemos hecho esto y agradecimientos</string>
     <string name ="pref_def_action">Acción por defecto</string>
@@ -42,7 +42,7 @@
     
     <string name="shortcut">Acceso directo</string>
     <string name="shortcut_summary">Crea una acceso directo para acceder a Gesture Call rápidamente desde el escritorio</string>
-    
+    <string name="creando">Creando</string>
     
     <!--  Button -->
     <string name = "ini_Button">Añadir</string>

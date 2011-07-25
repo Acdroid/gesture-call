@@ -7,6 +7,7 @@ import ac.gestureCall.R;
 import ac.gestureCall.exceptions.NoPreferenceException;
 import ac.gestureCall.ui.main;
 import ac.gestureCall.util.config.AppConfig;
+import ac.gestureCall.util.mToast.mToast;
 import ac.gestureCall.util.shortcut.CreateShortcut;
 import android.app.Activity;
 import android.app.Dialog;
@@ -83,9 +84,11 @@ public class Preferences extends Activity{
 	
 	
 	public void clickShortcut(View v){
-		CreateShortcut.create(this,"ac.gestureCall.ui.main");
+		mToast.Make(this, getResources().getString(R.string.creando), 0);
 		LinearLayout l = (LinearLayout)findViewById(R.id.pref_lay_shortcut);
 		l.setEnabled(false);
+		CreateShortcut.create(this,"ac.gestureCall.ui.main");
+		
 	}
 	
 	public void clickDonate(View v){
@@ -96,7 +99,7 @@ public class Preferences extends Activity{
 	
 	
 	
-	//Menu para los créditos
+	//Menu para los creditos
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
