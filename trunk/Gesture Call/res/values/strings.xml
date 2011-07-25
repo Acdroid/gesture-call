@@ -40,6 +40,8 @@
     </string>
     <string name ="donate_text2">In Acdroid love to develop applications for Android and not only have Gesture Call.</string>  
 
+	<string name="shortcut">Shortcut</string>
+	<string name="shortcut_summary">Create a shortcut to launch Gesture Call for quick access from the descktop</string>
 
     
     
