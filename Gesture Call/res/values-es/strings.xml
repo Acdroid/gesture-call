@@ -40,6 +40,8 @@
     <string name ="donate_text2">En Acdroid nos encanta desarrollar aplicaciones para Android y no sólo tenemos Gesture Call: 
     </string>
     
+    <string name="shortcut">Acceso directo</string>
+    <string name="shortcut_summary">Crea una acceso directo para acceder a Gesture Call rápidamente desde el escritorio</string>
     
     
     <!--  Button -->

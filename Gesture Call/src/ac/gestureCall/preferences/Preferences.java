@@ -7,6 +7,7 @@ import ac.gestureCall.R;
 import ac.gestureCall.exceptions.NoPreferenceException;
 import ac.gestureCall.ui.main;
 import ac.gestureCall.util.config.AppConfig;
+import ac.gestureCall.util.shortcut.CreateShortcut;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 
 /**
  * @author marcos
@@ -79,6 +81,12 @@ public class Preferences extends Activity{
 		dialog.show();
 	}
 	
+	
+	public void clickShortcut(View v){
+		CreateShortcut.create(this,"ac.gestureCall.ui.main");
+		LinearLayout l = (LinearLayout)findViewById(R.id.pref_lay_shortcut);
+		l.setEnabled(false);
+	}
 	
 	public void clickDonate(View v){
 		Intent intent = new Intent(Intent.ACTION_VIEW);

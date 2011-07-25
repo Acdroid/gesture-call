@@ -18,6 +18,7 @@ public class MSharedPreferences {
 	public SharedPreferences pref;
 	public SharedPreferences.Editor prefEditor;
 	public String namePreferences = "";
+	public Context mContext;
 	
 	
 	/*
@@ -33,10 +34,11 @@ public class MSharedPreferences {
 	
 	/**
   	 * <ul>Constructor de la clase MSharedPreferences</ul><br><br>
-  	 * @param mContext contexto desde el que se llama al constructor
+  	 * @param mCo contexto desde el que se llama al constructor
   	 * @param nombre nombre de las preferencias que deseamos obtener.
 	 */
-	public MSharedPreferences (Context mContext,String nombre){
+	public MSharedPreferences (Context mCo,String nombre){
+		mContext = mCo;
 		pref = mContext.getSharedPreferences(nombre, PREFERENCE_MODE);
 		prefEditor = pref.edit();
 		namePreferences = nombre;
@@ -205,7 +207,7 @@ public class MSharedPreferences {
 	 * @param ArrayList de keys que identificaran a las preferencias.
 	 */
 	public final void putStrings(ArrayList<String> valores, ArrayList<String>keys)throws Exception{
-		if (valores.size() != keys.size())  throw new Exception("Diferente tamaño de las listas de preferencias y claves");
+		if (valores.size() != keys.size())  throw new Exception("Diferente tamaï¿½o de las listas de preferencias y claves");
 		
 		Iterator<String> i = keys.iterator();
 		Iterator<String> j = valores.iterator();
@@ -224,7 +226,7 @@ public class MSharedPreferences {
 	 * @param ArrayList de keys que identificaran a las preferencias.
 	 */
 	public final void putInts(ArrayList<Integer> valores, ArrayList<String>keys)throws Exception{
-		if (valores.size() != keys.size())  throw new Exception("Diferente tamaño de las listas de preferencias y claves");
+		if (valores.size() != keys.size())  throw new Exception("Diferente tamaï¿½o de las listas de preferencias y claves");
 		
 		Iterator<String> i = keys.iterator();
 		Iterator<Integer> j = valores.iterator();

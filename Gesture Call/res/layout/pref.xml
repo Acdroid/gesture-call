@@ -41,16 +41,31 @@
 				    		style="@style/OptionsTextSummary"
 				   			android:text="@string/pref_ask_summary"/>
 				    </LinearLayout>	    		    
-			    	
-
 			    </LinearLayout>
-			  
 
+				<!-- ShortCut -->
+				<TextView
+					style="@style/OptionsGroupText"
+				  	android:text="@string/shortcut"/>
 
-	
-				 	  
-
-				    			    
+				<!-- Shortcut-->
+				<LinearLayout
+					style="@style/OptionsLayoutGroup"
+					android:onClick="clickShortcut"
+					android:id="@+id/pref_lay_shortcut">
+					<LinearLayout	style="@style/OptionsLayoutEmpty"/>
+					<LinearLayout	style="@style/OptionsLayoutGroupText">
+					    	
+					    	<TextView
+					    		style="@style/OptionsTextPrincipal"
+					    		android:text="@string/shortcut"/>
+					    	<TextView
+					    		style="@style/OptionsTextSummary"
+					   			android:text="@string/shortcut_summary"/>
+					    </LinearLayout>
+				</LinearLayout>
+				<LinearLayout style="@style/SeparatorLane"/>
+			  	    			    
 				    
 				<!-- About -->
 				<TextView
