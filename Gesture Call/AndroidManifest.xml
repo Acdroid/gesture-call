@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	  android:installLocation="auto"
       package="ac.gestureCall"
-      android:versionCode="7" android:versionName="1.2.2">
+      android:versionCode="8" android:versionName="1.2.3">
     <uses-sdk android:minSdkVersion="5" />
+    
     <uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
     <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
     <uses-permission android:name="android.permission.CALL_PRIVILEGED"></uses-permission>
@@ -12,6 +13,8 @@
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
 	<uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"></uses-permission>
+    
+    
     <application android:icon="@drawable/icon" android:label="@string/app_name" >
         <activity android:name=".ui.main"
                   android:label="@string/app_name">
@@ -25,12 +28,13 @@
         <activity android:name=".ui.contactos.ListContact"></activity>
         <activity android:name=".ui.creadorGestos.CreadorGestos"></activity>
         <activity android:name=".ui.gestos.GestureBuilderActivity"></activity>
+        <activity android:name=".ui.donate.Donate"></activity>
 
 	<meta-data android:value="a14daeadcc3acb6" android:name ="ADMOB_ID"></meta-data>
 	<activity android:name=".preferences.Preferences"></activity>
 	
 	
-	<!-- Widgets -->
+	<!-- Widgets 
 	<receiver android:name=".ui.widget.WidgetSimple" android:label="Gesture Call Simple">
         <intent-filter>
            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -38,8 +42,8 @@
         <meta-data
            android:name="android.appwidget.provider"
            android:resource="@xml/widget_simple_conf" />
-    </receiver>
-	<activity android:name=".ui.donate.Donate"></activity>
+    </receiver>-->
+	
     
     </application>
 </manifest>
