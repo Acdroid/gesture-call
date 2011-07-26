@@ -94,6 +94,7 @@ public class Preferences extends Activity{
 	public void clickDonate(View v){
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.setData(Uri.parse("market://details?id=ac.gestureCallPro"));
+		//intent.setData(Uri.parse("amzn://apps/android?p=ac.gestureCallPro")); //enlace con la app de amazon	
 		startActivity(intent);
 	}
 	
