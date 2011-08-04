@@ -1,6 +1,6 @@
-package ac.gestureCall.util.shortcut;
+package ac.gestureCallPro.util.shortcut;
 
-import ac.gestureCall.R;
+import ac.gestureCallPro.R;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
