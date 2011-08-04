@@ -1,9 +1,9 @@
 /**
  * 
  */
-package ac.gestureCall.ui.donate;
+package ac.gestureCallPro.ui.donate;
 
-import ac.gestureCall.R;
+import ac.gestureCallPro.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
