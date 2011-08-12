@@ -2,6 +2,7 @@
 <resources>
     <string name = "makeGesture">Faites un geste pour appeler un contact</string>
     
+    
     <!--  Button -->
     <string name = "ini_Button">Ajouter</string>
     <string name = "button_done">Créer</string>

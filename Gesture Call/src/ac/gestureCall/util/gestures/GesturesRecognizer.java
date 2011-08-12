@@ -98,7 +98,7 @@ public class GesturesRecognizer implements OnGesturePerformedListener{
 	 *    private GesturesRecognizer()<br>
 	 * <ul>Constructor de la clase GesturesRecognizer</ul><br><br>
 	 * @param String pathGestos con el path de la libreria
-	 * de gestos. Recomendado para librerías autogeneradas
+	 * de gestos. Recomendado para librerï¿½as autogeneradas
 	 * en la SDCard. El path no debe incluir el nombre del 
 	 * fichero, solo la ruta de acceso hasta el direcctorio
 	 * donde se encuentra.
@@ -196,6 +196,7 @@ public class GesturesRecognizer implements OnGesturePerformedListener{
 			handler.sendMessage(msg);
 		}
 
+		Log.d("DEBUG","Gestures basic ");
 
 		//Obtenemos el array de gestos reconocidos
 		ArrayList<Prediction> predictions = Store.recognize(gesture);
