@@ -2,6 +2,13 @@
 
 = Cambios de las versiones de Gesture call pro  para cuando se suban al market recordar todos los cambios realizados =
 
+= v2.0 =
+
+
+ * Adaptada a Gesture Call Donate!
+
+
+
 = v1.2 =
 
  * Añadidos Ruso y Koreano
