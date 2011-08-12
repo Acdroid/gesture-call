@@ -22,6 +22,6 @@ public class CreateShortcut {
 				context,R.drawable.icon); 
 		i.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,iconResource);
 
-		context.sendBroadcast(i); 
+		context.sendBroadcast(i);
 	}
 }
