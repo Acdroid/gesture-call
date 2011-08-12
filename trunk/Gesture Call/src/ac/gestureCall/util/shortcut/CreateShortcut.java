@@ -1,6 +1,6 @@
-package ac.gestureCallPro.util.shortcut;
+package ac.gestureCall.util.shortcut;
 
-import ac.gestureCallPro.R;
+import ac.gestureCall.R;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -8,11 +8,10 @@ import android.os.Parcelable;
 public class CreateShortcut {
 
 
-	public static final void create (Context context,String name){
+	public static final void create (Context context){
 
 		Intent shortcutIntent = new Intent(Intent.ACTION_MAIN); 
-		shortcutIntent.setClassName(context, name);
-		
+		shortcutIntent.setClassName(context, context.getApplicationContext().getPackageName() + ".ui.main");
 
 
 		Intent i = new Intent();
@@ -23,6 +22,6 @@ public class CreateShortcut {
 				context,R.drawable.icon); 
 		i.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,iconResource);
 
-		context.sendBroadcast(i);
+		context.sendBroadcast(i); 
 	}
 }
