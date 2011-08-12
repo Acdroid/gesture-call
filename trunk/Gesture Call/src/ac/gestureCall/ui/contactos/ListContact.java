@@ -11,15 +11,13 @@ import java.util.Set;
 import ac.gestureCall.R;
 import ac.gestureCall.ui.main;
 import ac.gestureCall.ui.creadorGestos.CreadorGestos;
+import ac.gestureCall.util.contactos.ContactCursor;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.gesture.GestureLibrary;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.provider.ContactsContract.Data;
 import android.view.View;
 import android.widget.AlphabetIndexer;
 import android.widget.ImageView;
@@ -35,6 +33,7 @@ public final class ListContact extends ListActivity
 	public static final String KEY_NAME ="NAME";
 	public static final String KEY_PHONE ="PHONE";
 	public GestureLibrary store;
+	public ContactCursor manegadorCursor;
 
 	public Cursor cursor;
 	/**
@@ -47,12 +46,12 @@ public final class ListContact extends ListActivity
 		setContentView(R.layout.lista_contactos);     
 		
 		store = main.getStore();
-		
-		cursor = getContacts();
-		startManagingCursor(cursor);
+		manegadorCursor = new ContactCursor(this);
+		cursor =  manegadorCursor.getCursor();
+		//startManagingCursor(cursor);
 		String[] fields = new String[] {
-				Data.DISPLAY_NAME,
-				Phone.NUMBER
+				manegadorCursor.getNameNameColum(),
+				manegadorCursor.getPhoneNameColum()
 		};
 
         int[] to = new int[] { R.id.item_lista_nombre,R.id.item_lista_numero};
@@ -84,19 +83,20 @@ public final class ListContact extends ListActivity
 //        String sortOrder = ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
 
 		
-		Uri uri =  Data.CONTENT_URI;
-		String[] projection = new String []{
-				Data._ID,
-				Data.DISPLAY_NAME,
-				Phone.NUMBER,
-				Phone.TYPE 
-		};
-		String selection = Data.MIMETYPE + "='" + Phone.CONTENT_ITEM_TYPE + "' AND "
-        		+ Phone.NUMBER + " IS NOT NULL";
-		
-		String[] selectionArgs = null;
-		String sortOrder = Data.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
-        return managedQuery(uri, projection, selection, selectionArgs, sortOrder);
+//		Uri uri =  Data.CONTENT_URI;
+//		String[] projection = new String []{
+//				Data._ID,
+//				Data.DISPLAY_NAME,
+//				Phone.NUMBER,
+//				Phone.TYPE 
+//		};
+//		String selection = Data.MIMETYPE + "='" + Phone.CONTENT_ITEM_TYPE + "' AND "
+//        		+ Phone.NUMBER + " IS NOT NULL";
+//		
+//		String[] selectionArgs = null;
+//		String sortOrder = Data.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
+//        return managedQuery(uri, projection, selection, selectionArgs, sortOrder);
+		return new ContactCursor(this).getCursor();
     }
 
 
@@ -105,8 +105,8 @@ public final class ListContact extends ListActivity
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		Intent i = new Intent(ListContact.this,CreadorGestos.class);
-		String nombre = cursor.getString(cursor.getColumnIndex(Data.DISPLAY_NAME));
-		String phone= cursor.getString(cursor.getColumnIndex(Phone.NUMBER));
+		String nombre = cursor.getString(cursor.getColumnIndex(manegadorCursor.getNameNameColum()));
+		String phone= cursor.getString(cursor.getColumnIndex(manegadorCursor.getPhoneNameColum()));
 		
 		
 		i.putExtra(KEY_NAME, nombre);
@@ -153,7 +153,7 @@ public final class ListContact extends ListActivity
 
 			this.mContext = context;
 			gestosNoNull = store.getGestureEntries();	
-			alphaIndexer=new AlphabetIndexer(c,c.getColumnIndex(Data.DISPLAY_NAME), " ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+			alphaIndexer=new AlphabetIndexer(c,c.getColumnIndex(manegadorCursor.getNameNameColum()), " ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 		}
 
 		@Override
