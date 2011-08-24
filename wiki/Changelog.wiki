@@ -7,6 +7,8 @@
 
  * Cambiada imagen de DonateAmazon para que lo acepten en la appstore de amazon.
 
+ * Italiano actualizado
+
 = v2.0 =
 
 
