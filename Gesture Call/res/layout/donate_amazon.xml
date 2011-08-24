@@ -34,7 +34,7 @@
 			  		android:layout_height="wrap_content"
 			  		android:id="@+id/donate_ima_gesturecalldonate" 
 			  		android:layout_gravity="center"
-			  		android:src="@drawable/android_donate"
+			  		android:src="@drawable/boton_amazon"
 			  		android:onClick="clickGestureCall"/>
 			  		
 		  	
