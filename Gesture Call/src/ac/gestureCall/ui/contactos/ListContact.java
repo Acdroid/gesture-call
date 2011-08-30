@@ -1,6 +1,10 @@
 /**
- *  Poner licencia
- * @author Carlos Diaz Canovas y Marcos Trujillo Seoane
+ * Acdroid Apps for Android
+ * 
+ * @author Carlos Diaz Canovas
+ * @author Marcos Trujillo Seoane
+ * 
+ * Project Gesture Call
  * 
  */
 package ac.gestureCall.ui.contactos;
@@ -69,6 +73,7 @@ public final class ListContact extends ListActivity
 	 *
 	 * @return A cursor for for accessing the contact list.
 	 */
+	@SuppressWarnings("unused")
 	private Cursor getContacts()
 	{
         // Run query
@@ -127,6 +132,7 @@ public final class ListContact extends ListActivity
 			case main.RESULT_SALIR:
 				setResult(main.RESULT_SALIR);
 				ListContact.this.finish();
+				break;
 			case main.RESULT_GESTO_ADD_OK:
 				setResult(main.RESULT_OK);
 				ListContact.this.finish();
@@ -194,7 +200,7 @@ public final class ListContact extends ListActivity
 			TextView t2 = (TextView) view.findViewById(R.id.item_lista_numero);
 			String phone =t2.getText().toString();
 			ImageView i = (ImageView)view.findViewById(R.id.item_list_image);
-			if (gestosNoNull.contains(phone) == true){
+			if ( gestosNoNull.contains(phone) ){
 				i.setImageResource(R.drawable.btn_check_on);
 			}
 			else{

@@ -1,8 +1,16 @@
+/**
+ * Acdroid Apps for Android
+ * 
+ * @author Carlos Diaz Canovas
+ * @author Marcos Trujillo Seoane
+ * 
+ * Project Gesture Call
+ * 
+ */
 package ac.gestureCall.ui;
 
 
 import ac.gestureCall.ui.donate.Donate;
-import ac.gestureCall.ui.donate.DonateAmazon;
 import ac.gestureCall.R;
 import ac.gestureCall.exceptions.NoPreferenceException; 
 import ac.gestureCall.preferences.Preferences;
@@ -33,6 +41,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Data;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -100,19 +109,12 @@ public class main extends Activity {
 
 	};
 
-
-
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		init();
 	}
-
-
-	
-
 
 	/**
 	 * <p>Metodo encargado de iniciar toda la configuracion tanto
@@ -130,7 +132,7 @@ public class main extends Activity {
 		try {
 			gr = new GesturesRecognizer(dir,fich, overlay, handler, GesturesRecognizer.RECONOCEDOR_BASICO);
 		} catch (Exception e) {
-			Toast.makeText(this, e.getMessage() + "\nNo esta habilitado el reconocedor de gestos.",Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, e.getMessage() + "\nERROR while the Gesture Recognice starts!!",Toast.LENGTH_SHORT).show();
 		} //Reconocedor, lo cargamos con la base de datos de accesos directos
 		
 		//notificacion
@@ -141,7 +143,9 @@ public class main extends Activity {
 		try {
 			intervalo = ap.getLong(AppConfig.S_AFTER_CALL);
 		} catch (NoPreferenceException e) {
+			Log.i("Gesture Call","No After Call preference. Apply Default 3000");
 			intervalo=3000; //Ponemos intervalo por defecto si ocurre un error
+			ap.put(3000,AppConfig.S_AFTER_CALL);
 		}
 		countdown = new CallCountDown(intervalo, 1000);
 		//Iniciamos el dialog
@@ -235,7 +239,9 @@ public class main extends Activity {
 				try {
 					aux = ap.getBool(AppConfig.RETURN_AFTER_CALL);
 				} catch (NoPreferenceException e) {
+					Log.i("Gesture Call","No Return After Call preference. Apply Default false");
 					isOnCallingSms=false;//Si falla no salimos
+					ap.put(false,AppConfig.RETURN_AFTER_CALL);
 					return;
 				}
 				//Si venimos de una llamada y se quiere salir despues de llamar
@@ -253,6 +259,7 @@ public class main extends Activity {
 				break;
 			case RESULT_SALIR:
 				main.this.finish();
+				break;
 			case RESULT_REALOAD_GESTURES:
 				getStore().load();
 				break;
@@ -265,7 +272,9 @@ public class main extends Activity {
 				try {
 					intervalo = ap.getLong(AppConfig.S_AFTER_CALL);
 				} catch (NoPreferenceException e) {
+					Log.i("Gesture Call","No Secs After Call preference. Apply Default 3000");
 					intervalo=3000; //Ponemos intervalo por defecto si ocurre un error
+					ap.put(3000,AppConfig.S_AFTER_CALL);
 				}
 				countdown = new CallCountDown(intervalo, 1000);
 				setTheme();
@@ -298,7 +307,9 @@ public class main extends Activity {
 		try {
 			notif = ap.getBool(AppConfig.NOTIFICATION);
 		} catch (NoPreferenceException e) {
+			Log.i("Gesture Call","No Notification Icon Preference. Apply Default: True");
 			notif = true; //en caso de error SI notificaciones
+			ap.put(true,AppConfig.NOTIFICATION);		
 		}
 		
 		if (!notif){
@@ -339,7 +350,9 @@ public class main extends Activity {
 		try {
 			actDef = ap.getInt(AppConfig.ACCION_POR_DEFECTO);
 		} catch (NoPreferenceException e) {
+			Log.i("Gesture Call","No Def Action Preference. Apply Default: Call");
 			actDef = ACCION_LLAMAR;
+			ap.put(ACCION_LLAMAR,AppConfig.ACCION_POR_DEFECTO);		
 		}
 		ImageView iSMS = (ImageView)findViewById(R.id.main_sms);
 		
@@ -374,7 +387,9 @@ public class main extends Activity {
 		try {
 			theme = ap.getInt(AppConfig.THEME);
 		} catch (NoPreferenceException e) {
+			Log.i("Gesture Call","No Theme Preference. Apply Default: Grey");
 			theme = Themes.GREY;
+			ap.put(Themes.GREY,AppConfig.THEME);
 		}
 		
 		
@@ -505,10 +520,12 @@ public class main extends Activity {
 				
 			}
 		} catch (NoPreferenceException e) { //En caso de no existir la opcion guardada correctamente se llama
+			Log.i("Gesture Call","No Before Call preference. Calling");
 			String url = "tel:" + prediccion;
 			Intent i = new Intent(Intent.ACTION_CALL, Uri.parse(url));
 			isOnCallingSms=true;
 			startActivityForResult(i,ID);
+			ap.put(true, AppConfig.AVISO_AL_LLAMAR);
 		}
 
 	}
@@ -565,10 +582,12 @@ public class main extends Activity {
 				startActivityForResult(iSMS,ID);
 			}
 		} catch (NoPreferenceException e) { //En caso de no existir la opcion se envia directamente
+			Log.i("Gesture Call","No Before Call preference. Sending sms");
 			String url = "sms:" + prediccion;
 			Intent iSMS = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 			isOnCallingSms=true;
 			startActivityForResult(iSMS,ID);
+			ap.put(true, AppConfig.AVISO_AL_LLAMAR);
 		}
 
 	}
@@ -725,7 +744,6 @@ public class main extends Activity {
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		
 		ImageView i = (ImageView)findViewById(R.id.main_sms);
@@ -802,35 +820,8 @@ public class main extends Activity {
 	}
 	
 	
-	
-	
-	// Comprobar estas funciones para el error de llamar si se pulsa
-	//  boton home cuando esta la cuenta atras y para la creacion de dialogs
-	
-
-	@Override
-	protected void onPrepareDialog(int id, Dialog dialog, Bundle args) {
-		// TODO Auto-generated method stub
-		super.onPrepareDialog(id, dialog, args);
-	}
-
-
-
-
-
-	@Override
-	protected void onPrepareDialog(int id, Dialog dialog) {
-		// TODO Auto-generated method stub
-		super.onPrepareDialog(id, dialog);
-	}
-
-
-
-
-
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
-		// TODO Auto-generated method stub
 		outState.putBoolean("ISCALLSMS", isOnCallingSms);
 		super.onSaveInstanceState(outState);
 	}
@@ -841,7 +832,6 @@ public class main extends Activity {
 
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		if ( (savedInstanceState != null) && (savedInstanceState.containsKey("ISCALLSMS")) ){
 			isOnCallingSms = savedInstanceState.getBoolean("ISCALLSMS");
 		}
