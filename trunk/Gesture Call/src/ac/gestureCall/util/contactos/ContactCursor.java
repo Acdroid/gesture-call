@@ -1,3 +1,12 @@
+/**
+ * Acdroid Apps for Android
+ * 
+ * @author Carlos Diaz Canovas
+ * @author Marcos Trujillo Seoane
+ * 
+ * Project Gesture Call
+ * 
+ */
 package ac.gestureCall.util.contactos;
 
 import android.app.Activity;
@@ -17,6 +26,7 @@ import android.provider.ContactsContract.Data;
  * @author mtrujillo y cdiaz
  *
  */
+@SuppressWarnings("deprecation")
 public class ContactCursor {
 	
 	Cursor mCursor=null;

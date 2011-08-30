@@ -1,3 +1,12 @@
+/**
+ * Acdroid Apps for Android
+ * 
+ * @author Carlos Diaz Canovas
+ * @author Marcos Trujillo Seoane
+ * 
+ * Project Gesture Call
+ * 
+ */
 package ac.gestureCall.util.contactos;
 
 import android.app.Activity;
@@ -10,8 +19,6 @@ import android.provider.Contacts.People;
 
 @SuppressWarnings("deprecation")
 public class ContactCursorInf {
-
-	
 	public static final Cursor getCursor(Context context){
 		
 		
@@ -27,7 +34,5 @@ public class ContactCursorInf {
 		String[] selectionArgs = null;
 		String sortOrder = People.NAME +  " COLLATE LOCALIZED ASC";
         return ((Activity)context).managedQuery(uri, projection, selection, selectionArgs, sortOrder);
-		
 	}
-	
 }
