@@ -15,6 +15,7 @@ import java.io.IOException;
 import ac.gestureCall.R;
 import ac.gestureCall.exceptions.NoPreferenceException;
 import ac.gestureCall.ui.main;
+import ac.gestureCall.util.mToast.mToast;
 import ac.gestureCall.util.shortcut.CreateShortcut;
 import android.app.Dialog;
 import android.content.Context;
@@ -33,6 +34,7 @@ import android.widget.Button;
  * todas las posibles preferencias que se pueden guardar.
  * Durante el primer uso guarda la configuracion inicial.
  * @author mtrujillo & cdiaz
+ * @version $Revision: 1.0 $
  */
 public class AppConfig extends MSharedPreferences{
 	public static final String VERSION = "version"; //version
@@ -59,6 +61,12 @@ public class AppConfig extends MSharedPreferences{
 	private final String fich = dir + "/gestures";
 
 
+
+	/**
+	 * Constructor for AppConfig.
+	 * @param mContext Context
+	 * @param name String
+	 */
 	public AppConfig(Context mContext, String name){
 		super(mContext,name);
 		
@@ -89,9 +97,9 @@ public class AppConfig extends MSharedPreferences{
 	 * 
 	 * @param dirPath El directorio completo donde esta el archivo sin el nombre del archivo
 	 * @param fullPath
-	 * @throws NoContactFileException 
+	
 	 * 
-	 * */
+	 * * @throws NoContactFileException  */
 	public static void createStructure(String dirPath, String fullPath){
 
 		File file = new File(fullPath);
@@ -120,7 +128,6 @@ public class AppConfig extends MSharedPreferences{
 				//throw new NoFileException("Unable to create file: "+fullPath);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -139,6 +146,7 @@ public class AppConfig extends MSharedPreferences{
 		makeV1();
 		makeV2();
 		makeV3();
+		makeV4();
 	}
 	
 	/**
@@ -164,6 +172,10 @@ public class AppConfig extends MSharedPreferences{
 		
 		if (ver < 3){
 			makeV3();
+		}
+		
+		if (ver < 4){
+			makeV4();
 		}
 		
 		
@@ -211,6 +223,22 @@ public class AppConfig extends MSharedPreferences{
 		put(new Long(3000),S_AFTER_CALL);
 		put(3,VERSION); //Imprescindible siempre poner
 		
+		
+	}
+
+	/**
+	 * Cuarta version de las opciones con la opcion de
+	 * aviso al llamar e inclusion de la version
+	 * 
+	 * 2.1.1
+	 * 
+	 */
+	private void makeV4(){
+		//Falseamos las notificaciones
+		//para que no haya quejas
+		put(false,NOTIFICATION);
+		mToast.Make(mContext, mContext.getResources().getString(R.string.aviso_notificacion),1);
+		
 		Dialog dialog = new Dialog(mContext);
 		dialog.setContentView(R.layout.whats_new_firsttime);
 		Button b;
@@ -227,8 +255,8 @@ public class AppConfig extends MSharedPreferences{
 		dialog.setTitle("Whats new");
 		
 		dialog.show();
+		put(4,VERSION); //Imprescindible siempre poner
 	}
-
 	
 	
 	
@@ -245,6 +273,7 @@ public class AppConfig extends MSharedPreferences{
 //		put(Themes.GREEN,THEME);
 //		put(new Long(4000),S_AFTER_CALL);
 //		logOptions(); //Muestra todas las opciones menos FIRST_TIME
+
 	}
 	
 	/**
