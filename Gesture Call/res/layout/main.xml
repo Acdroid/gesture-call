@@ -6,9 +6,10 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
     <!-- android:background="@drawable/gradiente_android">-->    
-    
+     
     <!-- xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads" -->
     
+
         <android.gesture.GestureOverlayView
 			android:id="@+id/gestures"
 			android:layout_width="fill_parent"
@@ -98,6 +99,8 @@
 		<RelativeLayout
 	    android:orientation="vertical" android:layout_height="fill_parent"
 	    android:layout_width="fill_parent">
+	    
+	    
 	 
 	    <LinearLayout
 	        android:id="@+id/header"
@@ -131,13 +134,17 @@
 		        		android:layout_width="wrap_content"
 		        		android:layout_height="wrap_content"
 		        		android:src="@drawable/button_sms_disabled"
-		        		android:onClick="clickSms"/>
+		        		android:onClick="clickSms"
+		        		android:background="@drawable/button_imageview"
+		        		android:layout_margin="2dip"/>
 		        	<ImageView
 		        		android:id="@+id/imggears"
 		        		android:layout_width="wrap_content"
 		        		android:layout_height="wrap_content"
 		        		android:src="@drawable/button_options"
-		        		android:onClick="clickOpciones"/>
+		        		android:onClick="clickOpciones"
+		        		android:background="@drawable/button_imageview"
+		        		android:layout_margin="2dip"/>
 	        	
 	        	</LinearLayout>
 
@@ -148,9 +155,8 @@
 	        	android:layout_width="fill_parent"
 	        	android:background="@drawable/gradiente_shadow"></LinearLayout>
 	    </LinearLayout>
-	 
-	 
-	 
+	    
+ 
 	 <LinearLayout	 	    
 	        android:orientation="vertical"
 	        android:layout_height="wrap_content"
