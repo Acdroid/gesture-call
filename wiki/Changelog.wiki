@@ -2,8 +2,14 @@
 
 = Cambios de las versiones de Gesture call pro  para cuando se suban al market recordar todos los cambios realizados =
 
+= 2.0.2 =
 
-= v2.1 y 2.0.1 =
+ * Cambiados iconos del escritorio por otros con cierta profundidad y aspecto de botón.
+
+ * Pruebas con Mobclix
+
+
+= 2.0.1 =
 
  * Cambiada imagen de DonateAmazon para que lo acepten en la appstore de amazon.
 
