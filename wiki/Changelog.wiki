@@ -2,11 +2,15 @@
 
 = Cambios de las versiones de Gesture call pro  para cuando se suban al market recordar todos los cambios realizados =
 
-= 2.0.2 =
+= 2.0-2=
 
  * Cambiados iconos del escritorio por otros con cierta profundidad y aspecto de botón.
 
- * Pruebas con Mobclix
+ * Añadida publicidad mobclix
+
+ * Arreglado el error de getStore mítico!! 
+ 
+ * Añadida opción "inifinito" en el dialog after call
 
 
 = 2.0.1 =
