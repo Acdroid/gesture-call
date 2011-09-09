@@ -9,6 +9,8 @@
  */
 package ac.gestureCall.ui.creadorGestos;
 
+import java.io.File;
+
 import ac.gestureCall.R;
 import ac.gestureCall.exceptions.NoPreferenceException;
 import ac.gestureCall.ui.main;
@@ -16,18 +18,23 @@ import ac.gestureCall.ui.contactos.ListContact;
 import ac.gestureCall.util.config.AppConfig;
 import ac.gestureCall.util.config.AppConfig.Themes;
 import ac.gestureCall.util.mToast.mToast;
+import ac.gestureCall.util.mobclixListener.MobclixListener;
 import android.app.Activity;
 import android.content.Context;
 import android.gesture.Gesture;
+import android.gesture.GestureLibraries;
 import android.gesture.GestureLibrary;
 import android.gesture.GestureOverlayView;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.mobclix.android.sdk.MobclixMMABannerXLAdView;
 
 
 public class CreadorGestos extends Activity {
@@ -47,6 +54,8 @@ public class CreadorGestos extends Activity {
 	public AppConfig ap;
 	
 	public GestureOverlayView overlay;
+	
+	public MobclixMMABannerXLAdView adView;
 
 	
 	@Override
@@ -54,6 +63,11 @@ public class CreadorGestos extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.create_gesture);
+		
+		//Escondemos la publicidad hasta que se cargue
+		adView = (MobclixMMABannerXLAdView)findViewById(R.id.mobclix_publicidad);
+		adView.setVisibility(View.GONE);
+		adView.addMobclixAdViewListener(new MobclixListener());
 
 		mDoneButton = (Button)findViewById(R.id.done);
 		ButtonCancel = (Button) findViewById(R.id.cg_button_cancel);
@@ -113,7 +127,8 @@ public class CreadorGestos extends Activity {
 	public void addGesture(View v) {
 		if (mGesture != null) {
 
-			store = main.getStore();
+			if(!obtenLibreria())
+				return;
 			
 			store.removeEntry(phoneContacto);
 			store.addGesture(phoneContacto, mGesture);
@@ -124,6 +139,27 @@ public class CreadorGestos extends Activity {
 			CreadorGestos.this.finish();
 		}
 
+	}
+	
+	
+	/**
+	 * Obtiene la lista de gestos de la base de datos
+	 * de gestos.
+	 * @return false si ha ocurrido algun error al cargar
+	 * true si todo ha salido bien.
+	 */
+	private boolean obtenLibreria(){
+		File mStoreFile = new File(Environment.getExternalStorageDirectory() + "/GestureCall", "gestures");
+		store = GestureLibraries.fromFile(mStoreFile);
+		if (!store.load()){
+			Log.d("DEBUG","Store.load == null");
+			if ( store.getGestureEntries() == null){
+				mToast.Make(this, "Error while obtain the Gestures Library. Try to close and open Gesture Call", 0);
+				return false;
+			}
+		}
+		
+		return true;
 	}
 
 	/**

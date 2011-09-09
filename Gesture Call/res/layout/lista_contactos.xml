@@ -13,6 +13,7 @@
          android:layout_weight="1"
          android:cacheColorHint="#FFFFFFFF"
          android:fastScrollEnabled="true"
+         android:scrollingCache="true"
          />
          <TextView
 		    android:id="@android:id/empty"

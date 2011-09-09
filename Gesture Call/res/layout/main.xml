@@ -134,17 +134,18 @@
 		        		android:layout_width="wrap_content"
 		        		android:layout_height="wrap_content"
 		        		android:src="@drawable/button_sms_disabled"
-		        		android:onClick="clickSms"
-		        		android:background="@drawable/button_imageview"
-		        		android:layout_margin="2dip"/>
+		        		android:onClick="clickSms"/>
+		        		<!-- android:background="@drawable/button_imageview"
+		        		android:layout_margin="2dip"/> -->
 		        	<ImageView
 		        		android:id="@+id/imggears"
 		        		android:layout_width="wrap_content"
 		        		android:layout_height="wrap_content"
 		        		android:src="@drawable/button_options"
-		        		android:onClick="clickOpciones"
+		        		android:onClick="clickOpciones"/>
+		        		<!-- 
 		        		android:background="@drawable/button_imageview"
-		        		android:layout_margin="2dip"/>
+		        		android:layout_margin="2dip"/> -->
 	        	
 	        	</LinearLayout>
 
@@ -204,8 +205,8 @@
 				            android:layout_weight="1"		            
 				            android:onClick="clickAdd"
 				            android:text="@string/ini_Button"
-				            android:padding="10dip"
-				            android:background="@drawable/button_menu_bar_left_bg"/>
+				           android:padding="10dip"
+				           android:background="@drawable/button_menu_bar_right_bg"/> 
 				    
 				        <Button
 				        	android:id="@+id/main_button_edit"
@@ -214,20 +215,29 @@
 				            android:layout_weight="1"		            
 				            android:onClick="clickEdit"
 				            android:text="@string/button_edit_gesture"
-				            android:padding="10dip"		           
+				            android:padding="10dip"
 				            android:background="@drawable/button_menu_bar_right_bg"/>
-				            
+				             				            
 			 
 			    </LinearLayout>
 			    
- 			<com.google.ads.AdView
+<!--  			<com.google.ads.AdView
  	 			android:id="@+id/Publicidad"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
 
                 ads:adUnitId="a14daeadcc3acb6"
 		        ads:adSize="BANNER"
-		        ads:loadAdOnCreate="true"/> 
+		        ads:loadAdOnCreate="true"/>  -->
+		        
+		   	<com.mobclix.android.sdk.MobclixMMABannerXLAdView 
+		        android:id="@+id/publicidad"
+		        android:layout_height="50dp"
+		        android:layout_width="320dp"
+		        android:layout_gravity="center"
+		        android:tag="adspace"
+		        android:visibility="gone"
+		    />
 		
 			 </LinearLayout>
 			 
