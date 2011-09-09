@@ -10,6 +10,8 @@
 package ac.gestureCall.ui;
 
 
+import com.mobclix.android.sdk.MobclixMMABannerXLAdView;
+
 import ac.gestureCall.ui.donate.Donate;
 import ac.gestureCall.R;
 import ac.gestureCall.exceptions.NoPreferenceException; 
@@ -20,6 +22,7 @@ import ac.gestureCall.util.config.AppConfig;
 import ac.gestureCall.util.config.AppConfig.Themes;
 import ac.gestureCall.util.gestures.GesturesRecognizer;
 import ac.gestureCall.util.mToast.mToast;
+import ac.gestureCall.util.mobclixListener.MobclixListener;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -83,6 +86,8 @@ public class main extends Activity {
 	public int tipoAccion=ACCION_LLAMAR; //Accion por defecto llamar si no se pulsa ningun boton
 	public CallCountDown countdown;
 	
+	public MobclixMMABannerXLAdView adView;
+	
 	public boolean smsOn=false;
 	public boolean isOnCallingSms=false;
 
@@ -124,6 +129,13 @@ public class main extends Activity {
 	private void init(){
 		mContext = this;
 		isOnCallingSms=false;
+		
+		
+		//Escondemos la publicidad hasta que se cargue
+		adView = (MobclixMMABannerXLAdView)findViewById(R.id.publicidad);
+		adView.setVisibility(View.GONE);
+		adView.addMobclixAdViewListener(new MobclixListener());
+		
 
 		//Cargamos las opciones
 		ap = new AppConfig(this, AppConfig.NAME);
@@ -808,7 +820,7 @@ public class main extends Activity {
 
 	}
 
-	public static GestureLibrary getStore(){
+	public static GestureLibrary getStore() throws NullPointerException{
 		return gr.getStore();    	
 	}
 
