@@ -10,7 +10,6 @@
 
  * Arreglado el error de getStore mítico!! 
  
- * Añadida opción "inifinito" en el dialog after call
 
 
 = 2.0.1 =
