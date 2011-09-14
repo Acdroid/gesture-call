@@ -221,23 +221,33 @@
 			 
 			    </LinearLayout>
 			    
-<!--  			<com.google.ads.AdView
- 	 			android:id="@+id/Publicidad"
+ 			<com.google.ads.AdView
+ 	 			android:id="@+id/publicidad_admob"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
 
                 ads:adUnitId="a14daeadcc3acb6"
 		        ads:adSize="BANNER"
-		        ads:loadAdOnCreate="true"/>  -->
+		        ads:loadAdOnCreate="true"/>  
 		        
-		   	<com.mobclix.android.sdk.MobclixMMABannerXLAdView 
+<!-- 		   	<com.mobclix.android.sdk.MobclixMMABannerXLAdView  
 		        android:id="@+id/publicidad"
 		        android:layout_height="50dp"
 		        android:layout_width="320dp"
 		        android:layout_gravity="center"
 		        android:tag="adspace"
 		        android:visibility="gone"
-		    />
+		    /> -->
+		
+		
+			<ac.gestureCall.ui.autopublicidad.Autopublicidad
+ 	 			android:id="@+id/autopubli"
+ 	 			android:layout_width="fill_parent"
+ 	 			android:layout_height="50dip"
+ 	 			
+				android:visibility="gone"/>  
+		
+		
 		
 			 </LinearLayout>
 			 
