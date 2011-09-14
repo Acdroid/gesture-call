@@ -10,19 +10,18 @@
 package ac.gestureCall.ui;
 
 
-import com.mobclix.android.sdk.MobclixMMABannerXLAdView;
-
-import ac.gestureCall.ui.donate.Donate;
 import ac.gestureCall.R;
-import ac.gestureCall.exceptions.NoPreferenceException; 
+import ac.gestureCall.exceptions.NoPreferenceException;
 import ac.gestureCall.preferences.Preferences;
+import ac.gestureCall.ui.autopublicidad.Autopublicidad;
 import ac.gestureCall.ui.contactos.ListContact;
+import ac.gestureCall.ui.donate.Donate;
 import ac.gestureCall.ui.gestos.GestureBuilderActivity;
+import ac.gestureCall.util.adMobListener.AdMobListener;
 import ac.gestureCall.util.config.AppConfig;
 import ac.gestureCall.util.config.AppConfig.Themes;
 import ac.gestureCall.util.gestures.GesturesRecognizer;
 import ac.gestureCall.util.mToast.mToast;
-import ac.gestureCall.util.mobclixListener.MobclixListener;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -56,6 +55,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.ads.AdView;
  
 public class main extends Activity {
 
@@ -86,7 +87,9 @@ public class main extends Activity {
 	public int tipoAccion=ACCION_LLAMAR; //Accion por defecto llamar si no se pulsa ningun boton
 	public CallCountDown countdown;
 	
-	public MobclixMMABannerXLAdView adView;
+	//public MobclixMMABannerXLAdView adView;
+	public AdView adView;
+	public Autopublicidad autopubli;
 	
 	public boolean smsOn=false;
 	public boolean isOnCallingSms=false;
@@ -132,9 +135,12 @@ public class main extends Activity {
 		
 		
 		//Escondemos la publicidad hasta que se cargue
-		adView = (MobclixMMABannerXLAdView)findViewById(R.id.publicidad);
-		adView.setVisibility(View.GONE);
-		adView.addMobclixAdViewListener(new MobclixListener());
+//		adView = (MobclixMMABannerXLAdView)findViewById(R.id.publicidad);
+//		adView.setVisibility(View.GONE);
+//		adView.addMobclixAdViewListener(new MobclixListener());
+		adView = (AdView)findViewById(R.id.publicidad_admob);
+		autopubli = (Autopublicidad)findViewById(R.id.autopubli);
+		adView.setAdListener(new AdMobListener(adView,autopubli));
 		
 
 		//Cargamos las opciones
