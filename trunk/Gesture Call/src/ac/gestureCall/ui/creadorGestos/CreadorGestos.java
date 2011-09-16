@@ -15,6 +15,7 @@ import ac.gestureCall.R;
 import ac.gestureCall.exceptions.NoPreferenceException;
 import ac.gestureCall.ui.main;
 import ac.gestureCall.ui.contactos.ListContact;
+import ac.gestureCall.util.adMobListener.AdMobListener;
 import ac.gestureCall.util.adMobListener.AdMobListenerInterstitial;
 import ac.gestureCall.util.config.AppConfig;
 import ac.gestureCall.util.config.AppConfig.Themes;
@@ -60,7 +61,6 @@ public class CreadorGestos extends Activity {
 	
 	public MobclixMMABannerXLAdView adView;
 	public InterstitialAd interstitial;
-
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,17 +71,8 @@ public class CreadorGestos extends Activity {
 		//Escondemos la publicidad hasta que se cargue
 		adView = (MobclixMMABannerXLAdView)findViewById(R.id.mobclix_publicidad);
 		adView.setVisibility(View.GONE);
-		adView.addMobclixAdViewListener(new MobclixListener());
+		adView.addMobclixAdViewListener(new MobclixListener());		
 		
-		// Create the interstitial
-	    interstitial = new InterstitialAd(this, "a14e3596443c9fe");
-	    // Create ad request
-	    AdRequest adRequest = new AdRequest();
-	    // and begin loading your interstitial
-	    interstitial.setAdListener(new AdMobListenerInterstitial(interstitial));
-	    interstitial.loadAd(adRequest);
-		
-
 		mDoneButton = (Button)findViewById(R.id.done);
 		ButtonCancel = (Button) findViewById(R.id.cg_button_cancel);
 		//Asignamos al boton el texto volver
