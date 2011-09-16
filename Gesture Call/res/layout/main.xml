@@ -181,7 +181,7 @@
 			    	android:background="@drawable/button_semitransparente"/>
 		    </LinearLayout> 
 	        
-	        
+
 	        
 	        
 	        <LinearLayout
@@ -206,7 +206,7 @@
 				            android:onClick="clickAdd"
 				            android:text="@string/ini_Button"
 				           android:padding="10dip"
-				           android:background="@drawable/button_menu_bar_right_bg"/> 
+				           android:background="@drawable/button_menu_bar_left_bg"/> 
 				    
 				        <Button
 				        	android:id="@+id/main_button_edit"
@@ -241,10 +241,9 @@
 		
 		
 			<ac.gestureCall.ui.autopublicidad.Autopublicidad
- 	 			android:id="@+id/autopubli"
+ 	 			android:id="@+id/autopubli"	 	
  	 			android:layout_width="fill_parent"
- 	 			android:layout_height="50dip"
- 	 			
+ 	 			android:layout_height="wrap_content"		
 				android:visibility="gone"/>  
 		
 		

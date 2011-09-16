@@ -61,6 +61,7 @@ public class AdMobListener implements AdListener {
 	@Override
 	public void onReceiveAd(Ad ad) {
 		Log.d("Ads","On receiveAd");
+
 		if (flag){
 			autopublicidad.setVisibility(View.GONE);
 			adView.setVisibility(View.VISIBLE);
