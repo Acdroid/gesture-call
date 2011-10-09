@@ -9,6 +9,14 @@
     android:gestureColor="#c32020"
 	android:uncertainGestureColor="#80c32020"
     android:orientation="vertical">
+    
+    <ac.gestureCall.ui.cabecera.Cabecera
+    	android:id="@+id/create_cabecera"
+    	android:layout_width="fill_parent"
+    	android:layout_height="50dip"
+    	android:layout_alignParentTop="true"
+    
+    ></ac.gestureCall.ui.cabecera.Cabecera>
 
     <LinearLayout
         android:layout_width="fill_parent"
