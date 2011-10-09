@@ -4,7 +4,7 @@
 
 = 2.0-4=
 
- * Cabecera
+ * Cabecera y autopublicidad
 
 = 2.0-2=
 
