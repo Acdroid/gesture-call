@@ -4,6 +4,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
+    
+    <ac.gestureCall.ui.cabecera.Cabecera
+    	android:layout_width="fill_parent"
+    	android:layout_height="50dip"
+    	android:layout_alignParentTop="true"
+    
+    ></ac.gestureCall.ui.cabecera.Cabecera>
 
     <ListView
         android:id="@android:id/list"

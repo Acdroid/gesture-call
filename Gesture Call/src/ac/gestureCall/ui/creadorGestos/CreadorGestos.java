@@ -14,15 +14,15 @@ import java.io.File;
 import ac.gestureCall.R;
 import ac.gestureCall.exceptions.NoPreferenceException;
 import ac.gestureCall.ui.main;
+import ac.gestureCall.ui.cabecera.Cabecera;
 import ac.gestureCall.ui.contactos.ListContact;
-import ac.gestureCall.util.adMobListener.AdMobListener;
-import ac.gestureCall.util.adMobListener.AdMobListenerInterstitial;
 import ac.gestureCall.util.config.AppConfig;
 import ac.gestureCall.util.config.AppConfig.Themes;
 import ac.gestureCall.util.mToast.mToast;
 import ac.gestureCall.util.mobclixListener.MobclixListener;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.gesture.Gesture;
 import android.gesture.GestureLibraries;
 import android.gesture.GestureLibrary;
@@ -36,13 +36,13 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.ads.AdRequest;
 import com.google.ads.InterstitialAd;
 import com.mobclix.android.sdk.MobclixMMABannerXLAdView;
 
 
 public class CreadorGestos extends Activity {
 	private static final float LENGTH_THRESHOLD = 120.0f;
+	private static final int ID = 2;
 
 	private Gesture mGesture;
 	private Button mDoneButton;
@@ -56,23 +56,24 @@ public class CreadorGestos extends Activity {
 	public String phoneContacto="";
 	public LinearLayout lay_main;
 	public AppConfig ap;
-	
+	public Cabecera cabecera;
+
 	public GestureOverlayView overlay;
-	
+
 	public MobclixMMABannerXLAdView adView;
 	public InterstitialAd interstitial;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.create_gesture);
-		
+
 		//Escondemos la publicidad hasta que se cargue
 		adView = (MobclixMMABannerXLAdView)findViewById(R.id.mobclix_publicidad);
 		adView.setVisibility(View.GONE);
 		adView.addMobclixAdViewListener(new MobclixListener());		
-		
+
 		mDoneButton = (Button)findViewById(R.id.done);
 		ButtonCancel = (Button) findViewById(R.id.cg_button_cancel);
 		//Asignamos al boton el texto volver
@@ -83,6 +84,10 @@ public class CreadorGestos extends Activity {
 		lay_main = (LinearLayout)findViewById(R.id.create_gesture_lay_main);
 		ap = new AppConfig(mContext, AppConfig.NAME);
 		setTheme();
+
+		//Cabecera
+		cabecera = (Cabecera)findViewById(R.id.create_cabecera);
+		cabecera.setOnOptionClickWitReturn(ID);
 
 		Bundle bundle = getIntent().getExtras();
 		if(bundle!=null){
@@ -109,7 +114,7 @@ public class CreadorGestos extends Activity {
 
 		mGesture = savedInstanceState.getParcelable("gesture");
 		if (mGesture != null) {
-				overlay.post(new Runnable() {
+			overlay.post(new Runnable() {
 				public void run() {
 					overlay.setGesture(mGesture);
 				}
@@ -133,7 +138,7 @@ public class CreadorGestos extends Activity {
 
 			if(!obtenLibreria())
 				return;
-			
+
 			store.removeEntry(phoneContacto);
 			store.addGesture(phoneContacto, mGesture);
 			store.save();
@@ -144,8 +149,8 @@ public class CreadorGestos extends Activity {
 		}
 
 	}
-	
-	
+
+
 	/**
 	 * Obtiene la lista de gestos de la base de datos
 	 * de gestos.
@@ -162,7 +167,7 @@ public class CreadorGestos extends Activity {
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
 
@@ -176,7 +181,7 @@ public class CreadorGestos extends Activity {
 	 * @param v boton que activa el metodo
 	 */
 	public void cancelGesture(View v) {
-		
+
 		if (overlay.getGesture() == null){
 			setResult(main.RESULT_OK);
 			finish();
@@ -188,7 +193,7 @@ public class CreadorGestos extends Activity {
 		}
 	}
 
-	
+
 	/**
 	 * 
 	 * Metodo al que se llama cuadno se pulsa el a�adir. Guarda y asigna
@@ -199,9 +204,9 @@ public class CreadorGestos extends Activity {
 	public void doneGesture(View v) {		
 		gestureActual = mGesture;
 		addGesture(v);
-		
+
 	}
-	
+
 	/**
 	 * Carga el tema segun las preferencias del usuarios
 	 * 
@@ -215,28 +220,28 @@ public class CreadorGestos extends Activity {
 			theme = Themes.GREY;
 			ap.put(Themes.GREY,AppConfig.THEME);
 		}
-		
+
 		Log.d("DEBUG","puto theme " + theme);
-		
+
 		switch (theme) {
 		case Themes.GREY:
 			lay_main.setBackgroundResource(R.drawable.background_grey);
-//			overlay.setGestureColor(getResources().getColor(R.color.overlay_grey));
-//			overlay.setGestureColor(Color.WHITE);
-//			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_grey_uncertain));
+			//			overlay.setGestureColor(getResources().getColor(R.color.overlay_grey));
+			//			overlay.setGestureColor(Color.WHITE);
+			//			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_grey_uncertain));
 			texto.setTextColor(getResources().getColor(R.color.white));
-			
+
 			break;
 		case Themes.BLUE:
 			lay_main.setBackgroundResource(R.drawable.background_blue_gradient);
-//			overlay.setGestureColor(getResources().getColor(R.color.overlay_blue));
-//			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_blue_uncertain));
+			//			overlay.setGestureColor(getResources().getColor(R.color.overlay_blue));
+			//			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_blue_uncertain));
 			texto.setTextColor(getResources().getColor(R.color.black));
 			break;
 		case Themes.GREEN:
 			lay_main.setBackgroundResource(R.drawable.background_green_gradient);
-//			overlay.setGestureColor(getResources().getColor(R.color.overlay_green));
-//			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_green_uncertain));
+			//			overlay.setGestureColor(getResources().getColor(R.color.overlay_green));
+			//			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_green_uncertain));
 			texto.setTextColor(getResources().getColor(R.color.black));
 			break;
 		case Themes.BLACK:
@@ -254,9 +259,20 @@ public class CreadorGestos extends Activity {
 			break;
 		}
 	}
-	
 
-	
+
+
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == ID){
+			setTheme();
+		}
+
+	}
+
+
+
 
 	private class GesturesProcessor implements GestureOverlayView.OnGestureListener {
 		public void onGestureStarted(GestureOverlayView overlay, MotionEvent event) {
@@ -274,12 +290,12 @@ public class CreadorGestos extends Activity {
 				overlay.clear(false);
 			}
 			mDoneButton.setEnabled(true);
-			
+
 
 		}
 
 		public void onGestureCancelled(GestureOverlayView overlay, MotionEvent event) {
 		}
 	}
-	
+
 }
