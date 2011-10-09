@@ -7,10 +7,10 @@
  * Project Gesture Call
  * 
  */
-package ac.gestureCall.ui.cabecera;
+package ac.gestureCallPro.ui.cabecera;
 
-import ac.gestureCall.R;
-import ac.gestureCall.preferences.Preferences;
+import ac.gestureCallPro.R;
+import ac.gestureCallPro.preferences.Preferences;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -20,7 +20,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-public class Cabecera extends LinearLayout {
+public class Cabecera extends LinearLayout { 
 	
 	private Context context;
 	
