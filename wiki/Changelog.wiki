@@ -2,6 +2,10 @@
 
 = Cambios de las versiones de Gesture call pro  para cuando se suban al market recordar todos los cambios realizados =
 
+= 2.0-4=
+
+ * Cabecera
+
 = 2.0-2=
 
  * Cambiados iconos del escritorio por otros con cierta profundidad y aspecto de botón.
