@@ -23,13 +23,13 @@
 	        	android:layout_width="fill_parent"
 	        	android:orientation="horizontal"
 	        	android:layout_weight="0.8"
-	        	android:gravity="right">
+	        	android:gravity="right"> 
 	        		
 	        	<ImageView
 		        	android:id="@+id/cabecera_sms"
-		        	android:layout_width="wrap_content"
+		        	android:layout_width="35dip"
 		        	android:layout_height="wrap_content"
-		        	android:src="@drawable/button_sms_disabled"
+		        	android:src="@drawable/phone"
 		        	android:visibility="gone"/>
 		        	<!-- android:background="@drawable/button_imageview"
 		        		android:layout_margin="2dip"/> -->
