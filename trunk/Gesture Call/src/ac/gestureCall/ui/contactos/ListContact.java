@@ -15,7 +15,6 @@ import java.util.Set;
 
 import ac.gestureCall.R;
 import ac.gestureCall.ui.main;
-import ac.gestureCall.ui.cabecera.Cabecera;
 import ac.gestureCall.ui.creadorGestos.CreadorGestos;
 import ac.gestureCall.util.contactos.ContactCursor;
 import ac.gestureCall.util.mToast.mToast;

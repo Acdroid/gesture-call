@@ -390,17 +390,18 @@ public class main extends Activity {
 		case ACCION_LLAMAR:
 			tipoAccion = ACCION_LLAMAR;
 			smsOn = false;
-			cabecera.setAccionImageResource(R.drawable.button_sms_disabled);
+			cabecera.setAccionImageResource(R.drawable.phone);
 			break;
 		case ACCION_SMS:
 			tipoAccion = ACCION_SMS;
 			smsOn = true;
-			cabecera.setAccionImageResource(R.drawable.button_sms_enabled);
+			cabecera.setAccionImageResource(R.drawable.sms);
 			break;
 		case ACCION_PERDIDA:
 			tipoAccion = ACCION_PERDIDA;
 			smsOn = false;
-			cabecera.setAccionImageResource(R.drawable.button_sms_disabled);
+			//cabecera.setAccionImageResource(R.drawable.button_sms_disabled);
+			cabecera.setAccionImageResource(R.drawable.phone);
 			break;
 		default:
 			break;
@@ -758,11 +759,11 @@ public class main extends Activity {
 		if(smsOn){
 			tipoAccion=ACCION_SMS;
 			//OJO esto se cambiara segun los temas
-			cabecera.setAccionImageResource(R.drawable.env_enabled);
+			cabecera.setAccionImageResource(R.drawable.sms);
 		}
 		else{
 			tipoAccion=ACCION_LLAMAR;
-			cabecera.setAccionImageResource(R.drawable.env_disabled);
+			cabecera.setAccionImageResource(R.drawable.phone);
 			//OJO desactivar otros elementos como llamada perdida
 		}
 	}
@@ -775,11 +776,11 @@ public class main extends Activity {
 		if(smsOn){
 			tipoAccion=ACCION_SMS;
 			//OJO esto se cambiara segun los temas
-			cabecera.setAccionImageResource(R.drawable.env_enabled);
+			cabecera.setAccionImageResource(R.drawable.sms);
 		}
 		else{
 			tipoAccion=ACCION_LLAMAR;
-			cabecera.setAccionImageResource(R.drawable.env_disabled);
+			cabecera.setAccionImageResource(R.drawable.phone);
 
 			//OJO desactivar otros elementos como llamada perdida
 		}
@@ -806,13 +807,13 @@ public class main extends Activity {
 			smsOn=false;
 			tipoAccion=ACCION_LLAMAR;
 			//OJO esto se cambiara segun los temas
-			cabecera.setAccionImageResource(R.drawable.button_sms_disabled);
+			cabecera.setAccionImageResource(R.drawable.phone);
 			mToast.Make(this, getResources().getString(R.string.smsoff), 0);
 		}
 		else{
 			smsOn=true;
 			tipoAccion=ACCION_SMS;
-			cabecera.setAccionImageResource(R.drawable.button_sms_enabled);
+			cabecera.setAccionImageResource(R.drawable.sms);
 			
 			mToast.Make(this, getResources().getString(R.string.smson), 0);
 			//OJO desactivar otros elementos como llamada perdida
