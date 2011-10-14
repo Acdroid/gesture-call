@@ -2,6 +2,12 @@
 
 = Cambios de las versiones de Gesture call pro  para cuando se suban al market recordar todos los cambios realizados =
 
+= v2.1-5 =
+
+• Añadido botón no al dialog AfterCall
+
+• Tema por defecto, AZUL
+
 = 2.0-4=
 
  * Cabecera y autopublicidad
