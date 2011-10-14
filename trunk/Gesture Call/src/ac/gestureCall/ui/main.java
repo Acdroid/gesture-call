@@ -666,6 +666,19 @@ public class main extends Activity {
 				dialogCall.dismiss();
 			}
 		});
+		
+		buttonDialog = (Button) dialogCall.findViewById(R.id.dialog_button_no);
+		
+		
+		buttonDialog.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				countdown.setIsPressedButtonSi(false);
+				countdown.cancel();	
+				dialogCall.dismiss();
+			}
+		});
+		
 
 	}
 	
