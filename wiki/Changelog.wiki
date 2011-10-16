@@ -14,6 +14,8 @@
 
 • Eliminados archivos no necesarios, reducidas imágenes de la aplicación.
 
+• Mejorados los dialogs whats news
+
 = 2.0-4=
 
  * Cabecera y autopublicidad
