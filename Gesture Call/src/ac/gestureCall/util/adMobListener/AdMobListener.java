@@ -35,12 +35,15 @@ public class AdMobListener implements AdListener {
 	@Override
 	public void onFailedToReceiveAd(Ad ad, ErrorCode error) {
 		Log.d("Ads","On dismissScreen");
-		Log.i("Gesture Call","Error obteniendo la publicidad. ErrorCode: " + error );
-		adView.setVisibility(View.GONE);
-		autopublicidad.setVisibility(View.VISIBLE);
-		flag=true;
-		tiempo = new Timer();
-		tiempo.schedule(new timerTask(), 17000, 17000);
+		if (error != ErrorCode.NETWORK_ERROR){
+				
+			Log.i("Gesture Call","Error obteniendo la publicidad. ErrorCode: " + error );
+			adView.setVisibility(View.GONE);
+			autopublicidad.setVisibility(View.VISIBLE);
+			flag=true;
+			tiempo = new Timer();
+			tiempo.schedule(new timerTask(), 17000, 17000);
+		}
 		
 		
 		
