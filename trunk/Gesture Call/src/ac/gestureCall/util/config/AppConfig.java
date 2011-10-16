@@ -239,6 +239,17 @@ public class AppConfig extends MSharedPreferences{
 		put(false,NOTIFICATION);
 		mToast.Make(mContext, mContext.getResources().getString(R.string.aviso_notificacion),1);
 		
+		showNewDialog();
+		
+		put(4,VERSION); //Imprescindible siempre poner
+	}
+	
+	
+	/**
+	 * Muestra el dialog de 
+	 * whatsNew
+	 */
+	private void showNewDialog(){
 		Dialog dialog = new Dialog(mContext);
 		dialog.setContentView(R.layout.whats_new_firsttime);
 		Button b;
@@ -248,14 +259,14 @@ public class AppConfig extends MSharedPreferences{
 			@Override
 			public void onClick(View arg0) {
 				CreateShortcut.create(mContext);
+				arg0.setEnabled(false);
+				
 				
 			}
 		});
-		
 		dialog.setTitle("Whats new");
 		
 		dialog.show();
-		put(4,VERSION); //Imprescindible siempre poner
 	}
 	
 	

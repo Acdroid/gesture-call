@@ -19,7 +19,7 @@ import ac.gestureCall.ui.contactos.ListContact;
 import ac.gestureCall.util.config.AppConfig;
 import ac.gestureCall.util.config.AppConfig.Themes;
 import ac.gestureCall.util.mToast.mToast;
-import ac.gestureCall.util.mobclixListener.MobclixListener;
+import ac.gestureCall.util.smaatoListener.PrepareBaner;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +38,7 @@ import android.widget.TextView;
 
 import com.google.ads.InterstitialAd;
 import com.mobclix.android.sdk.MobclixMMABannerXLAdView;
+import com.smaato.SOMA.SOMABanner;
 
 
 public class CreadorGestos extends Activity {
@@ -62,6 +63,8 @@ public class CreadorGestos extends Activity {
 
 	public MobclixMMABannerXLAdView adView;
 	public InterstitialAd interstitial;
+	
+	public SOMABanner somaBaner;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +72,14 @@ public class CreadorGestos extends Activity {
 
 		setContentView(R.layout.create_gesture);
 
-		//Escondemos la publicidad hasta que se cargue
+        //Escondemos la publicidad hasta que se cargue
 		adView = (MobclixMMABannerXLAdView)findViewById(R.id.mobclix_publicidad);
 		adView.setVisibility(View.GONE);
-		adView.addMobclixAdViewListener(new MobclixListener());		
+			
+		
+		//Publicidad de smaato!
+		somaBaner = (SOMABanner)findViewById(R.id.smaato_baner);
+		PrepareBaner.prepareAndCall(somaBaner,adView);
 
 		mDoneButton = (Button)findViewById(R.id.done);
 		ButtonCancel = (Button) findViewById(R.id.cg_button_cancel);
@@ -269,6 +276,23 @@ public class CreadorGestos extends Activity {
 			setTheme();
 		}
 
+	}
+
+
+
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		somaBaner.setAutoRefresh(false);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		somaBaner.setAutoRefresh(true);
 	}
 
 
