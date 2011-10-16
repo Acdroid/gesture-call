@@ -10,6 +10,8 @@
 
 • "Arreglado" un "error" comunicado por Amazon en el dialog de whatsNew. Pesados -.-
 
+• Cambiado el icono de la aplicación.
+
 = 2.0-4=
 
  * Cabecera y autopublicidad
