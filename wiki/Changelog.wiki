@@ -8,6 +8,8 @@
 
 • Tema por defecto, AZUL
 
+• "Arreglado" un "error" comunicado por Amazon en el dialog de whatsNew. Pesados -.-
+
 = 2.0-4=
 
  * Cabecera y autopublicidad
