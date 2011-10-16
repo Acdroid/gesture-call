@@ -12,6 +12,8 @@
 
 • Cambiado el icono de la aplicación.
 
+• Eliminados archivos no necesarios, reducidas imágenes de la aplicación.
+
 = 2.0-4=
 
  * Cabecera y autopublicidad
