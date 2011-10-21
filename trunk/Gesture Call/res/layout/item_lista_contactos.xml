@@ -3,28 +3,13 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 		android:orientation="vertical"
-		
+
+
 		android:gravity="center">
 	
-		<LinearLayout 
-		    android:layout_width="fill_parent"
-		    android:layout_height="4dip"
-			android:background="@drawable/linearlayout_color_gradient_down"/>
+		
 			
-			
-		<LinearLayout 
-			android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-			android:orientation="horizontal"
-			android:gravity="center">
-			
-			<LinearLayout 
-			    android:layout_width="4dip"
-			    android:layout_height="wrap_content"
-				android:background="@drawable/linearlayout_color_gradient_down"/>
-			
-			
-			
+	
 			<LinearLayout
 			
 				android:id = "@+id/lay_item"
@@ -33,7 +18,7 @@
 				android:orientation="horizontal"
 				android:paddingLeft="4dip"
 				android:paddingRight="4dip"
-				android:background="@color/grey_list_item"
+				android:background="@drawable/item_list_gradient"
 				android:gravity="center">		
 			
 			
@@ -72,12 +57,6 @@
 				       		
 				</LinearLayout>
 			</LinearLayout>
-			
-			
-			<LinearLayout 
-			    android:layout_width="4dip"
-			    android:layout_height="wrap_content"
-				android:background="@drawable/linearlayout_color_gradient_down"/>	
-			
-	</LinearLayout>
+		
+
 </LinearLayout>

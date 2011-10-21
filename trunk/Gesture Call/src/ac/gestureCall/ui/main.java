@@ -56,6 +56,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.ads.AdRequest;
 import com.google.ads.AdView;
  
 public class main extends Activity {
@@ -797,6 +798,8 @@ public class main extends Activity {
 
 			//OJO desactivar otros elementos como llamada perdida
 		}
+		
+		adView.loadAd(new AdRequest());
 	}
 
     public void clickDonate(View v){

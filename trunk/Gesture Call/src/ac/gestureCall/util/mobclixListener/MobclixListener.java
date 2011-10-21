@@ -56,7 +56,7 @@ public class MobclixListener implements MobclixAdViewListener, MobclixFullScreen
 	@Override
 	public void onFailedLoad(MobclixAdView AdView, int errorValue) {
 		if (errorValue == -501){
-			Log.d("DEBUG","Anuncio no disponible volviendo a pedir");
+			Log.d("Ads","Anuncio no disponible volviendo a pedir");
 			AdView.setVisibility(View.GONE);
 			AdView.getAd();
 			return;
@@ -72,7 +72,7 @@ public class MobclixListener implements MobclixAdViewListener, MobclixFullScreen
 
 	@Override
 	public void onSuccessfulLoad(MobclixAdView AdView) {
-		Log.d("DEBUG","Anuncio obtenido");
+		Log.d("Ads","Anuncio obtenido MobClix");
 		AdView.setVisibility(View.VISIBLE);
 		
 	}
