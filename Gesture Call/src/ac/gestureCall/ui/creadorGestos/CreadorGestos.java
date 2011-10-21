@@ -34,9 +34,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.ads.InterstitialAd;
 import com.mobclix.android.sdk.MobclixMMABannerXLAdView;
 import com.smaato.SOMA.SOMABanner;
 
@@ -45,7 +45,7 @@ public class CreadorGestos extends Activity {
 	private static final float LENGTH_THRESHOLD = 120.0f;
 	private static final int ID = 2;
 
-	private Gesture mGesture;
+	public Gesture mGesture;
 	private Button mDoneButton;
 	public Button ButtonCancel;
 	public GestureLibrary store;
@@ -61,9 +61,7 @@ public class CreadorGestos extends Activity {
 
 	public GestureOverlayView overlay;
 
-	public MobclixMMABannerXLAdView adView;
-	public InterstitialAd interstitial;
-	
+	public MobclixMMABannerXLAdView adView;	
 	public SOMABanner somaBaner;
 
 	@Override
@@ -72,14 +70,16 @@ public class CreadorGestos extends Activity {
 
 		setContentView(R.layout.create_gesture);
 
-        //Escondemos la publicidad hasta que se cargue
-		adView = (MobclixMMABannerXLAdView)findViewById(R.id.mobclix_publicidad);
-		adView.setVisibility(View.GONE);
-			
-		
-		//Publicidad de smaato!
-		somaBaner = (SOMABanner)findViewById(R.id.smaato_baner);
-		PrepareBaner.prepareAndCall(somaBaner,adView);
+		//Escondemos la publicidad hasta que se cargue
+        adView = (MobclixMMABannerXLAdView)findViewById(R.id.mobclix_publicidad);
+        adView.setVisibility(View.GONE);
+                
+        
+        //Publicidad de smaato!
+        somaBaner = (SOMABanner)findViewById(R.id.smaato_baner);
+        PrepareBaner.prepareAndCall(somaBaner,adView); 
+
+
 
 		mDoneButton = (Button)findViewById(R.id.done);
 		ButtonCancel = (Button) findViewById(R.id.cg_button_cancel);
@@ -168,7 +168,6 @@ public class CreadorGestos extends Activity {
 		File mStoreFile = new File(Environment.getExternalStorageDirectory() + "/GestureCall", "gestures");
 		store = GestureLibraries.fromFile(mStoreFile);
 		if (!store.load()){
-			Log.d("DEBUG","Store.load == null");
 			if ( store.getGestureEntries() == null){
 				mToast.Make(this, "Error while obtain the Gestures Library. Try to close and open Gesture Call", 0);
 				return false;
@@ -188,7 +187,6 @@ public class CreadorGestos extends Activity {
 	 * @param v boton que activa el metodo
 	 */
 	public void cancelGesture(View v) {
-
 		if (overlay.getGesture() == null){
 			setResult(main.RESULT_OK);
 			finish();
@@ -228,7 +226,6 @@ public class CreadorGestos extends Activity {
 			ap.put(Themes.GREY,AppConfig.THEME);
 		}
 
-		Log.d("DEBUG","puto theme " + theme);
 
 		switch (theme) {
 		case Themes.GREY:
@@ -277,25 +274,20 @@ public class CreadorGestos extends Activity {
 		}
 
 	}
+	
+    @Override
+    protected void onPause() {
+            // TODO Auto-generated method stub
+            super.onPause();
+            somaBaner.setAutoRefresh(false);
+    }
 
-
-
-
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		somaBaner.setAutoRefresh(false);
-	}
-
-	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		somaBaner.setAutoRefresh(true);
-	}
-
-
+    @Override
+    protected void onResume() {
+            // TODO Auto-generated method stub
+            super.onResume();
+            somaBaner.setAutoRefresh(true);
+    }
 
 
 	private class GesturesProcessor implements GestureOverlayView.OnGestureListener {
