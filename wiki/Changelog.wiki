@@ -16,6 +16,8 @@
 
 • Mejorados los dialogs whats news
 
+• Mejoras en la interfaz
+
 • Arreglado un error en la publicidad de admob cuando no hay conexión.
 
 = 2.0-4=
