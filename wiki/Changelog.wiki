@@ -4,6 +4,10 @@
 
 = v2.1-5 =
 
+• Cambios en la publcidad: Actualizada librería de Android, quitado Smaato y puesto solo mobclix y añadidos intersititial 1/8 de las veces en createGesture
+
+= v2.1-5 =
+
 • Añadido botón no al dialog AfterCall
 
 • Tema por defecto, AZUL
