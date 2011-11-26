@@ -3,24 +3,32 @@ package ac.gestureCall.util.adMobListener;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.app.Activity;
 import android.os.Looper;
 import android.util.Log;
 
 import com.google.ads.Ad;
 import com.google.ads.AdListener;
 import com.google.ads.AdRequest;
-import com.google.ads.InterstitialAd;
 import com.google.ads.AdRequest.ErrorCode;
-import com.google.ads.AdView;
+import com.google.ads.InterstitialAd;
+import com.mobclix.android.sdk.MobclixFullScreenAdView;
+
 
 public class AdMobListenerInterstitial implements AdListener {
 
 	private InterstitialAd adView;
-	boolean flag = false; //Se estam mostrando autopublicidad?
-	Timer tiempo;
+	private boolean flag = false; //Se estam mostrando autopublicidad?
+	private Timer tiempo;
+	private Activity activity = null;
 
 	public AdMobListenerInterstitial(InterstitialAd ad){
 		adView = ad;
+	}
+
+	public AdMobListenerInterstitial(InterstitialAd ad, Activity act){
+		adView = ad;
+		this.activity = act;
 	}
 
 	@Override
@@ -42,6 +50,10 @@ public class AdMobListenerInterstitial implements AdListener {
 		//			tiempo.schedule(new timerTask(), 17000, 17000);
 		//		}
 
+		if (activity != null){
+			MobclixFullScreenAdView mobClixFSAdView = new MobclixFullScreenAdView(activity);
+			mobClixFSAdView.requestAndDisplayAd();
+		}
 
 
 	}
