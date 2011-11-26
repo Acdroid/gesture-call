@@ -2,7 +2,7 @@
 
 = Cambios de las versiones de Gesture call pro  para cuando se suban al market recordar todos los cambios realizados =
 
-= v2.1-5 =
+= v2.1-6 =
 
 • Cambios en la publcidad: Actualizada librería de Android, quitado Smaato y puesto solo mobclix y añadidos intersititial 1/8 de las veces en createGesture
 
