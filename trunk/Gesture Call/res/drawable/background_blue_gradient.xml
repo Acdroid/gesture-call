@@ -10,5 +10,6 @@
     <corners android:radius="2px" />
 </shape>
 
+<!-- Degradado de azul azul a azul-gris de abajo a arriba -->
 <!-- android:startColor="#4aace5" azul -->
 <!-- android:startColor="#a4c639" verde -->

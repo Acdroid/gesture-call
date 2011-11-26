@@ -36,49 +36,13 @@
 	
 		<!-- Widgets --> 
 		
-		<!--  Widget Simple 
-	<receiver android:name=".ui.widget.WidgetSimple" android:label="Gesture Call Simple">
-        <intent-filter>
-           <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-        </intent-filter>
-        <intent-filter>
-    		<action android:name="ac.gestureCallPro.PressButton"/>
-		</intent-filter>
-        <meta-data
-           android:name="android.appwidget.provider"
-           android:resource="@xml/widget_simple_conf" />
-    </receiver>
-    
-    <activity android:name=".ui.widget.WidgetSimpleConfig">
-    	<intent-filter>
-        	<action android:name="android.apwidget.action.APPWIDGET_CONFIGURE"/>
-    	</intent-filter>
-	</activity>
-	-->
-	<!--  Widget Pro 
+		
+
+	<!-- Ads google -->
+	<activity android:name="com.google.ads.AdActivity"
+               android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
 	
-	<receiver android:name=".ui.widget.WidgetPro" android:label="Gesture Call Pro">
-        <intent-filter>
-           <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-    		<action android:name="ac.gestureCallPro.ProPressButton"/>
-    		<action android:name="ac.gestureCallPro.proDirectCall"/>
-		</intent-filter>
-        <meta-data
-           android:name="android.appwidget.provider"
-           android:resource="@xml/widget_pro_config" />
-    </receiver>
-    
-    <activity android:name=".ui.widget.WidgetProConfig">
-    	<intent-filter>
-        	<action android:name="android.apwidget.action.APPWIDGET_CONFIGURE"/>
-    	</intent-filter>
-	</activity> 
 	
-	-->
-	
-	<activity android:name="com.google.ads.AdActivity" 
-			  android:configChanges="keyboard|keyboardHidden|orientation"/>
-			  
 	<!-- Mobclix --> 
 	<meta-data android:name="com.mobclix.APPLICATION_ID" android:value="86E265D9-F336-4C3F-B5BE-E545F674437F"/>
 	<meta-data android:value="a14daeadcc3acb6" android:name="ADMOB_PUBLISHER_ID" />

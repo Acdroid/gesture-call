@@ -8,3 +8,5 @@
         />   
     <corners android:radius="2px" />
 </shape>
+
+<!-- Degradado de gris/negro a negro de abajo a arriba -->
