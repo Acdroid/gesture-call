@@ -98,19 +98,21 @@
                 android:text="@string/cancelGesture" />
         </LinearLayout>
 
-        <com.smaato.SOMA.SOMABanner
-            android:id="@+id/smaato_baner"
-            android:layout_width="fill_parent"
-            android:layout_height="50dip"
-            android:visibility="gone" />
+
 
         <com.mobclix.android.sdk.MobclixMMABannerXLAdView
             android:id="@+id/mobclix_publicidad"
-            android:layout_width="320dp"
-            android:layout_height="50dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:tag="adspace"
             android:visibility="gone" />
     </LinearLayout>
+    
+        <!--         <com.smaato.SOMA.SOMABanner
+            android:id="@+id/smaato_baner"
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:visibility="gone" /> -->
 
 </LinearLayout>

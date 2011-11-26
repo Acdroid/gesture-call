@@ -11,3 +11,5 @@
     	android:width="1dip"
         android:color="#FFFFFF"></stroke>
 </shape>
+
+<!-- Degradado de gris/negro a negro de abajo a arriba con el borde blanco -->

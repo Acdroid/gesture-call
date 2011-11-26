@@ -7,7 +7,7 @@ import com.mobclix.android.sdk.MobclixAdView;
 import com.mobclix.android.sdk.MobclixAdViewListener;
 import com.mobclix.android.sdk.MobclixFullScreenAdView;
 import com.mobclix.android.sdk.MobclixFullScreenAdViewListener;
-import com.mobclix.android.sdk.MobclixMMABannerXLAdView;
+
 
 public class MobclixListener implements MobclixAdViewListener, MobclixFullScreenAdViewListener{
 

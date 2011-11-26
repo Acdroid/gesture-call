@@ -22,6 +22,7 @@ import ac.gestureCall.util.adMobListener.AdMobListener;
 import ac.gestureCall.util.config.AppConfig;
 import ac.gestureCall.util.config.AppConfig.Themes;
 import ac.gestureCall.util.gestures.GesturesRecognizer;
+import ac.gestureCall.util.location.GetCurrentLocation;
 import ac.gestureCall.util.mToast.mToast;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -134,15 +135,7 @@ public class main extends Activity {
 		mContext = this;
 		isOnCallingSms=false;
 		
-		
-		//Escondemos la publicidad hasta que se cargue
-//		adView = (MobclixMMABannerXLAdView)findViewById(R.id.publicidad);
-//		adView.setVisibility(View.GONE);
-//		adView.addMobclixAdViewListener(new MobclixListener());
-		adView = (AdView)findViewById(R.id.publicidad_admob);
-		autopubli = (Autopublicidad)findViewById(R.id.autopubli);
-		adView.setAdListener(new AdMobListener(adView,autopubli));
-		
+		GetCurrentLocation.getInstance(this);	
 
 		//Cargamos las opciones
 		ap = new AppConfig(this, AppConfig.NAME);
@@ -191,6 +184,13 @@ public class main extends Activity {
 		lay_main = (LinearLayout)findViewById(R.id.lay_main);
 		setTheme();
 		
+		//Escondemos la publicidad hasta que se cargue
+//		adView = (MobclixMMABannerXLAdView)findViewById(R.id.publicidad);
+//		adView.setVisibility(View.GONE);
+//		adView.addMobclixAdViewListener(new MobclixListener());
+		adView = (AdView)findViewById(R.id.publicidad_admob);
+		autopubli = (Autopublicidad)findViewById(R.id.autopubli);
+		adView.setAdListener(new AdMobListener(adView,autopubli));
 		
 		//Aviso por pantalla //TODO donde poner esto? En appconfig o aqui
 		mToast.Make(this, getResources().getString(R.string.makeGesture), 0);
@@ -780,6 +780,12 @@ public class main extends Activity {
 			cabecera.setAccionImageResource(R.drawable.phone);
 			//OJO desactivar otros elementos como llamada perdida
 		}
+		
+		AdRequest request = new AdRequest();
+		if (GetCurrentLocation.getInstance(this).currentLocation != null)
+			request.setLocation(GetCurrentLocation.getInstance(this).currentLocation);
+
+		adView.loadAd(request);
 	}
 
 
@@ -798,8 +804,11 @@ public class main extends Activity {
 
 			//OJO desactivar otros elementos como llamada perdida
 		}
-		
-		adView.loadAd(new AdRequest());
+		AdRequest request = new AdRequest();
+		if (GetCurrentLocation.getInstance(this).currentLocation != null)
+			request.setLocation(GetCurrentLocation.getInstance(this).currentLocation);
+
+		adView.loadAd(request);
 	}
 
     public void clickDonate(View v){

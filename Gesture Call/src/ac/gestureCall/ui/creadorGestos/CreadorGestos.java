@@ -10,16 +10,19 @@
 package ac.gestureCall.ui.creadorGestos;
 
 import java.io.File;
+import java.util.Random;
 
 import ac.gestureCall.R;
 import ac.gestureCall.exceptions.NoPreferenceException;
 import ac.gestureCall.ui.main;
 import ac.gestureCall.ui.cabecera.Cabecera;
 import ac.gestureCall.ui.contactos.ListContact;
+import ac.gestureCall.util.adMobListener.AdMobListenerInterstitial;
 import ac.gestureCall.util.config.AppConfig;
 import ac.gestureCall.util.config.AppConfig.Themes;
+import ac.gestureCall.util.location.GetCurrentLocation;
 import ac.gestureCall.util.mToast.mToast;
-import ac.gestureCall.util.smaatoListener.PrepareBaner;
+import ac.gestureCall.util.mobclixListener.MobclixListener;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -36,8 +39,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.ads.AdRequest;
+import com.google.ads.InterstitialAd;
 import com.mobclix.android.sdk.MobclixMMABannerXLAdView;
-import com.smaato.SOMA.SOMABanner;
 
 
 public class CreadorGestos extends Activity {
@@ -60,8 +64,9 @@ public class CreadorGestos extends Activity {
 
 	public GestureOverlayView overlay;
 
+	private InterstitialAd interstitial;
 	public MobclixMMABannerXLAdView adView;	
-	public SOMABanner somaBaner;
+	//public SOMABanner somaBaner;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,13 +75,14 @@ public class CreadorGestos extends Activity {
 		setContentView(R.layout.create_gesture);
 
 		//Escondemos la publicidad hasta que se cargue
-        adView = (MobclixMMABannerXLAdView)findViewById(R.id.mobclix_publicidad);
-        adView.setVisibility(View.GONE);
-                
-        
-        //Publicidad de smaato!
-        somaBaner = (SOMABanner)findViewById(R.id.smaato_baner);
-        PrepareBaner.prepareAndCall(somaBaner,adView); 
+		adView = (MobclixMMABannerXLAdView)findViewById(R.id.mobclix_publicidad);
+		adView.addMobclixAdViewListener(new MobclixListener());
+		// adView.setVisibility(View.GONE);
+
+
+		//Publicidad de smaato!
+		/*        somaBaner = (SOMABanner)findViewById(R.id.smaato_baner);
+        PrepareBaner.prepareAndCall(somaBaner,adView); */
 
 
 
@@ -152,6 +158,9 @@ public class CreadorGestos extends Activity {
 			mToast.Make(this, getResources().getString(R.string.gesto_anadido),0);
 			setResult(main.RESULT_GESTO_ADD_OK);
 			CreadorGestos.this.finish();
+			
+			if (interstitial.isReady())
+				interstitial.show();
 		}
 
 	}
@@ -189,6 +198,9 @@ public class CreadorGestos extends Activity {
 		if (overlay.getGesture() == null){
 			setResult(main.RESULT_OK);
 			finish();
+			
+			if (interstitial.isReady())
+				interstitial.show();
 		}
 		else{
 			overlay.clear(true);
@@ -200,7 +212,7 @@ public class CreadorGestos extends Activity {
 
 	/**
 	 * 
-	 * Metodo al que se llama cuadno se pulsa el aï¿½adir. Guarda y asigna
+	 * Metodo al que se llama cuadno se pulsa el añadir. Guarda y asigna
 	 * el gesto al contacto seleccionado.
 	 * 
 	 * @param v boton que activa el metodo
@@ -273,20 +285,51 @@ public class CreadorGestos extends Activity {
 		}
 
 	}
-	
-    @Override
-    protected void onPause() {
-            // TODO Auto-generated method stub
-            super.onPause();
-            somaBaner.setAutoRefresh(false);
-    }
 
-    @Override
-    protected void onResume() {
-            // TODO Auto-generated method stub
-            super.onResume();
-            somaBaner.setAutoRefresh(true);
-    }
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		// somaBaner.setAutoRefresh(false);
+
+	}
+
+	@Override
+	protected void onResume() {
+
+		Random rnd = new Random();
+		if (interstitial == null)
+			interstitial = new InterstitialAd(this, "a14daeadcc3acb6");
+		int i = rnd.nextInt(7);
+
+		if ( i == 4){ //Por ejemplo 1 de cada siete (0-6) cuando sea 4, por que? porque me apetece
+			Log.i("Ads","Intentando mostrar instersticial");
+			// Create the interstitial
+			
+			interstitial.setAdListener(new AdMobListenerInterstitial(interstitial));
+			
+			// Create ad request
+			AdRequest request = new AdRequest();
+			if (GetCurrentLocation.getInstance(this).currentLocation != null)
+				request.setLocation(GetCurrentLocation.getInstance(this).currentLocation);
+
+			// and begin loading your interstitial
+			interstitial.loadAd(request);
+			
+		}
+
+		super.onResume();
+		//somaBaner.setAutoRefresh(true);
+	}
+
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		
+		if (interstitial.isReady())
+			interstitial.show();
+	}
 
 
 	private class GesturesProcessor implements GestureOverlayView.OnGestureListener {
