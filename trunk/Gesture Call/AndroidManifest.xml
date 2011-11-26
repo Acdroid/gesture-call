@@ -41,11 +41,10 @@
 	<!-- Ads google -->
 	<activity android:name="com.google.ads.AdActivity"
                android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
-	
+	<meta-data android:value="a14daeadcc3acb6" android:name="ADMOB_PUBLISHER_ID" />
 	
 	<!-- Mobclix --> 
 	<meta-data android:name="com.mobclix.APPLICATION_ID" android:value="86E265D9-F336-4C3F-B5BE-E545F674437F"/>
-	<meta-data android:value="a14daeadcc3acb6" android:name="ADMOB_PUBLISHER_ID" />
 	<activity android:name="com.mobclix.android.sdk.MobclixBrowserActivity"
 			android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 	

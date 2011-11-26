@@ -765,6 +765,7 @@ public class main extends Activity {
 	
 	
 	
+	@SuppressWarnings("static-access")
 	@Override
 	protected void onRestart() {
 		
@@ -789,6 +790,7 @@ public class main extends Activity {
 	}
 
 
+	@SuppressWarnings("static-access")
 	@Override
 	protected void onResume() {
 		super.onResume();
