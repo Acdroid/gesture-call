@@ -2,7 +2,15 @@
 <resources>
     <string name="app_name">Gesture Call</string>
     <string name = "makeGesture">Make a gesture to call a contact</string>
-     
+    
+    <!-- Mas nuevas -->
+	<string name ="sharefacebook">Share on Facebook</string>    
+	<string name ="post_facebook">I just tried Gesture Call for Android. 
+	    Call and send text messages to your contacts with a simple gesture on your screen. Get it here
+	    
+	    </string>
+	<string name ="sharefacebook_sub">Put a post in your wall to recomend Gesture Call to your friends</string>
+	    
     <!--  NUEVAS --> 
     <string name ="click_gesture">Access Gesture Call !</string>
     <string name ="pref_exit_after_call">Exit after call</string>

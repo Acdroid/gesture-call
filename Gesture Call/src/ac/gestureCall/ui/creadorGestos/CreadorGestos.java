@@ -46,6 +46,7 @@ import com.google.ads.AdRequest;
 import com.google.ads.InterstitialAd;
 import com.mobclix.android.sdk.MobclixFullScreenAdView;
 import com.mobclix.android.sdk.MobclixMMABannerXLAdView;
+import com.smaato.SOMA.SOMABanner;
 
 
 public class CreadorGestos extends Activity {
@@ -71,22 +72,22 @@ public class CreadorGestos extends Activity {
 	private InterstitialAd interstitial;
 	public MobclixMMABannerXLAdView adView;
 	Boolean interstitialCalled = false;
-	//MobclixFullScreenAdView mobClixFSAdView;
-	//public SOMABanner somaBaner;
-//	private Boolean showMobclix = false;
-//	private Boolean callMobclix = false;
-//	
-//	public Handler handlerMobclix = new Handler(){
-//		@Override
-//		public void handleMessage(Message msg) {
-//			
-//			Boolean mobclixOK = (Boolean)msg.obj;
-//			showMobclix = mobclixOK;
-//		}
-//		
-//	};
-	
-	
+	MobclixFullScreenAdView mobClixFSAdView;
+	public SOMABanner somaBaner;
+	private Boolean showMobclix = false;
+	private Boolean callMobclix = false;
+
+	public Handler handlerMobclix = new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+
+			Boolean mobclixOK = (Boolean)msg.obj;
+			showMobclix = mobclixOK;
+		}
+
+	};
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -128,6 +129,12 @@ public class CreadorGestos extends Activity {
 		}
 
 		overlay.addOnGestureListener(new GesturesProcessor());
+
+		if (interstitialCalled == false){
+			callInterstitial();
+
+		}
+
 	}
 
 	@Override
@@ -137,6 +144,7 @@ public class CreadorGestos extends Activity {
 		if (mGesture != null) {
 			outState.putParcelable("gesture", mGesture);
 		}
+
 	}
 
 	@Override
@@ -177,14 +185,12 @@ public class CreadorGestos extends Activity {
 			mToast.Make(this, getResources().getString(R.string.gesto_anadido),0);
 			setResult(main.RESULT_GESTO_ADD_OK);
 			CreadorGestos.this.finish();
-			
-			if (interstitial.isReady())
+
+			if(callMobclix && showMobclix){
+				mobClixFSAdView.displayRequestedAd();
+			}
+			else if (interstitial.isReady())
 				interstitial.show();
-//			else{
-//				if(callMobclix && showMobclix){
-//					mobClixFSAdView.displayRequestedAd();
-//				}
-//			}
 		}
 
 	}
@@ -222,14 +228,12 @@ public class CreadorGestos extends Activity {
 		if (overlay.getGesture() == null){
 			setResult(main.RESULT_OK);
 			finish();
-			
-			if (interstitial.isReady())
+
+			if(callMobclix && showMobclix){
+				mobClixFSAdView.displayRequestedAd();
+			}
+			else if (interstitial.isReady())
 				interstitial.show();
-//			else{
-//				if(callMobclix && showMobclix){
-//					mobClixFSAdView.displayRequestedAd();
-//				}
-//			}
 		}
 		else{
 			overlay.clear(true);
@@ -261,7 +265,7 @@ public class CreadorGestos extends Activity {
 		try {
 			theme = ap.getInt(AppConfig.THEME);
 		} catch (NoPreferenceException e) {
-			Log.i("Gesture Call","No Theme preference. Apply Default GREY");
+			Log.i("Gesture Call","No Theme preference. Apply Default BLUE");
 			theme = Themes.BLUE;
 			ap.put(Themes.BLUE,AppConfig.THEME);
 		}
@@ -298,8 +302,8 @@ public class CreadorGestos extends Activity {
 			break;
 
 		default:
-			lay_main.setBackgroundResource(R.drawable.background_grey);
-			texto.setTextColor(getResources().getColor(R.color.white));
+			lay_main.setBackgroundResource(R.drawable.background_blue_gradient);
+			texto.setTextColor(getResources().getColor(R.color.black));
 			break;
 		}
 	}
@@ -308,22 +312,36 @@ public class CreadorGestos extends Activity {
 		Random rnd = new Random();
 		if (interstitial == null)
 			interstitial = new InterstitialAd(this, "a14daeadcc3acb6");
-		int i = rnd.nextInt(2);
+		int i = rnd.nextInt(70);
 		Log.i("Ads", "Random num = " + i + " solo se llama con probabilidad 1/7 ");
-		if ( i == 1){ 
+		if ( i < 10){ 
 			Log.i("Ads","Intentando mostrar instersticial");
-			// Create the interstitial
-			
-			interstitial.setAdListener(new AdMobListenerInterstitial(interstitial,this));
-			
-			// Create ad request
-			AdRequest request = new AdRequest();
-			if (GetCurrentLocation.getInstance(this).currentLocation != null)
-				request.setLocation(GetCurrentLocation.getInstance(this).currentLocation);
-			 //request.addTestDevice("7F47B6DBE8A643CD69173EB599FBE91A");
-			// and begin loading your interstitial
-			interstitial.loadAd(request);
-			interstitialCalled = true;
+
+			if (i%2 == 0){
+				// Create the interstitial
+				callMobclix = false;
+				interstitial.setAdListener(new AdMobListenerInterstitial(interstitial,this));
+
+				// Create ad request
+				AdRequest request = new AdRequest();
+				if (GetCurrentLocation.getInstance(this).currentLocation != null)
+					request.setLocation(GetCurrentLocation.getInstance(this).currentLocation);
+				//request.addTestDevice("7F47B6DBE8A643CD69173EB599FBE91A");
+				// and begin loading your interstitial
+				interstitial.loadAd(request);
+				interstitialCalled = true;
+			}
+			else{
+				callMobclix = true;
+				mobClixFSAdView = new MobclixFullScreenAdView(this);
+				mobClixFSAdView.addMobclixAdViewListener(new MobclixFullScreenListener(handlerMobclix));
+				//mobClixFSAdView.requestAndDisplayAd();
+				mobClixFSAdView.requestAd();
+
+			}
+
+
+
 		}
 	}
 
@@ -347,19 +365,6 @@ public class CreadorGestos extends Activity {
 	@SuppressWarnings("static-access")
 	@Override
 	protected void onResume() {
-
-		if (interstitialCalled == false){
-			callInterstitial();
-			
-		}
-//		if(i == 0){
-//			callMobclix = true;
-//			mobClixFSAdView = new MobclixFullScreenAdView(this);
-//			mobClixFSAdView.addMobclixAdViewListener(new MobclixFullScreenListener(handlerMobclix));
-//			//mobClixFSAdView.requestAndDisplayAd();
-//			mobClixFSAdView.requestAd();
-//		}
-
 		super.onResume();
 		//somaBaner.setAutoRefresh(true);
 	}
@@ -368,14 +373,13 @@ public class CreadorGestos extends Activity {
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
-		
-		if (interstitial.isReady())
+
+
+		if(callMobclix && showMobclix){
+			mobClixFSAdView.displayRequestedAd();
+		}
+		else if (interstitial.isReady())
 			interstitial.show();
-//		else{
-//			if(callMobclix && showMobclix){
-//				mobClixFSAdView.displayRequestedAd();
-//			}
-//		}
 	}
 
 
