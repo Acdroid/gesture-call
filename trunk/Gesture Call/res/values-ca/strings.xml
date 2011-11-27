@@ -2,6 +2,14 @@
 <resources>
    <string name = "makeGesture">Fes un gest per trucar a un contacte</string>
    
+       <!-- Mas nuevas -->
+	<string name ="sharefacebook">Compartir en Facebook</string>    
+	<string name ="post_facebook">He probado Gesture Call para android y me gusta. 
+	    Puedes llamar o andar un SMS a tus contactos con un simple gesto en la pantalla. Consíguelo aquí
+	    
+	    </string>
+	<string name ="sharefacebook_sub">Publica un comentario en Facebook para recomendar Gesture Call a tus amigos</string>    
+   
    <!--  NUEVAS -->
     <string name ="click_gesture">Accede a Gesture Call !</string>
     <string name ="pref_exit_after_call">Salir después de llamar</string>

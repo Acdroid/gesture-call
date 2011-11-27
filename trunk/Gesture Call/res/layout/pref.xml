@@ -211,6 +211,36 @@
 					   			android:text="@string/pref_themes_summary"/>
 					    </LinearLayout>
 				</LinearLayout>
+				
+				    <!--  Facebook -->
+				    
+				<TextView
+					style="@style/OptionsGroupText"
+				  	android:text="Facebook"/>
+				  	
+				<LinearLayout 
+					style="@style/OptionsLayoutGroup"
+					android:onClick="clickFacebook"
+					android:id="@+id/pref_lay_facebook">
+					
+					<ImageView 
+					       android:layout_width="35dip"
+					       android:layout_height="fill_parent"
+					       android:src="@drawable/facebook_icon"
+					       android:gravity="center"
+					       />
+						
+						<LinearLayout	style="@style/OptionsLayoutGroupText">
+					    	<TextView
+					    		style="@style/OptionsTextPrincipal"
+					    		android:id="@+id/pref_facebook"
+					   			android:text="@string/sharefacebook"/>
+					    	<TextView
+					    		style="@style/OptionsTextSummary"
+					    		android:id="@+id/pref_text_facebook2"
+					   			android:text="@string/sharefacebook_sub"/>
+					    </LinearLayout>
+				</LinearLayout>
 				    			    
 				    			    
 				<!-- ShortCut -->

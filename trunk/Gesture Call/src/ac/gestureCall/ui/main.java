@@ -21,6 +21,7 @@ import ac.gestureCall.ui.gestos.GestureBuilderActivity;
 import ac.gestureCall.util.adMobListener.AdMobListener;
 import ac.gestureCall.util.config.AppConfig;
 import ac.gestureCall.util.config.AppConfig.Themes;
+import ac.gestureCall.util.facebook.FacebookPostMessage;
 import ac.gestureCall.util.gestures.GesturesRecognizer;
 import ac.gestureCall.util.location.GetCurrentLocation;
 import ac.gestureCall.util.mToast.mToast;
@@ -61,6 +62,9 @@ import com.google.ads.AdRequest;
 import com.google.ads.AdView;
  
 public class main extends Activity {
+	
+	public static final String IMAGE = "http://i13.photobucket.com/albums/a253/Aracem/Captura1Device.png";
+	public static final String LINK = "https://market.android.com/details?id=ac.gestureCall";
 
 	public static final String NO_PREDICCION = "Sin_Resultado";
 	public static final int RESULT_ERROR = 1;
@@ -256,6 +260,10 @@ public class main extends Activity {
 		case R.id.me_opciones:
 			clickOpciones(null);
 			return true;
+		case R.id.me_facebook:
+			new FacebookPostMessage(this,"Gesture Call for Android", getResources().getString(R.string.post_facebook),
+					LINK,
+					IMAGE);
 		default:
 			return super.onOptionsItemSelected(item);
 		}

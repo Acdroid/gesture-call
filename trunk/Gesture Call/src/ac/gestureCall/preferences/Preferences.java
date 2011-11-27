@@ -13,6 +13,7 @@ import ac.gestureCall.R;
 import ac.gestureCall.exceptions.NoPreferenceException;
 import ac.gestureCall.ui.main;
 import ac.gestureCall.util.config.AppConfig;
+import ac.gestureCall.util.facebook.FacebookPostMessage;
 import ac.gestureCall.util.mToast.mToast;
 import ac.gestureCall.util.shortcut.CreateShortcut;
 import android.app.Activity;
@@ -177,6 +178,19 @@ public class Preferences extends Activity{
 	}
 	
 	
+	/**
+	 * Method clickDonate.
+	 * @param v View
+	 */
+	public void clickFacebook(View v){
+		new FacebookPostMessage(this,"Gesture Call for Android", getResources().getString(R.string.post_facebook),
+				main.LINK,
+				main.IMAGE);
+		
+		LinearLayout l = (LinearLayout)findViewById(R.id.pref_lay_facebook);
+		l.setEnabled(false);
+		
+	}
 	
 	
 	/**
