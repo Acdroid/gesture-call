@@ -3,9 +3,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-   	android:background="@color/white"
-    >
+    android:layout_height="fill_parent">
     <ac.gestureCall.ui.cabecera.Cabecera
         android:id="@+id/list_cont_cabecera"
     	android:layout_width="fill_parent"
@@ -19,7 +17,6 @@
     	 android:layout_below="@id/list_cont_cabecera"
     	 android:layout_width="fill_parent"
          android:layout_height="wrap_content"
-         android:layout_weight="1"
          android:cacheColorHint="#FFFFFFFF"
          android:fastScrollEnabled="true"
          android:scrollingCache="true"
@@ -28,5 +25,9 @@
 		 android:id="@android:id/empty"
 		 android:layout_width="fill_parent"
 		 android:layout_height="fill_parent"
-		 android:text="no se han encontrado registros"  /> 
+		 android:gravity="center"
+		 android:textSize="40dip"
+		 android:textStyle="bold"
+		 android:textColor="@color/black"
+		 android:text="@string/do_you_have_contacts"  /> 
 </RelativeLayout>

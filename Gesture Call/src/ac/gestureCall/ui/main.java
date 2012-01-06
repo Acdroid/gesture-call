@@ -52,6 +52,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -198,6 +200,12 @@ public class main extends Activity {
 		
 		//Aviso por pantalla //TODO donde poner esto? En appconfig o aqui
 		mToast.Make(this, getResources().getString(R.string.makeGesture), 0);
+		Button bdonate = (Button)findViewById(R.id.button_donate);
+		
+		Animation anim = new TranslateAnimation(-600, 0, 0, 0);
+		anim.setDuration(2000);
+		bdonate.setAnimation(anim);
+		anim.start();
 		
 	}
 
