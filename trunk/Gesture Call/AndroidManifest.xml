@@ -16,7 +16,7 @@
 <!--   -->    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
     
     <application android:icon="@drawable/icon" android:label="@string/app_name" 
-    	android:theme="@android:style/Theme.NoTitleBar">
+    	android:theme="@android:style/Theme.Light.NoTitleBar">
     
         <activity android:name=".ui.main"
                   android:label="@string/app_name"
@@ -33,9 +33,6 @@
         <activity android:name=".ui.donate.Donate"></activity>
 		<activity android:name=".ui.donate.DonateAmazon"></activity>
 		<activity android:name=".preferences.Preferences"></activity>
-	
-		<!-- Widgets --> 
-		
 		
 
 	<!-- Ads google -->
@@ -47,6 +44,8 @@
 	<meta-data android:name="com.mobclix.APPLICATION_ID" android:value="86E265D9-F336-4C3F-B5BE-E545F674437F"/>
 	<activity android:name="com.mobclix.android.sdk.MobclixBrowserActivity"
 			android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+	
+	
 	
 	 
 	
