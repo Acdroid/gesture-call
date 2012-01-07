@@ -276,38 +276,39 @@ public class CreadorGestos extends Activity {
 			lay_main.setBackgroundResource(R.drawable.background_grey);
 			overlay.setGestureColor(getResources().getColor(R.color.overlay_grey));
 			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_grey_uncertain));
+			texto.setTextColor(getResources().getColor(R.color.white));
 
 			break;
 		case Themes.BLUE:
 			lay_main.setBackgroundResource(R.drawable.background_blue_gradient);
 			overlay.setGestureColor(getResources().getColor(R.color.overlay_blue));
 			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_blue_uncertain));
-
+			texto.setTextColor(getResources().getColor(R.color.black));
 			break;
 		case Themes.GREEN:
 			lay_main.setBackgroundResource(R.drawable.background_green_gradient);
 			overlay.setGestureColor(getResources().getColor(R.color.overlay_green));
 			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_green_uncertain));
-
+			texto.setTextColor(getResources().getColor(R.color.black));
 			break;
 		case Themes.BLACK:
 			lay_main.setBackgroundResource(R.drawable.background_black_gradient);
 			overlay.setGestureColor(getResources().getColor(R.color.overlay_black));
 			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_black_uncertain));
-
+			texto.setTextColor(getResources().getColor(R.color.white));
 			break;
 		case Themes.WHITE:
 			lay_main.setBackgroundResource(R.drawable.background_white_gradient);
 			overlay.setGestureColor(getResources().getColor(R.color.overlay_white));
 			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_white_uncertain));
-
+			texto.setTextColor(getResources().getColor(R.color.black));
 			break;
 
 		default:
 			lay_main.setBackgroundResource(R.drawable.background_blue_gradient);
 			overlay.setGestureColor(getResources().getColor(R.color.overlay_blue));
 			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_blue_uncertain));
-
+			texto.setTextColor(getResources().getColor(R.color.black));
 			break;
 		}
 	}
