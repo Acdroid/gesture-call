@@ -72,10 +72,10 @@ public class CreadorGestos extends Activity {
 	private InterstitialAd interstitial;
 	public MobclixMMABannerXLAdView adView;
 	Boolean interstitialCalled = false;
-	MobclixFullScreenAdView mobClixFSAdView;
-	public SOMABanner somaBaner;
+	//MobclixFullScreenAdView mobClixFSAdView;
+	//public SOMABanner somaBaner;
 	private Boolean showMobclix = false;
-	private Boolean callMobclix = false;
+	//private Boolean callMobclix = false;
 
 	public Handler handlerMobclix = new Handler(){
 		@Override
@@ -186,10 +186,10 @@ public class CreadorGestos extends Activity {
 			setResult(main.RESULT_GESTO_ADD_OK);
 			CreadorGestos.this.finish();
 
-			if(callMobclix && showMobclix){
-				mobClixFSAdView.displayRequestedAd();
-			}
-			else if (interstitial.isReady())
+//			if(callMobclix && showMobclix){
+//				mobClixFSAdView.displayRequestedAd();
+//			}
+			if (interstitial.isReady())
 				interstitial.show();
 		}
 
@@ -229,10 +229,10 @@ public class CreadorGestos extends Activity {
 			setResult(main.RESULT_OK);
 			finish();
 
-			if(callMobclix && showMobclix){
-				mobClixFSAdView.displayRequestedAd();
-			}
-			else if (interstitial.isReady())
+//			if(callMobclix && showMobclix){
+//				mobClixFSAdView.displayRequestedAd();
+//			}
+			if (interstitial.isReady())
 				interstitial.show();
 		}
 		else{
@@ -265,7 +265,7 @@ public class CreadorGestos extends Activity {
 		try {
 			theme = ap.getInt(AppConfig.THEME);
 		} catch (NoPreferenceException e) {
-			Log.i("Gesture Call","No Theme preference. Apply Default BLUE");
+			Log.i("Gesture Call","No Theme Preference. Apply Default: Grey");
 			theme = Themes.BLUE;
 			ap.put(Themes.BLUE,AppConfig.THEME);
 		}
@@ -274,71 +274,82 @@ public class CreadorGestos extends Activity {
 		switch (theme) {
 		case Themes.GREY:
 			lay_main.setBackgroundResource(R.drawable.background_grey);
-			//			overlay.setGestureColor(getResources().getColor(R.color.overlay_grey));
-			//			overlay.setGestureColor(Color.WHITE);
-			//			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_grey_uncertain));
-			texto.setTextColor(getResources().getColor(R.color.white));
+			overlay.setGestureColor(getResources().getColor(R.color.overlay_grey));
+			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_grey_uncertain));
 
 			break;
 		case Themes.BLUE:
 			lay_main.setBackgroundResource(R.drawable.background_blue_gradient);
-			//			overlay.setGestureColor(getResources().getColor(R.color.overlay_blue));
-			//			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_blue_uncertain));
-			texto.setTextColor(getResources().getColor(R.color.black));
+			overlay.setGestureColor(getResources().getColor(R.color.overlay_blue));
+			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_blue_uncertain));
+
 			break;
 		case Themes.GREEN:
 			lay_main.setBackgroundResource(R.drawable.background_green_gradient);
-			//			overlay.setGestureColor(getResources().getColor(R.color.overlay_green));
-			//			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_green_uncertain));
-			texto.setTextColor(getResources().getColor(R.color.black));
+			overlay.setGestureColor(getResources().getColor(R.color.overlay_green));
+			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_green_uncertain));
+
 			break;
 		case Themes.BLACK:
 			lay_main.setBackgroundResource(R.drawable.background_black_gradient);
-			texto.setTextColor(getResources().getColor(R.color.white));
+			overlay.setGestureColor(getResources().getColor(R.color.overlay_black));
+			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_black_uncertain));
+
 			break;
 		case Themes.WHITE:
 			lay_main.setBackgroundResource(R.drawable.background_white_gradient);
-			texto.setTextColor(getResources().getColor(R.color.black));
+			overlay.setGestureColor(getResources().getColor(R.color.overlay_white));
+			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_white_uncertain));
+
 			break;
 
 		default:
 			lay_main.setBackgroundResource(R.drawable.background_blue_gradient);
-			texto.setTextColor(getResources().getColor(R.color.black));
+			overlay.setGestureColor(getResources().getColor(R.color.overlay_blue));
+			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_blue_uncertain));
+
 			break;
 		}
 	}
 
 	private void callInterstitial(){
 		Random rnd = new Random();
-		if (interstitial == null)
-			interstitial = new InterstitialAd(this, "a14daeadcc3acb6");
-		int i = rnd.nextInt(70);
-		Log.i("Ads", "Random num = " + i + " solo se llama con probabilidad 1/7 ");
-		if ( i < 10){ 
+
+		int i = rnd.nextInt(50);
+		if (interstitial == null){
+			if (i%2 == 0)
+				interstitial = new InterstitialAd(this, "a14daeadcc3acb6");
+			else
+				interstitial = new InterstitialAd(this, "a14f079be1a9471"); //special
+		}
+			
+		Log.i("Ads", "Random num = " + i + " solo se llama con probabilidad 1/5 ");
+		if ( i < 12){ 
 			Log.i("Ads","Intentando mostrar instersticial");
 
-			if (i%2 == 0){
-				// Create the interstitial
-				callMobclix = false;
-				interstitial.setAdListener(new AdMobListenerInterstitial(interstitial,this));
+			//			if (i%2 == 0){
+			// Create the interstitial
+			//	callMobclix = false;
 
-				// Create ad request
-				AdRequest request = new AdRequest();
-				if (GetCurrentLocation.getInstance(this).currentLocation != null)
-					request.setLocation(GetCurrentLocation.getInstance(this).currentLocation);
-				//request.addTestDevice("7F47B6DBE8A643CD69173EB599FBE91A");
-				// and begin loading your interstitial
-				interstitial.loadAd(request);
-				interstitialCalled = true;
-			}
-			else{
-				callMobclix = true;
-				mobClixFSAdView = new MobclixFullScreenAdView(this);
-				mobClixFSAdView.addMobclixAdViewListener(new MobclixFullScreenListener(handlerMobclix));
-				//mobClixFSAdView.requestAndDisplayAd();
-				mobClixFSAdView.requestAd();
+			interstitial.setAdListener(new AdMobListenerInterstitial(interstitial,this));
 
-			}
+			// Create ad request
+			AdRequest request = new AdRequest();
+			if (GetCurrentLocation.getInstance(this).currentLocation != null)
+				request.setLocation(GetCurrentLocation.getInstance(this).currentLocation);
+			//request.addTestDevice("7F47B6DBE8A643CD69173EB599FBE91A");
+			// and begin loading your interstitial
+			interstitial.loadAd(request);
+			interstitialCalled = true;
+			//			}
+			//			else{
+			//				callMobclix = true;
+			//				mobClixFSAdView = new MobclixFullScreenAdView(this);
+			//				mobClixFSAdView.addMobclixAdViewListener(new MobclixFullScreenListener(handlerMobclix));
+			//				//mobClixFSAdView.requestAndDisplayAd();
+			//				mobClixFSAdView.requestAd();
+			//
+			//			}
 
 
 
@@ -375,10 +386,10 @@ public class CreadorGestos extends Activity {
 		super.onBackPressed();
 
 
-		if(callMobclix && showMobclix){
-			mobClixFSAdView.displayRequestedAd();
-		}
-		else if (interstitial.isReady())
+//		if(callMobclix && showMobclix){
+//			mobClixFSAdView.displayRequestedAd();
+//		}
+		if (interstitial.isReady())
 			interstitial.show();
 	}
 

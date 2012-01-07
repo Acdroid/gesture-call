@@ -19,6 +19,7 @@
         android:eventsInterceptionEnabled="true"
         android:gestureColor="#c32020"
         android:gestureStrokeType="multiple"
+        android:gestureStrokeWidth="15"
         android:gravity="center"
         android:orientation="vertical"
         android:uncertainGestureColor="#80c32020" >
