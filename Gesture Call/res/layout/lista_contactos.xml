@@ -1,33 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
     <ac.gestureCall.ui.cabecera.Cabecera
         android:id="@+id/list_cont_cabecera"
-    	android:layout_width="fill_parent"
-    	android:layout_height="40dip"
-    	android:layout_alignParentTop="true"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:layout_alignParentTop="true" >
+    </ac.gestureCall.ui.cabecera.Cabecera>
     
-    ></ac.gestureCall.ui.cabecera.Cabecera>
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/list_cont_cabecera"
+        android:cacheColorHint="#FF000000"
+        android:fastScrollEnabled="true"
+        android:scrollingCache="true"
+        android:divider="#a0a0a0"
+        android:dividerHeight="3dip"
+        android:textFilterEnabled="true" />
 
-    
-    <ListView android:id="@android:id/list" 
-    	 android:layout_below="@id/list_cont_cabecera"
-    	 android:layout_width="fill_parent"
-         android:layout_height="wrap_content"
-         android:cacheColorHint="#FFFFFFFF"
-         android:fastScrollEnabled="true"
-         android:scrollingCache="true"
-         />
     <TextView
-		 android:id="@android:id/empty"
-		 android:layout_width="fill_parent"
-		 android:layout_height="fill_parent"
-		 android:gravity="center"
-		 android:textSize="40dip"
-		 android:textStyle="bold"
-		 android:textColor="@color/black"
-		 android:text="@string/do_you_have_contacts"  /> 
+        android:id="@android:id/empty"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:text="@string/do_you_have_contacts"
+        android:textColor="@color/black"
+        android:textSize="40dip"
+        android:textStyle="bold" />
+
 </RelativeLayout>
