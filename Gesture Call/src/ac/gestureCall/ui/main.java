@@ -38,7 +38,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.gesture.GestureLibrary;
 import android.gesture.GestureOverlayView;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -206,7 +205,7 @@ public class main extends Activity  {
 		addAnimationDonateButton();
 		
 		//Aviso por pantalla //TODO donde poner esto? En appconfig o aqui
-	//	mToast.Make(this, getResources().getString(R.string.makeGesture), 0);
+		mToast.Make(this, getResources().getString(R.string.makeGesture), 0);
 
 	}
 
