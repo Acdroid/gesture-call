@@ -802,7 +802,6 @@ public class main extends Activity  {
 		if (GetCurrentLocation.getInstance(this).currentLocation != null)
 			request.setLocation(GetCurrentLocation.getInstance(this).currentLocation);
 
-		adView.loadAd(request);
 	}
 
 
@@ -844,9 +843,11 @@ public class main extends Activity  {
 		AnimationSet as = new AnimationSet(true);
 		as.setInterpolator(new LinearInterpolator());
 		
-		Animation anim = new TranslateAnimation(-600, 0, 0, 0);
-		anim.setDuration(600);
+		Animation anim = new TranslateAnimation(-800, 0, 0, 0);
+		anim.setDuration(800);
+		anim.setStartOffset(3000);
 		as.addAnimation(anim);
+		
 //		anim = new TranslateAnimation(0, -100,0,0);
 //		anim.setDuration(200);
 //		anim.setStartOffset(600);

@@ -26,10 +26,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.ads.AdView;
+
 import ac.gestureCall.R;
 import ac.gestureCall.ui.main;
+import ac.gestureCall.ui.autopublicidad.Autopublicidad;
 import ac.gestureCall.ui.contactos.ListContact;
 import ac.gestureCall.ui.creadorGestos.CreadorGestos;
+import ac.gestureCall.util.adMobListener.AdMobListener;
 import ac.gestureCall.util.mToast.mToast;
 import android.app.ListActivity;
 import android.content.Context;
@@ -72,7 +76,8 @@ public class GestureBuilderActivity extends ListActivity {
 	private static final int MENU_ID_EDIT = 1;
 	private static final int MENU_ID_REMOVE = 2;
 
-
+	public AdView adView;
+	public Autopublicidad autopubli;
 
 	// Type: long (id)
 	private static final String GESTURES_INFO_ID = "gestures.info_id";
@@ -121,6 +126,12 @@ public class GestureBuilderActivity extends ListActivity {
 		loadGestures();
 
 		registerForContextMenu(getListView());
+		
+		adView = (AdView)findViewById(R.id.publicidad_admob);
+		autopubli = (Autopublicidad)findViewById(R.id.autopubli);
+		adView.setAdListener(new AdMobListener(adView,autopubli));
+		
+		mToast.Make(this, getResources().getString(R.string.info_list_gestos), 0);
 	}
 
 	static GestureLibrary getStore() {
