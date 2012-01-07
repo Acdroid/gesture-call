@@ -38,6 +38,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.gesture.GestureLibrary;
 import android.gesture.GestureOverlayView;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -53,6 +54,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -62,9 +65,9 @@ import android.widget.Toast;
 
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
- 
-public class main extends Activity {
-	
+
+public class main extends Activity  {
+
 	public static final String IMAGE = "http://i13.photobucket.com/albums/a253/Aracem/Captura1Device.png";
 	public static final String LINK = "https://market.android.com/details?id=ac.gestureCall";
 
@@ -93,12 +96,12 @@ public class main extends Activity {
 	public Context mContext;
 	public int tipoAccion=ACCION_LLAMAR; //Accion por defecto llamar si no se pulsa ningun boton
 	public CallCountDown countdown;
-	
+
 	//public MobclixMMABannerXLAdView adView;
 	public AdView adView;
 	public Autopublicidad autopubli;
 	public Cabecera cabecera;
-	
+
 	public boolean smsOn=false;
 	public boolean isOnCallingSms=false;
 
@@ -140,7 +143,7 @@ public class main extends Activity {
 	private void init(){
 		mContext = this;
 		isOnCallingSms=false;
-		
+
 		GetCurrentLocation.getInstance(this);	
 
 		//Cargamos las opciones
@@ -152,23 +155,23 @@ public class main extends Activity {
 		} catch (Exception e) {
 			Toast.makeText(this, e.getMessage() + "\nERROR while the Gesture Recognice starts!!",Toast.LENGTH_SHORT).show();
 		} //Reconocedor, lo cargamos con la base de datos de accesos directos
-		
+
 		//Configuramos la cabecera
 		cabecera = (Cabecera)findViewById(R.id.main_cabecera);
 		cabecera.setVisibleAccion();
 		cabecera.setOnActionClick(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				clickSms(arg0);
-				
+
 			}
 		});
 		cabecera.setOnOptionClickWitReturn(ID);
-		
+
 		//notificacion
 		setStatusBarNotification();
-		
+
 		//La cuenta atras para las llamadas
 		long intervalo;
 		try {
@@ -182,31 +185,29 @@ public class main extends Activity {
 		//Iniciamos el dialog
 		//TODO cambiar esto , hay que sacarlo fuera de aqui
 		createDialog();
-		
+
 		//accion por defecto
 		setDefaultAction();
-		
+
 		//Cargamos tema
 		lay_main = (LinearLayout)findViewById(R.id.lay_main);
 		setTheme();
-		
+
 		//Escondemos la publicidad hasta que se cargue
-//		adView = (MobclixMMABannerXLAdView)findViewById(R.id.publicidad);
-//		adView.setVisibility(View.GONE);
-//		adView.addMobclixAdViewListener(new MobclixListener());
+		//		adView = (MobclixMMABannerXLAdView)findViewById(R.id.publicidad);
+		//		adView.setVisibility(View.GONE);
+		//		adView.addMobclixAdViewListener(new MobclixListener());
 		adView = (AdView)findViewById(R.id.publicidad_admob);
 		autopubli = (Autopublicidad)findViewById(R.id.autopubli);
 		adView.setAdListener(new AdMobListener(adView,autopubli));
+
+		
+		//Animacion boton donate
+		addAnimationDonateButton();
 		
 		//Aviso por pantalla //TODO donde poner esto? En appconfig o aqui
-		mToast.Make(this, getResources().getString(R.string.makeGesture), 0);
-		Button bdonate = (Button)findViewById(R.id.button_donate);
-		
-		Animation anim = new TranslateAnimation(-600, 0, 0, 0);
-		anim.setDuration(2000);
-		bdonate.setAnimation(anim);
-		anim.start();
-		
+	//	mToast.Make(this, getResources().getString(R.string.makeGesture), 0);
+
 	}
 
 
@@ -301,7 +302,7 @@ public class main extends Activity {
 					//sino volvemos a poner isOnCallingSms a fale
 					isOnCallingSms=false;
 				}
-				
+
 				break;
 			case RESULT_ERROR:
 				break;
@@ -313,7 +314,7 @@ public class main extends Activity {
 				break;
 			case RESULT_PREF_SAVED:
 				setStatusBarNotification();
-				
+
 				//Cargamos el contador
 				//La cuenta atras para las llamadas
 				long intervalo;
@@ -334,22 +335,22 @@ public class main extends Activity {
 			getStore().load();
 		}
 	}
-	
-	
-	
+
+
+
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	
-	
+
+
+
 	/**
 	 * Crea una notificacion en la barra de status
 	 * para acceder directamente a la aplicación
 	 * */
 	public void setStatusBarNotification(){
-		
+
 		String ns = Context.NOTIFICATION_SERVICE;
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(ns);
-		
+
 		//Comprobamos si el usuario desea usar notificaciones
 		boolean notif;
 		try {
@@ -359,22 +360,22 @@ public class main extends Activity {
 			notif = true; //en caso de error SI notificaciones
 			ap.put(true,AppConfig.NOTIFICATION);		
 		}
-		
+
 		if (!notif){
 			mNotificationManager.cancel(HELLO_ID);
 			return;
 		}
-		
-		
+
+
 		//Creamos la notificacion
 		int icon = R.drawable.icon;
 		CharSequence tickerText = getResources().getString(R.string.notification_hello);
 		long when = System.currentTimeMillis();
 
 		Notification notification = new Notification(icon, tickerText, when);
-		
+
 		notification.flags |= Notification.FLAG_NO_CLEAR | Notification.FLAG_ONGOING_EVENT;
-				
+
 		Context context = getApplicationContext();
 		CharSequence contentTitle = getString(R.string.app_name);
 		CharSequence contentText  = getString(R.string.click_gesture);
@@ -382,18 +383,18 @@ public class main extends Activity {
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
 		notification.setLatestEventInfo(context, contentTitle, contentText, contentIntent);
-		
-		
-		
+
+
+
 
 		mNotificationManager.notify(HELLO_ID, notification);
 	}
-	
+
 	/**
 	 * Establece la accion por defecto deseada por el usuario
 	 */
 	public void setDefaultAction(){
-		
+
 		int  actDef;
 		try {
 			actDef = ap.getInt(AppConfig.ACCION_POR_DEFECTO);
@@ -402,7 +403,7 @@ public class main extends Activity {
 			actDef = ACCION_LLAMAR;
 			ap.put(ACCION_LLAMAR,AppConfig.ACCION_POR_DEFECTO);		
 		}
-		
+
 		switch (actDef) {
 		case ACCION_LLAMAR:
 			tipoAccion = ACCION_LLAMAR;
@@ -424,8 +425,8 @@ public class main extends Activity {
 			break;
 		}
 	}
-	
-	
+
+
 	/**
 	 * Carga el tema segun las preferencias del usuarios
 	 * 
@@ -436,54 +437,54 @@ public class main extends Activity {
 			theme = ap.getInt(AppConfig.THEME);
 		} catch (NoPreferenceException e) {
 			Log.i("Gesture Call","No Theme Preference. Apply Default: Grey");
-			theme = Themes.GREY;
-			ap.put(Themes.GREY,AppConfig.THEME);
+			theme = Themes.BLUE;
+			ap.put(Themes.BLUE,AppConfig.THEME);
 		}
-		
-		
+
+
 		switch (theme) {
 		case Themes.GREY:
 			lay_main.setBackgroundResource(R.drawable.background_grey);
-			//overlay.setGestureColor(R.color.overlay_grey);
-			//overlay.setUncertainGestureColor(R.color.overlay_grey_uncertain);
-			
+			overlay.setGestureColor(getResources().getColor(R.color.overlay_grey));
+			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_grey_uncertain));
+
 			break;
 		case Themes.BLUE:
 			lay_main.setBackgroundResource(R.drawable.background_blue_gradient);
-			//overlay.setGestureColor(R.color.overlay_blue);
-			//overlay.setUncertainGestureColor(R.color.overlay_blue_uncertain);
-			
+			overlay.setGestureColor(getResources().getColor(R.color.overlay_blue));
+			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_blue_uncertain));
+
 			break;
 		case Themes.GREEN:
 			lay_main.setBackgroundResource(R.drawable.background_green_gradient);
-			//overlay.setGestureColor(R.color.overlay_green);
-			//overlay.setUncertainGestureColor(R.color.overlay_green_uncertain);
-			
+			overlay.setGestureColor(getResources().getColor(R.color.overlay_green));
+			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_green_uncertain));
+
 			break;
 		case Themes.BLACK:
 			lay_main.setBackgroundResource(R.drawable.background_black_gradient);
-			//overlay.setGestureColor(R.color.overlay_green);
-			//overlay.setUncertainGestureColor(R.color.overlay_green_uncertain);
-			
+			overlay.setGestureColor(getResources().getColor(R.color.overlay_black));
+			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_black_uncertain));
+
 			break;
 		case Themes.WHITE:
 			lay_main.setBackgroundResource(R.drawable.background_white_gradient);
-			//overlay.setGestureColor(R.color.overlay_green);
-			//overlay.setUncertainGestureColor(R.color.overlay_green_uncertain);
-			
+			overlay.setGestureColor(getResources().getColor(R.color.overlay_white));
+			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_white_uncertain));
+
 			break;
 
 		default:
-			lay_main.setBackgroundResource(R.drawable.background_grey);
-			//overlay.setGestureColor(R.color.overlay_grey);
-			//overlay.setUncertainGestureColor(R.color.overlay_grey_uncertain);
-			
+			lay_main.setBackgroundResource(R.drawable.background_blue_gradient);
+			overlay.setGestureColor(getResources().getColor(R.color.overlay_blue));
+			overlay.setUncertainGestureColor(getResources().getColor(R.color.overlay_blue_uncertain));
+
 			break;
 		}
 	}
-	
-	
-	
+
+
+
 
 	/**
 	 * <p>Metodo que llama a la accion determinada (llamar
@@ -496,7 +497,7 @@ public class main extends Activity {
 	public void ejecutaAccion(String prediccion){
 		int accionActual = getTipoAccion();
 
-		
+
 		switch (accionActual) {
 		case ACCION_LLAMAR:			
 			call(prediccion);			
@@ -536,7 +537,7 @@ public class main extends Activity {
 
 				TextView tquieres = (TextView)dialogCall.findViewById(R.id.qieres);
 				tquieres.setText(R.string.dialog_bc_seriusly);
-				
+
 				Uri uri =  Data.CONTENT_URI;
 				String[] projection = new String []{
 						Data.DISPLAY_NAME
@@ -549,14 +550,14 @@ public class main extends Activity {
 				if(c.moveToFirst()){ 
 					t.setText(c.getString(c.getColumnIndex(Data.DISPLAY_NAME))+  "?");       			
 				}
-			else{
+				else{
 					t.setText(getPrediccionActual());
 				}
 				showDialog(DIALOG_CALL);
-								
+
 				countdown.setButton((Button) dialogCall.findViewById(R.id.dialog_button_yes));
 				countdown.start();
-				
+
 
 			}
 			else{//Si no, se llama directamente
@@ -565,7 +566,7 @@ public class main extends Activity {
 				Intent i = new Intent(Intent.ACTION_CALL, Uri.parse(url));
 				isOnCallingSms=true;
 				startActivityForResult(i,ID);
-				
+
 			}
 		} catch (NoPreferenceException e) { //En caso de no existir la opcion guardada correctamente se llama
 			Log.i("Gesture Call","No Before Call preference. Calling");
@@ -598,8 +599,8 @@ public class main extends Activity {
 				dialogCall.setTitle(mContext.getResources().getString(R.string.sms));
 				TextView tquieres = (TextView)dialogCall.findViewById(R.id.qieres);
 				tquieres.setText(R.string.dialog_bc_seriusly_sms);
-				
-				
+
+
 				TextView t = (TextView)dialogCall.findViewById(R.id.dialog_text_contact);
 
 				Uri uri =  Data.CONTENT_URI;
@@ -618,7 +619,7 @@ public class main extends Activity {
 					t.setText(getPrediccionActual());
 				}
 				showDialog(DIALOG_CALL);
-				
+
 				countdown.setButton((Button) dialogCall.findViewById(R.id.dialog_button_yes));
 				countdown.start();
 
@@ -662,7 +663,7 @@ public class main extends Activity {
 		dialogCall = new Dialog(mContext);
 		dialogCall.setContentView(R.layout.dialog_b4_call);
 		dialogCall.setTitle(mContext.getResources().getString(R.string.calling));
-		
+
 		//Cuando el usuario pulsa atras, cancelamos la cuenta atras
 		dialogCall.setOnCancelListener(new OnCancelListener() {			
 			@Override
@@ -671,10 +672,10 @@ public class main extends Activity {
 				countdown.cancel();				
 			}
 		});
-		
+
 		Button buttonDialog = (Button) dialogCall.findViewById(R.id.dialog_button_yes);
-		
-		
+
+
 		buttonDialog.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -683,10 +684,10 @@ public class main extends Activity {
 				dialogCall.dismiss();
 			}
 		});
-		
+
 		buttonDialog = (Button) dialogCall.findViewById(R.id.dialog_button_no);
-		
-		
+
+
 		buttonDialog.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -695,17 +696,17 @@ public class main extends Activity {
 				dialogCall.dismiss();
 			}
 		});
-		
+
 
 	}
-	
-	
-	
+
+
+
 	/**
 	 * Este metodo gestiona las acciones a tomar en las llamadas
 	 * */
 	private void callActions() {
-		
+
 		CheckBox c = (CheckBox)dialogCall.findViewById(R.id.dialog_check);
 		if(c.isChecked()){
 			getAp().put(false, AppConfig.AVISO_AL_LLAMAR);
@@ -714,7 +715,7 @@ public class main extends Activity {
 		//Marcamos como que se esta llamando o enviando un smsm para poder salir
 		//directamente al volver si es necesario
 		isOnCallingSms=true;
-		
+
 		//Dependiendo del tipo de accion realizamos una u otra cosa
 		String url = "";
 		switch (tipoAccion) {
@@ -734,59 +735,59 @@ public class main extends Activity {
 		default:
 			break;
 		}
-		
+
 	}
-	
-	
+
+
 	/**
 	 * Clase que gestiona la cuenta atras antes de una "llamada"
 	 * 1.Crear el objeto con new
 	 * 2.Llamar a setButton
 	 * 3.Llamar a start
 	 **/
-    class CallCountDown extends CountDownTimer{
+	class CallCountDown extends CountDownTimer{
 
-    	Button button;
-    	boolean isPressedButtonSi=false;
-    	
-    	public CallCountDown(long millisInFuture, long countDownInterval) {
-    		super(millisInFuture, countDownInterval);
-    	}
+		Button button;
+		boolean isPressedButtonSi=false;
 
-    	public void setButton(Button b) {    		
-    		this.button = b;
-    	}
-    	
-    	public void setIsPressedButtonSi(boolean pressed){
-    		isPressedButtonSi = pressed;
-    	}
-    	
-    	@Override
-    	public void onFinish() {
-    		if(isPressedButtonSi){
-    			isPressedButtonSi=false;
-    			return;
-    		}
-    		callActions();
-    		dialogCall.dismiss();
-    	}
-    	
+		public CallCountDown(long millisInFuture, long countDownInterval) {
+			super(millisInFuture, countDownInterval);
+		}
 
-    	@Override
-    	public void onTick(long millisUntilFinished) {
-    		button.setText(getString(R.string.yes)+" ("+millisUntilFinished/1000+")");
-    	}
+		public void setButton(Button b) {    		
+			this.button = b;
+		}
 
-    }
-	
-	
-	
+		public void setIsPressedButtonSi(boolean pressed){
+			isPressedButtonSi = pressed;
+		}
+
+		@Override
+		public void onFinish() {
+			if(isPressedButtonSi){
+				isPressedButtonSi=false;
+				return;
+			}
+			callActions();
+			dialogCall.dismiss();
+		}
+
+
+		@Override
+		public void onTick(long millisUntilFinished) {
+			button.setText(getString(R.string.yes)+" ("+millisUntilFinished/1000+")");
+		}
+
+	}
+
+
+
 	@SuppressWarnings("static-access")
 	@Override
 	protected void onRestart() {
-		
+
 		super.onRestart();
-		
+
 		if(smsOn){
 			tipoAccion=ACCION_SMS;
 			//OJO esto se cambiara segun los temas
@@ -797,7 +798,7 @@ public class main extends Activity {
 			cabecera.setAccionImageResource(R.drawable.phone);
 			//OJO desactivar otros elementos como llamada perdida
 		}
-		
+
 		AdRequest request = new AdRequest();
 		if (GetCurrentLocation.getInstance(this).currentLocation != null)
 			request.setLocation(GetCurrentLocation.getInstance(this).currentLocation);
@@ -810,7 +811,7 @@ public class main extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		
+
 		if(smsOn){
 			tipoAccion=ACCION_SMS;
 			//OJO esto se cambiara segun los temas
@@ -829,23 +830,45 @@ public class main extends Activity {
 		adView.loadAd(request);
 	}
 
-    public void clickDonate(View v){
-    	Intent i = new Intent(this,Donate.class);
-    	//Intent i = new Intent(this,DonateAmazon.class); //Para amazon
-    	startActivity(i);
-    }
-	
-	
-	
+	public void clickDonate(View v){
+		Intent i = new Intent(this,Donate.class);
+		//Intent i = new Intent(this,DonateAmazon.class); //Para amazon
+		startActivity(i);
+	}
+
+
+
 	/* **************** Funciones auxiliares o menores ****************** */
+	
+	public void addAnimationDonateButton(){
+		Button bdonate = (Button)findViewById(R.id.button_donate);
+		AnimationSet as = new AnimationSet(true);
+		as.setInterpolator(new LinearInterpolator());
+		
+		Animation anim = new TranslateAnimation(-600, 0, 0, 0);
+		anim.setDuration(600);
+		as.addAnimation(anim);
+//		anim = new TranslateAnimation(0, -100,0,0);
+//		anim.setDuration(200);
+//		anim.setStartOffset(600);
+//		as.addAnimation(anim);
+//		anim = new TranslateAnimation(-100,0,0,0);
+//		anim.setDuration(200);
+//		anim.setStartOffset(800);
+//		as.addAnimation(anim);
+		
+		
+		bdonate.setAnimation(as);
+		as.start();
+	}
 
 	public void clickAdd(View v){
 		Intent i = new Intent(main.this,ListContact.class);
 		startActivityForResult(i, ID);
 	}
-	
+
 	public void clickSms(View v){
-		
+
 		if(smsOn){
 			smsOn=false;
 			tipoAccion=ACCION_LLAMAR;
@@ -857,11 +880,11 @@ public class main extends Activity {
 			smsOn=true;
 			tipoAccion=ACCION_SMS;
 			cabecera.setAccionImageResource(R.drawable.sms);
-			
+
 			mToast.Make(this, getResources().getString(R.string.smson), 0);
 			//OJO desactivar otros elementos como llamada perdida
 		}
-		
+
 	}
 
 	public void clickEdit(View v){
@@ -887,15 +910,13 @@ public class main extends Activity {
 	public int getTipoAccion(){
 		return tipoAccion;
 	}
-	
-	
+
+
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		outState.putBoolean("ISCALLSMS", isOnCallingSms);
 		super.onSaveInstanceState(outState);
 	}
-
-
 
 
 
@@ -906,22 +927,4 @@ public class main extends Activity {
 		}
 		super.onRestoreInstanceState(savedInstanceState);
 	}
-
-
-
-
-
-	@Override
-	protected void onStop() {
-		super.onStop();
-		countdown.cancel();
-	}
-
-	
-	
-	
-	
-	
-	
-	
 }
