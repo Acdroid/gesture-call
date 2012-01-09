@@ -1,18 +1,19 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-    <ScrollView android:id="@+id/scrollView1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
-        <LinearLayout android:id="@+id/linearLayout1" android:layout_width="match_parent" android:layout_height="wrap_content">
-                             <TextView
-                    	android:text="@string/creditos"                 	
-                    	android:id="@+id/textView1" android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
-        </LinearLayout>
-    </ScrollView>
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/creditos" >
+        </TextView>
+    </LinearLayout>
 
-
-
-    <!-- 
- ·Basque:\n
- Haizea Mendo San José\n
- \n
-    
-    -->
+</ScrollView>
