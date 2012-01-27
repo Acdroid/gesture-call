@@ -25,6 +25,17 @@
 	        	android:layout_weight="0.8"
 	        	android:gravity="right"> 
 	        		
+       	
+	            <View 
+		            android:id="@+id/separator2"
+		            android:layout_width="1dip"
+		            android:layout_height="fill_parent"
+		            android:background="@drawable/separator"
+		            android:visibility="gone"
+		            android:layout_marginRight="4dip"
+		            
+		            />
+	        		
 	        	<ImageView  
 		        	android:id="@+id/cabecera_sms"
 		        	android:layout_width="35dip"
@@ -33,6 +44,15 @@
 		        	android:visibility="gone"/>
 		        	<!-- android:background="@drawable/button_imageview"
 		        		android:layout_margin="2dip"/> -->
+		        		
+		        <View 
+		            android:id="@+id/separator1"
+		            android:layout_width="1dip"
+		            android:layout_height="fill_parent"
+		            android:background="@drawable/separator"
+		            android:layout_marginLeft="4dip"
+		            
+		            />
 		        <ImageView 
 		        	android:id="@+id/cabecera_options"
 		        	android:layout_width="wrap_content"
@@ -41,6 +61,7 @@
 		        		<!-- 
 		        		android:background="@drawable/button_imageview"
 		        		android:layout_margin="2dip"/> -->
+	        	
 	        	
 	        </LinearLayout>
 	</LinearLayout>

@@ -44,9 +44,7 @@ import android.widget.TextView;
 
 import com.google.ads.AdRequest;
 import com.google.ads.InterstitialAd;
-import com.mobclix.android.sdk.MobclixFullScreenAdView;
 import com.mobclix.android.sdk.MobclixMMABannerXLAdView;
-import com.smaato.SOMA.SOMABanner;
 
 
 public class CreadorGestos extends Activity {
@@ -91,14 +89,12 @@ public class CreadorGestos extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.create_gesture);
 
-
+		//Publicidad
 		adView = (MobclixMMABannerXLAdView)findViewById(R.id.mobclix_publicidad);
 		adView.addMobclixAdViewListener(new MobclixListener());
 		// adView.setVisibility(View.GONE);
-
 
 		//Publicidad de smaato!
 		/*        somaBaner = (SOMABanner)findViewById(R.id.smaato_baner);

@@ -243,10 +243,6 @@ public class main extends Activity  {
 		}
 	}
 
-	public AppConfig getAp() {
-		return ap;
-	}
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -927,4 +923,21 @@ public class main extends Activity  {
 		}
 		super.onRestoreInstanceState(savedInstanceState);
 	}
+	
+	
+	/**
+	 * Method onStop.
+	 */
+	@Override
+	protected void onStop() {
+		super.onStop();
+		countdown.cancel();
+	}
+
+	
+
+	public AppConfig getAp() {
+		return ap;
+	}
+
 }
