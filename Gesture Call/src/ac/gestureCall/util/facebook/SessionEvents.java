@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package ac.gestureCall.util.facebook;
+package ac.gestureCallPro.util.facebook;
 
-import java.util.LinkedList;
+import java.util.LinkedList; 
 
 public class SessionEvents {
 
