@@ -7,10 +7,10 @@
  * Project Gesture Call
  * 
  */
-package ac.gestureCallPro.ui.cabecera;
+package ac.gestureCall.ui.cabecera;
 
-import ac.gestureCallPro.R;
-import ac.gestureCallPro.preferences.Preferences;
+import ac.gestureCall.R;
+import ac.gestureCall.preferences.Preferences;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +26,7 @@ public class Cabecera extends LinearLayout {
 	
 	private ImageView opciones;
 	private ImageView accion;
+	private View separator;
 
 	
 	
@@ -77,10 +78,13 @@ public class Cabecera extends LinearLayout {
 	
 	public void setVisibleAccion(){
 		accion.setVisibility(View.VISIBLE);
+		separator.setVisibility(View.VISIBLE);
 	}
 	
 	public void setNoVisibleAccion(){
 		accion.setVisibility(View.GONE);
+		separator.setVisibility(View.GONE);
+
 	}
 	/**
 	 * 

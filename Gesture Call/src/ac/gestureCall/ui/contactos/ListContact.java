@@ -26,15 +26,9 @@ import android.gesture.GestureLibraries;
 import android.gesture.GestureLibrary;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.Contacts.People;
-import android.provider.ContactsContract.Data;
-import android.provider.ContactsContract;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AlphabetIndexer;
-import android.widget.EditText;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -62,15 +56,7 @@ public final class ListContact extends ListActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.lista_contactos);     
 
-		//		try {
-		//			store = main.getStore();
-		//		} catch (Exception e) {
-		//			Log.e("Gesture Call","ERROR al obtener los gestos. " + e.getMessage());
-		//			mToast.Make(this, "Error while obtain the Gestures Library. Try to close and open Gesture Call", 0);
-		//		}
-
 		obtenLibreria();
-
 
 		manegadorCursor = new ContactCursor(this);
 		cursor =  manegadorCursor.getCursor();
@@ -109,33 +95,7 @@ public final class ListContact extends ListActivity
 	 * @return A cursor for for accessing the contact list.
 	 */
 	@SuppressWarnings("unused")
-	private Cursor getContacts()
-	{
-		// Run query
-		//        Uri uri = ContactsContract.Contacts.CONTENT_URI;
-		//        String[] projection = new String[] {
-		//                ContactsContract.Contacts._ID,
-		//                ContactsContract.Contacts.DISPLAY_NAME
-		//        };
-		//        String selection = ContactsContract.Contacts.IN_VISIBLE_GROUP + " = '1'";
-		//        
-		//        String[] selectionArgs = null;
-		//        String sortOrder = ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
-
-
-		//		Uri uri =  Data.CONTENT_URI;
-		//		String[] projection = new String []{
-		//				Data._ID,
-		//				Data.DISPLAY_NAME,
-		//				Phone.NUMBER,
-		//				Phone.TYPE 
-		//		};
-		//		String selection = Data.MIMETYPE + "='" + Phone.CONTENT_ITEM_TYPE + "' AND "
-		//        		+ Phone.NUMBER + " IS NOT NULL";
-		//		
-		//		String[] selectionArgs = null;
-		//		String sortOrder = Data.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
-		//        return managedQuery(uri, projection, selection, selectionArgs, sortOrder);
+	private Cursor getContacts(){
 		return new ContactCursor(this).getCursor();
 	}
 
@@ -216,21 +176,7 @@ public final class ListContact extends ListActivity
 		@Override
 		public void bindView(View view, Context context, Cursor cursor) {
 
-			//Cambiamos el color de fondo
-			//LinearLayout l = (LinearLayout) view.findViewById(R.id.lay_item);
-			TextView t = (TextView) view.findViewById(R.id.item_lista_nombre);
-			t.setTextColor(mContext.getResources().getColor(android.R.color.white));
-			//			if (cursor.getPosition() % 2 == 0){
-			//				l.setBackgroundResource(R.drawable.linearlayout_color_gradient_down);
-			//				
-			//			}
-			//			else{
-			//				l.setBackgroundResource(R.drawable.linearlayout_color_gradient_up);
-			//			}
 			super.bindView(view, context, cursor);
-
-			//Comprobamos si hay gesto o no
-
 
 			TextView t2 = (TextView) view.findViewById(R.id.item_lista_numero);
 			String phone =t2.getText().toString();
