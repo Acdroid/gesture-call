@@ -7,10 +7,11 @@
  * Project Gesture Call
  * 
  */
-package ac.gestureCall.ui.cabecera;
+package ac.gestureCallPro.ui.cabecera;
 
-import ac.gestureCall.R;
-import ac.gestureCall.preferences.Preferences;
+import ac.gestureCallPro.R; 
+import ac.gestureCallPro.preferences.Preferences;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -20,9 +21,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-public class Cabecera extends LinearLayout { 
+public class Cabecera extends LinearLayout {
 	
-	private Context context;
+	private Context context; 
 	
 	private ImageView opciones;
 	private ImageView accion;
@@ -46,7 +47,7 @@ public class Cabecera extends LinearLayout {
 	/**
 	 * Inicializa el View
 	 */
-	private void init (){
+	private void init (){ 
 		String infService = Context.LAYOUT_INFLATER_SERVICE;
 	    LayoutInflater li = (LayoutInflater)getContext().getSystemService(infService);
 	    li.inflate(R.layout.cabecera, this, true);
@@ -64,6 +65,7 @@ public class Cabecera extends LinearLayout {
 		});
 		
 		accion = (ImageView)findViewById(R.id.cabecera_sms);
+		separator = (View)findViewById(R.id.separator2);
 	    
 	}
 	
@@ -83,8 +85,7 @@ public class Cabecera extends LinearLayout {
 	
 	public void setNoVisibleAccion(){
 		accion.setVisibility(View.GONE);
-		separator.setVisibility(View.GONE);
-
+		separator.setVisibility(View.GONE); 
 	}
 	/**
 	 * 
