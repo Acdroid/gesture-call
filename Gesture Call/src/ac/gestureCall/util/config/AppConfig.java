@@ -48,6 +48,8 @@ public class AppConfig extends MSharedPreferences{
 	public static final String ACCION_POR_DEFECTO = "defAction"; //accion por defecto llamar, sms o perdida?
 	public static final String THEME = "theme"; //Theme elegido
 	public static final String S_AFTER_CALL = "secondsAfterCall"; //tiempo en segundos antes de llamar, sms o perdida
+	public static final String OPEN_START = "open_on_start";
+
 	
     public static final class Themes {
         public static final int GREY = 0;
@@ -147,6 +149,7 @@ public class AppConfig extends MSharedPreferences{
 		makeV2();
 		makeV3();
 		makeV4();
+		makeV5();
 	}
 	
 	/**
@@ -177,6 +180,11 @@ public class AppConfig extends MSharedPreferences{
 		if (ver < 4){
 			makeV4();
 		}
+		
+		if (ver < 5){
+			makeV5();
+		}
+		
 		
 		
 	}
@@ -230,7 +238,6 @@ public class AppConfig extends MSharedPreferences{
 	 * Cuarta version de las opciones con la opcion de
 	 * aviso al llamar e inclusion de la version
 	 * 
-	 * 2.1.1
 	 * 
 	 */
 	private void makeV4(){
@@ -238,10 +245,20 @@ public class AppConfig extends MSharedPreferences{
 		//para que no haya quejas
 		put(false,NOTIFICATION);
 		mToast.Make(mContext, mContext.getResources().getString(R.string.aviso_notificacion),1);
-		
-		showNewDialog();
-		
+				
 		put(4,VERSION); //Imprescindible siempre poner
+	}
+	
+	/**
+	 * Quinta version en la que se agrega abrir al inicio
+	 * 
+	 * 2.0.8
+	 */
+	private void makeV5(){
+		put(true,OPEN_START);
+		showNewDialog();
+		put(5,VERSION);
+		
 	}
 	
 	

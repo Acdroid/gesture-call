@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.CALL_PRIVILEGED"></uses-permission>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"></uses-permission>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    
      
     <!-- Ya no son necesarios estos permisos,permisos de publicidad -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
@@ -33,6 +35,14 @@
         <activity android:name=".ui.donate.Donate"></activity>
 		<activity android:name=".ui.donate.DonateAmazon"></activity>
 		<activity android:name=".preferences.Preferences"></activity>
+		<receiver android:enabled="true" android:name=".util.bootReceiver.BootUpReceiver"
+        			android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+
+	        <intent-filter>
+	                <action android:name="android.intent.action.BOOT_COMPLETED" />
+	                <category android:name="android.intent.category.DEFAULT" />
+	        </intent-filter>
+		</receiver>
 		
 
 	<!-- Ads google -->

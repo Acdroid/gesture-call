@@ -166,7 +166,8 @@
 			  	<LinearLayout  	style="@style/OptionsLayoutGroup">
 				    <CheckBox
 				    	style="@style/OptionsCheckbox"
-					  	android:id="@+id/pref_check_notification"/>
+					  	android:id="@+id/pref_check_notification"
+					  	android:onClick="clickNotification"/>
 					<LinearLayout	style="@style/OptionsLayoutGroupText">
 				    	<TextView
 				    		style="@style/OptionsTextPrincipal"
@@ -180,7 +181,30 @@
 			    </LinearLayout>
 			    <LinearLayout style="@style/SeparatorLane"/>
 	
+		 		  <!-- Abrir al inicio -->
 	
+	            <LinearLayout 
+	                android:id="@+id/layout_open_start"
+	                style="@style/OptionsLayoutGroup" >
+	
+	                <CheckBox
+	                    android:id="@+id/pref_check_open_start"
+	                    style="@style/OptionsCheckbox" />
+	
+	                <LinearLayout style="@style/OptionsLayoutGroupText" >
+	
+	                    <TextView
+	                        style="@style/OptionsTextPrincipal"
+	                        android:text="@string/pref_open_start"
+	                        android:textColor="@android:color/primary_text_dark" />
+	
+	                    <TextView
+	                        style="@style/OptionsTextSummary"
+	                        android:text="@string/pref_open_start_summary"
+	                        android:textColor="@android:color/secondary_text_dark" />
+	                </LinearLayout>
+	            </LinearLayout>
+				    
 				 	  
 				<!-- Temas-->	
 				<TextView
