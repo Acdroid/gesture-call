@@ -7,10 +7,10 @@
  * Project Gesture Call
  * 
  */
-package ac.gestureCallPro.ui.cabecera;
+package ac.gestureCall.ui.cabecera;
 
-import ac.gestureCallPro.R; 
-import ac.gestureCallPro.preferences.Preferences;
+import ac.gestureCall.R; 
+import ac.gestureCall.preferences.Preferences;
 
 import android.app.Activity;
 import android.content.Context;
@@ -66,7 +66,6 @@ public class Cabecera extends LinearLayout {
 		
 		accion = (ImageView)findViewById(R.id.cabecera_sms);
 		separator = (View)findViewById(R.id.separator2);
-	    
 	}
 	
 	
