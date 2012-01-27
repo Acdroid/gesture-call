@@ -1,10 +1,11 @@
-package ac.gestureCall.util.facebook;
+package ac.gestureCallPro.util.facebook;
+
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import ac.gestureCall.util.facebook.SessionEvents.AuthListener;
-import ac.gestureCall.util.facebook.SessionEvents.LogoutListener;
+import ac.gestureCallPro.util.facebook.SessionEvents.AuthListener;
+import ac.gestureCallPro.util.facebook.SessionEvents.LogoutListener;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,7 +20,8 @@ import com.facebook.android.FacebookError;
 
 
 public class FacebookPostMessage implements DialogListener, AuthListener, LogoutListener{
-	private static final String FACEBOOK_ID ="145501312222682";
+	private static final String FACEBOOK_ID ="145501312222682"; 
+
 
 	private Facebook facebookClient;
 	private AsyncFacebookRunner mAsyncFBRunner;
