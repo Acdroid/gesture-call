@@ -396,7 +396,7 @@ public class Preferences extends Activity{
 	 * @param v View
 	 */
 	public void clickAbout(View v){
-		Dialog dialog = new Dialog(this);
+		Dialog dialog = new Dialog(this, android.R.style.Theme_Dialog);
 		dialog.setContentView(R.layout.credits_layout);
 		dialog.setTitle("Credits:");
 		

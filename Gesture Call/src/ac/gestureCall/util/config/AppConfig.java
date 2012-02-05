@@ -49,6 +49,10 @@ public class AppConfig extends MSharedPreferences{
 	public static final String THEME = "theme"; //Theme elegido
 	public static final String S_AFTER_CALL = "secondsAfterCall"; //tiempo en segundos antes de llamar, sms o perdida
 	public static final String OPEN_START = "open_on_start";
+	public static final String RATER = "rater";
+	public static final String RATER_LAUCH_COUNTER = "rater_lauch_counter";
+	public static final String RATER_FIRST_USE = "rater_first_use";
+	public static final String RATER_REMIND_LATER = "rater_remind_later";
 
 	
     public static final class Themes {
@@ -73,7 +77,7 @@ public class AppConfig extends MSharedPreferences{
 		super(mContext,name);
 		
 		//para el desarrollo por si se quiere hacer cosas especiales
-//		put(true,DEVELOPERS);
+		//put(true,DEVELOPERS);
 		try {
 			if( pref.contains(DEVELOPERS) && getBool(DEVELOPERS) ){
 				makeDevelopers();
@@ -132,13 +136,6 @@ public class AppConfig extends MSharedPreferences{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-
-
-		Log.i("GestureCall_AC", "Config file created");
-
-
-
 	}
 	
 	/**
@@ -150,6 +147,7 @@ public class AppConfig extends MSharedPreferences{
 		makeV3();
 		makeV4();
 		makeV5();
+		makeV6();
 	}
 	
 	/**
@@ -185,6 +183,9 @@ public class AppConfig extends MSharedPreferences{
 			makeV5();
 		}
 		
+		if (ver < 6){
+			makeV6();
+		}
 		
 		
 	}
@@ -256,8 +257,25 @@ public class AppConfig extends MSharedPreferences{
 	 */
 	private void makeV5(){
 		put(true,OPEN_START);
-		showNewDialog();
 		put(5,VERSION);
+		
+	}
+	
+	
+	/**
+	 * Quinta version en la que se agrega abrir al inicio
+	 * 
+	 * 2.0.89
+	 */
+	private void makeV6(){
+		put(true,RATER);
+		put(0,RATER_LAUCH_COUNTER);
+		put(1,RATER_REMIND_LATER);
+		//first lauch
+		Long time = System.currentTimeMillis();
+		put(time,RATER_FIRST_USE);
+		showNewDialog();
+		put(6,VERSION);
 		
 	}
 	
