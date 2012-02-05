@@ -25,6 +25,7 @@ import ac.gestureCall.util.facebook.FacebookPostMessage;
 import ac.gestureCall.util.gestures.GesturesRecognizer;
 import ac.gestureCall.util.location.GetCurrentLocation;
 import ac.gestureCall.util.mToast.mToast;
+import ac.gestureCall.util.rater.Rater;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -204,6 +205,7 @@ public class main extends Activity  {
 		//Animacion boton donate
 		addAnimationDonateButton();
 		
+		Rater.checkRater(this);
 		//Aviso por pantalla //TODO donde poner esto? En appconfig o aqui
 		mToast.Make(this, getResources().getString(R.string.makeGesture), 0);
 

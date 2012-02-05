@@ -20,7 +20,7 @@
                 android:id="@+id/textView1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/whats_new_firsttime"
+                android:text="@string/whats_new"
                 android:textColor="@color/black"
                 android:textStyle="bold" >
             </TextView>
