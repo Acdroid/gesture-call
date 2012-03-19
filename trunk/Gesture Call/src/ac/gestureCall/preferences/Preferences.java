@@ -9,6 +9,8 @@
  */
 package ac.gestureCall.preferences;
 
+import com.flurry.android.FlurryAgent;
+
 import ac.gestureCall.R;
 import ac.gestureCall.exceptions.NoPreferenceException;
 import ac.gestureCall.ui.main;
@@ -73,6 +75,12 @@ public class Preferences extends Activity{
 		
         
     }	
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		FlurryAgent.logEvent("Preferencias", true);	
+	}
     
 	
 	/**

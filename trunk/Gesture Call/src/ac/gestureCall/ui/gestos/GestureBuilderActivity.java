@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import com.flurry.android.FlurryAgent;
 import com.google.ads.AdView;
 
 import ac.gestureCall.R;
@@ -134,6 +135,12 @@ public class GestureBuilderActivity extends ListActivity {
 		mToast.Make(this, getResources().getString(R.string.info_list_gestos), 0);
 	}
 
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		FlurryAgent.logEvent("Lista Gestos", true);	
+	}
 	static GestureLibrary getStore() {
 		return sStore;
 	}

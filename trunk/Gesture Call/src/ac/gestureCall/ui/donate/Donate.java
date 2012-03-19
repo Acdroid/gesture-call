@@ -9,6 +9,8 @@
  */
 package ac.gestureCall.ui.donate;
 
+import com.flurry.android.FlurryAgent;
+
 import ac.gestureCall.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -35,6 +37,11 @@ public class Donate extends Activity {
 		init();
 	}
 
+	@Override
+	protected void onStart() {
+		super.onStart();
+		FlurryAgent.logEvent("Donate", true);	
+	}
 
 	public void init(){
 
@@ -43,6 +50,7 @@ public class Donate extends Activity {
 
 	public void clickGestureCall(View v){
 		Intent intent = new Intent(Intent.ACTION_VIEW);
+		FlurryAgent.logEvent("Donate click! Gesture call");
 		intent.setData(Uri.parse("market://details?id=ac.gestureCallPro"));
 		startActivityForResult(intent,ID);
 
@@ -62,6 +70,7 @@ public class Donate extends Activity {
 	
 	public void clickAcdroid(View v){
 		Intent intent = new Intent(Intent.ACTION_VIEW);
+		FlurryAgent.logEvent("Donate click! Acdroid");
 		intent.setData(Uri.parse("market://search?q=pub:Acdroid"));
 		startActivityForResult(intent,ID);	
 	}
