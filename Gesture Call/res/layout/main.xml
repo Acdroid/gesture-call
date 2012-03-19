@@ -98,8 +98,9 @@
                             android:layout_weight="1"
                             android:background="@drawable/button_menu_bar_left_bg"
                             android:onClick="clickAdd"
-                            android:padding="10dip"
-                            android:text="@string/ini_Button" />
+                            android:padding="8dip"
+                            android:text="@string/ini_Button" 
+                            android:textColor="@color/black"/>
 
                         <Button
                             android:id="@+id/main_button_edit"
@@ -108,8 +109,9 @@
                             android:layout_weight="1"
                             android:background="@drawable/button_menu_bar_right_bg"
                             android:onClick="clickEdit"
-                            android:padding="10dip"
-                            android:text="@string/button_edit_gesture" />
+                            android:padding="8dip"
+                            android:text="@string/button_edit_gesture" 
+                            android:textColor="@color/black"/>
                     </LinearLayout>
 
                     <com.google.ads.AdView

@@ -10,7 +10,6 @@
 package ac.gestureCall.ui.creadorGestos;
 
 import java.io.File;
-import java.util.Random;
 
 import ac.gestureCall.R;
 import ac.gestureCall.exceptions.NoPreferenceException;
@@ -41,6 +40,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 //import com.google.ads.InterstitialAd;
+import com.flurry.android.FlurryAgent;
 import com.mobclix.android.sdk.MobclixFullScreenAdView;
 import com.mobclix.android.sdk.MobclixMMABannerXLAdView;
 
@@ -129,6 +129,12 @@ public class CreadorGestos extends Activity {
 
 		}
 
+	}
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		FlurryAgent.logEvent("Creador de Gestos", true);	
 	}
 
 	@Override

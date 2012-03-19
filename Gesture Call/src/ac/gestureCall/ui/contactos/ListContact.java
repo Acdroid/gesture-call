@@ -13,6 +13,8 @@ package ac.gestureCall.ui.contactos;
 import java.io.File;
 import java.util.Set;
 
+import com.flurry.android.FlurryAgent;
+
 import ac.gestureCall.R;
 import ac.gestureCall.ui.main;
 import ac.gestureCall.ui.creadorGestos.CreadorGestos;
@@ -73,6 +75,13 @@ public final class ListContact extends ListActivity
 
 		setListAdapter(adapter);
 	}
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		FlurryAgent.logEvent("Contactos", true);	
+	}
+	
 
 
 	/**
@@ -144,6 +153,7 @@ public final class ListContact extends ListActivity
 
 	private class mySimpleCursorAdapter extends SimpleCursorAdapter implements SectionIndexer, Filterable{
 
+		@SuppressWarnings("unused")
 		private Context mContext;
 		Set<String> gestosNoNull;
 		AlphabetIndexer alphaIndexer;

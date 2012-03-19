@@ -8,5 +8,6 @@
 	<classpathentry exported="true" kind="lib" path="assets/GoogleAdMobAdsSdk-4.3.1.jar"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="lib" path="assets/appbooster.jar"/>
+	<classpathentry kind="lib" path="assets/FlurryAgent.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

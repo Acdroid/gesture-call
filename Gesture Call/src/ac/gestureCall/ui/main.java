@@ -64,6 +64,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flurry.android.FlurryAgent;
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
 import com.smaato.SOMA.SOMABanner;
@@ -74,6 +75,7 @@ public class main extends Activity  {
 	public static final String LINK = "https://market.android.com/details?id=ac.gestureCall";
 
 	//public static final String API_KEY="F32CB87A85BC69367E892114F1E2E89C";
+	public static final String FLURRY_APP_ID = "GBTGCQ3BARVXQIL6PAS3";
 
 	public static final String NO_PREDICCION = "Sin_Resultado";
 	public static final int RESULT_ERROR = 1;
@@ -100,6 +102,8 @@ public class main extends Activity  {
 	public Context mContext;
 	public int tipoAccion=ACCION_LLAMAR; //Accion por defecto llamar si no se pulsa ningun boton
 	public CallCountDown countdown;
+	public int  theme = -1;
+	public boolean loggedEvent = false;
 
 	//public MobclixMMABannerXLAdView adView;
 	public AdView adView;
@@ -140,11 +144,24 @@ public class main extends Activity  {
 		init();
 	}
 
+	@Override
+	protected void onStart() {
+		super.onStart();
+		FlurryAgent.onStartSession(this, FLURRY_APP_ID);
+		FlurryAgent.setReportLocation(true);
+		FlurryAgent.logEvent("Portada", true);
+		loggedEvent = true;
+		FlurryAgent.logEvent("Thema " + theme);
+		
+	}
+	
+
 	/**
 	 * <p>Metodo encargado de iniciar toda la configuracion tanto
 	 * de los elementos graficos como de preparar los atributos
 	 * tales como AppCondig ap o el mContext.
 	 */
+	@SuppressWarnings("static-access")
 	private void init(){
 		mContext = this;
 		isOnCallingSms=false;
@@ -202,11 +219,11 @@ public class main extends Activity  {
 		//		adView = (MobclixMMABannerXLAdView)findViewById(R.id.publicidad);
 		//		adView.setVisibility(View.GONE);
 		//		adView.addMobclixAdViewListener(new MobclixListener());
-		
+
 		adView = (AdView)findViewById(R.id.publicidad_admob);
 		autopubli = (Autopublicidad)findViewById(R.id.autopubli);
 		adView.setAdListener(new AdMobListener(adView,autopubli));
-		
+
 		Random rnd = new Random();
 		if ( (int)rnd.nextInt(50) % 2 == 0){
 			AdRequest request = new AdRequest();
@@ -238,6 +255,14 @@ public class main extends Activity  {
 		Dialog dialog;
 		switch(id) {
 		case DIALOG_SALIR:
+//			AlertDialog.Builder builder = null; 
+//			if (Build.VERSION.SDK_INT > 13)
+//				builder = new AlertDialog.Builder(mContext,android.R.style.Theme_DeviceDefault_Dialog);
+//			else if (Build.VERSION.SDK_INT > 10)
+//				builder = new AlertDialog.Builder(mContext,android.R.style.Theme_Holo_Dialog);
+//			else
+//				builder = new AlertDialog.Builder(mContext,android.R.style.Theme_Dialog);
+			
 			AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
 			builder.setMessage(mContext.getResources().getString(R.string.di_salir))
 			.setCancelable(false)
@@ -449,7 +474,7 @@ public class main extends Activity  {
 	 * 
 	 */
 	public void setTheme(){
-		int  theme;
+		
 		try {
 			theme = ap.getInt(AppConfig.THEME);
 		} catch (NoPreferenceException e) {
@@ -946,6 +971,7 @@ public class main extends Activity  {
 	@Override
 	protected void onStop() {
 		super.onStop();
+		FlurryAgent.onEndSession(this);
 		countdown.cancel();
 	}
 

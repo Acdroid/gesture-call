@@ -9,6 +9,8 @@
  */
 package ac.gestureCall.ui.donate;
 
+import com.flurry.android.FlurryAgent;
+
 import ac.gestureCall.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -35,6 +37,12 @@ public class DonateAmazon extends Activity {
 		init();
 	}
 
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		FlurryAgent.logEvent("Donate Amazon", true);	
+	}
 
 	public void init(){
 
@@ -53,6 +61,7 @@ public class DonateAmazon extends Activity {
 
 	public void clickGestureCall(View v){
 		Intent intent = new Intent(Intent.ACTION_VIEW);
+		FlurryAgent.logEvent("Donate Amazon click! Gesture Call");
 	//	intent.setData(Uri.parse("http://www.amazon.com/gp/mas/dl/android?p=ac.GestureCallPro"));//enlace web
 		intent.setData(Uri.parse("amzn://apps/android?p=ac.gestureCallPro")); //enlace con la app de amazon	
 		startActivity(intent);
