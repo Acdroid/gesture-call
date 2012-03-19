@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package ac.gestureCallPro.util.facebook;
+package ac.gestureCall.util.facebook;
 
 import com.facebook.android.Facebook;
-import android.content.Context; 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 

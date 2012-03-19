@@ -3,7 +3,6 @@ package ac.gestureCall.util.mobclixListener;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.View;
 
 import com.mobclix.android.sdk.MobclixFullScreenAdView;
 import com.mobclix.android.sdk.MobclixFullScreenAdViewListener;
@@ -25,10 +24,10 @@ public class MobclixFullScreenListener implements  MobclixFullScreenAdViewListen
 
 	@Override
 	public void onFailedLoad(MobclixFullScreenAdView ad, int errorValue) {
-		Log.i("Ads","Ad Full Screen no disponible pidiendo otro.");
-		if (errorValue == -501){
-			ad.requestAd();
-		}
+		Log.i("Ads","Ad Full Screen no disponible pidiendo otro. Error " + errorValue);
+//		if (errorValue == -503){
+//			ad.requestAd();
+//		}
 		
 	}
 

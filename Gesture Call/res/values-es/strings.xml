@@ -3,11 +3,12 @@
     <string name = "makeGesture">Haz un gesto para llamar a un contacto</string>
     
         	<!-- Lo mas de lo mas -->
-    <string name="rate">Valorar</string>
+    <string name="rate_title">Gracias</string>
     <string name="rate_later">Recuérdamelo más tarde</string>
     <string name="rate_no_thanks">No, gracias</string>
     <string name="rate_text1">Si te gusta </string>
-    <string name="rate_text2">, por favor tómate un momento para valorarlo. ¡Gracias por tu ayuda!"</string>
+    <string name="rate_text2">, ¿te importaría puntuarla en el Market? No te llevará más de un minuto. ¡Muchas gracias por tu ayuda!"</string>
+    <string name="rate_ok">Puntúa </string>
     
     
      <!--  Aun mas nuevas -->
