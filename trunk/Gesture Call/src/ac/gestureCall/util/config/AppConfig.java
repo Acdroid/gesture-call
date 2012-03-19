@@ -274,7 +274,7 @@ public class AppConfig extends MSharedPreferences{
 		//first lauch
 		Long time = System.currentTimeMillis();
 		put(time,RATER_FIRST_USE);
-		showNewDialog();
+		//showNewDialog();
 		put(6,VERSION);
 		
 	}

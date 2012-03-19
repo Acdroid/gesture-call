@@ -18,15 +18,14 @@
         android:layout_weight="1.0"
         android:eventsInterceptionEnabled="true"
         android:gestureColor="#c32020"
+        android:gestureStrokeAngleThreshold="40.0"
+        android:gestureStrokeLengthThreshold="50.0"
+        android:gestureStrokeSquarenessThreshold="0.275"
         android:gestureStrokeType="multiple"
         android:gestureStrokeWidth="15"
         android:gravity="center"
         android:orientation="vertical"
-        android:uncertainGestureColor="#80c32020" 
-        
-        android:gestureStrokeLengthThreshold="50.0"
-        android:gestureStrokeSquarenessThreshold="0.275"
-        android:gestureStrokeAngleThreshold="40.0">
+        android:uncertainGestureColor="#80c32020" >
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -119,7 +118,7 @@
                         android:layout_height="wrap_content"
                         ads:adSize="BANNER"
                         ads:adUnitId="a14daeadcc3acb6"
-                        ads:loadAdOnCreate="true" />
+                        ads:loadAdOnCreate="false"/>
 
                     <!--
                  		   	<com.mobclix.android.sdk.MobclixMMABannerXLAdView  
@@ -136,6 +135,14 @@
                         android:id="@+id/autopubli"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone" />
+
+                    <com.smaato.SOMA.SOMABanner
+                        android:id="@+id/smaato_baner"
+                        android:layout_width="320dip"
+                        android:layout_height="50dip"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
                         android:visibility="gone" />
                 </LinearLayout>
             </LinearLayout>

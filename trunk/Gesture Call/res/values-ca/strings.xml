@@ -3,11 +3,12 @@
 	<string name="makeGesture">Fes un gest per trucar a un contacte</string>
 	
 	<!-- Lo més de lo més -->
-    <string name="rate">Valorar</string>
+    <string name="rate_title">Gracias</string>
     <string name="rate_later">Recordar més tard</string>
     <string name="rate_no_thanks">No, gràcies</string>
     <string name="rate_text1">Si t\'agrada </string>
     <string name="rate_text2">, si us plau pren-te un moment per valorar-lo. Gràcies per la teva ajuda!"</string>
+    <string name="rate_ok">Puntua </string>
     
     
 	

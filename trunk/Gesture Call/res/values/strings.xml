@@ -3,11 +3,12 @@
     <string name="app_name">Gesture Call</string>
     <string name = "makeGesture">Make a gesture to call a contact</string>
         <!-- Lo mas de lo mas -->
-    <string name="rate">Rate</string>
+    <string name="rate_title">Thank you!</string>
     <string name="rate_later">Remind me later</string>
     <string name="rate_no_thanks">No, thanks</string>
     <string name="rate_text1">If you enjoy using </string>
     <string name="rate_text2">, please take a moment to rate it. Thanks for your support!"</string>
+    <string name="rate_ok">Rate </string>
     
      <!-- Aun mas nuevas -->
     <string name="pref_open_start">Start with device</string>

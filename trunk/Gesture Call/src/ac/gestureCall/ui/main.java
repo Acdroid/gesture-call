@@ -10,6 +10,8 @@
 package ac.gestureCall.ui;
 
 
+import java.util.Random;
+
 import ac.gestureCall.R;
 import ac.gestureCall.exceptions.NoPreferenceException;
 import ac.gestureCall.preferences.Preferences;
@@ -26,6 +28,7 @@ import ac.gestureCall.util.gestures.GesturesRecognizer;
 import ac.gestureCall.util.location.GetCurrentLocation;
 import ac.gestureCall.util.mToast.mToast;
 import ac.gestureCall.util.rater.Rater;
+import ac.gestureCall.util.smaatoListener.PrepareBaner;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -54,9 +57,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.TranslateAnimation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -65,11 +66,14 @@ import android.widget.Toast;
 
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
+import com.smaato.SOMA.SOMABanner;
 
 public class main extends Activity  {
 
 	public static final String IMAGE = "http://i13.photobucket.com/albums/a253/Aracem/Captura1Device.png";
 	public static final String LINK = "https://market.android.com/details?id=ac.gestureCall";
+
+	//public static final String API_KEY="F32CB87A85BC69367E892114F1E2E89C";
 
 	public static final String NO_PREDICCION = "Sin_Resultado";
 	public static final int RESULT_ERROR = 1;
@@ -99,6 +103,7 @@ public class main extends Activity  {
 
 	//public MobclixMMABannerXLAdView adView;
 	public AdView adView;
+	public SOMABanner somaBaner;
 	public Autopublicidad autopubli;
 	public Cabecera cabecera;
 
@@ -197,15 +202,30 @@ public class main extends Activity  {
 		//		adView = (MobclixMMABannerXLAdView)findViewById(R.id.publicidad);
 		//		adView.setVisibility(View.GONE);
 		//		adView.addMobclixAdViewListener(new MobclixListener());
+		
 		adView = (AdView)findViewById(R.id.publicidad_admob);
 		autopubli = (Autopublicidad)findViewById(R.id.autopubli);
 		adView.setAdListener(new AdMobListener(adView,autopubli));
-
 		
+		Random rnd = new Random();
+		if ( (int)rnd.nextInt(50) % 2 == 0){
+			AdRequest request = new AdRequest();
+			if (GetCurrentLocation.getInstance(this).currentLocation != null)
+				request.setLocation(GetCurrentLocation.getInstance(this).currentLocation);
+
+			adView.loadAd(request);
+
+		}
+		else{
+			//Publicidad de smaato!
+			somaBaner = (SOMABanner)findViewById(R.id.smaato_baner);
+			PrepareBaner.prepareAndCall(somaBaner,adView,getApplicationContext()); 
+		}
 		//Animacion boton donate
 		addAnimationDonateButton();
-		
+
 		Rater.checkRater(this);
+
 		//Aviso por pantalla //TODO donde poner esto? En appconfig o aqui
 		mToast.Make(this, getResources().getString(R.string.makeGesture), 0);
 
@@ -667,7 +687,7 @@ public class main extends Activity  {
 			public void onCancel(DialogInterface dialog) {
 				countdown.setIsPressedButtonSi(false);
 				countdown.cancel();	
-				
+
 				CheckBox c = (CheckBox)dialogCall.findViewById(R.id.dialog_check);
 				if(c.isChecked()){
 					getAp().put(false, AppConfig.AVISO_AL_LLAMAR);
@@ -828,45 +848,29 @@ public class main extends Activity  {
 
 			//OJO desactivar otros elementos como llamada perdida
 		}
-		AdRequest request = new AdRequest();
-		if (GetCurrentLocation.getInstance(this).currentLocation != null)
-			request.setLocation(GetCurrentLocation.getInstance(this).currentLocation);
-
-		adView.loadAd(request);
+		//		AdRequest request = new AdRequest();
+		//		if (GetCurrentLocation.getInstance(this).currentLocation != null)
+		//			request.setLocation(GetCurrentLocation.getInstance(this).currentLocation);
+		//
+		//		adView.loadAd(request);
 	}
 
 	public void clickDonate(View v){
 		Intent i = new Intent(this,Donate.class);
 		//Intent i = new Intent(this,DonateAmazon.class); //Para amazon
-		startActivity(i);
+		startActivity(i);  
 	}
 
 
 
 	/* **************** Funciones auxiliares o menores ****************** */
-	
+
 	public void addAnimationDonateButton(){
 		Button bdonate = (Button)findViewById(R.id.button_donate);
-		AnimationSet as = new AnimationSet(true);
-		as.setInterpolator(new LinearInterpolator());
-		
-		Animation anim = new TranslateAnimation(-800, 0, 0, 0);
-		anim.setDuration(800);
-		anim.setStartOffset(3000);
-		as.addAnimation(anim);
-		
-//		anim = new TranslateAnimation(0, -100,0,0);
-//		anim.setDuration(200);
-//		anim.setStartOffset(600);
-//		as.addAnimation(anim);
-//		anim = new TranslateAnimation(-100,0,0,0);
-//		anim.setDuration(200);
-//		anim.setStartOffset(800);
-//		as.addAnimation(anim);
-		
-		
-		bdonate.setAnimation(as);
-		as.start();
+
+		Animation anim = AnimationUtils.loadAnimation(mContext, R.anim.translate);
+		anim.setStartOffset(2000);
+		bdonate.startAnimation(anim);
 	}
 
 	public void clickAdd(View v){
@@ -934,8 +938,8 @@ public class main extends Activity  {
 		}
 		super.onRestoreInstanceState(savedInstanceState);
 	}
-	
-	
+
+
 	/**
 	 * Method onStop.
 	 */
@@ -945,7 +949,7 @@ public class main extends Activity  {
 		countdown.cancel();
 	}
 
-	
+
 
 	public AppConfig getAp() {
 		return ap;

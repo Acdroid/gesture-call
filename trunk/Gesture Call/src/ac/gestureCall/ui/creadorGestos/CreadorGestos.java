@@ -17,10 +17,8 @@ import ac.gestureCall.exceptions.NoPreferenceException;
 import ac.gestureCall.ui.main;
 import ac.gestureCall.ui.cabecera.Cabecera;
 import ac.gestureCall.ui.contactos.ListContact;
-import ac.gestureCall.util.adMobListener.AdMobListenerInterstitial;
 import ac.gestureCall.util.config.AppConfig;
 import ac.gestureCall.util.config.AppConfig.Themes;
-import ac.gestureCall.util.location.GetCurrentLocation;
 import ac.gestureCall.util.mToast.mToast;
 import ac.gestureCall.util.mobclixListener.MobclixFullScreenListener;
 import ac.gestureCall.util.mobclixListener.MobclixListener;
@@ -42,8 +40,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.ads.AdRequest;
-import com.google.ads.InterstitialAd;
+//import com.google.ads.InterstitialAd;
+import com.mobclix.android.sdk.MobclixFullScreenAdView;
 import com.mobclix.android.sdk.MobclixMMABannerXLAdView;
 
 
@@ -67,13 +65,13 @@ public class CreadorGestos extends Activity {
 
 	public GestureOverlayView overlay;
 
-	private InterstitialAd interstitial;
+//	private InterstitialAd interstitial;
 	public MobclixMMABannerXLAdView adView;
 	Boolean interstitialCalled = false;
-	//MobclixFullScreenAdView mobClixFSAdView;
+	MobclixFullScreenAdView mobClixFSAdView;
 	//public SOMABanner somaBaner;
 	private Boolean showMobclix = false;
-	//private Boolean callMobclix = false;
+	private Boolean callMobclix = false;
 
 	public Handler handlerMobclix = new Handler(){
 		@Override
@@ -182,11 +180,11 @@ public class CreadorGestos extends Activity {
 			setResult(main.RESULT_GESTO_ADD_OK);
 			CreadorGestos.this.finish();
 
-//			if(callMobclix && showMobclix){
-//				mobClixFSAdView.displayRequestedAd();
-//			}
-			if (interstitial.isReady())
-				interstitial.show();
+			if(callMobclix && showMobclix){
+				mobClixFSAdView.displayRequestedAd();
+			}
+			//			if (interstitial.isReady())
+			//				interstitial.show();
 		}
 
 	}
@@ -225,11 +223,11 @@ public class CreadorGestos extends Activity {
 			setResult(main.RESULT_OK);
 			finish();
 
-//			if(callMobclix && showMobclix){
-//				mobClixFSAdView.displayRequestedAd();
-//			}
-			if (interstitial.isReady())
-				interstitial.show();
+			if(callMobclix && showMobclix){
+				mobClixFSAdView.displayRequestedAd();
+			}
+			//			if (interstitial.isReady())
+			//				interstitial.show();
 		}
 		else{
 			overlay.clear(true);
@@ -310,47 +308,47 @@ public class CreadorGestos extends Activity {
 	}
 
 	private void callInterstitial(){
-		Random rnd = new Random();
+//		Random rnd = new Random();
 
-		int i = rnd.nextInt(50);
-		if (interstitial == null){
-			if (i%2 == 0)
-				interstitial = new InterstitialAd(this, "a14daeadcc3acb6");
-			else
-				interstitial = new InterstitialAd(this, "a14f079be1a9471"); //special
-		}
-			
-		Log.i("Ads", "Random num = " + i + " solo se llama con probabilidad 1/5 ");
-		if ( i < 12){ 
-			Log.i("Ads","Intentando mostrar instersticial");
+		//		int i = rnd.nextInt(50);
+		//		if (interstitial == null){
+		//			if (i%2 == 0)
+		//				interstitial = new InterstitialAd(this, "a14daeadcc3acb6");
+		//			else
+		//				interstitial = new InterstitialAd(this, "a14f079be1a9471"); //special
+		//		}
+		//
+		//		Log.i("Ads", "Random num = " + i + " solo se llama con probabilidad 1/5 ");
+		//		if ( i < 12){ 
+		//			Log.i("Ads","Intentando mostrar instersticial");
+		//
+		//			if (i%2 == 0){
+		//				//			 Create the interstitial
+		//				callMobclix = false;
+		//
+		//				interstitial.setAdListener(new AdMobListenerInterstitial(interstitial,this));
+		//
+		//				// Create ad request
+		//				AdRequest request = new AdRequest();
+		//				if (GetCurrentLocation.getInstance(this).currentLocation != null)
+		//					request.setLocation(GetCurrentLocation.getInstance(this).currentLocation);
+		//				//request.addTestDevice("7F47B6DBE8A643CD69173EB599FBE91A");
+		//				// and begin loading your interstitial
+		//				interstitial.loadAd(request);
+		//				interstitialCalled = true;
+		//			}
+		//			else{
+		callMobclix = true;
+		mobClixFSAdView = new MobclixFullScreenAdView(this);
+		mobClixFSAdView.addMobclixAdViewListener(new MobclixFullScreenListener(handlerMobclix));
+		//mobClixFSAdView.requestAndDisplayAd();
+		mobClixFSAdView.requestAd();
 
-			//			if (i%2 == 0){
-			// Create the interstitial
-			//	callMobclix = false;
-
-			interstitial.setAdListener(new AdMobListenerInterstitial(interstitial,this));
-
-			// Create ad request
-			AdRequest request = new AdRequest();
-			if (GetCurrentLocation.getInstance(this).currentLocation != null)
-				request.setLocation(GetCurrentLocation.getInstance(this).currentLocation);
-			//request.addTestDevice("7F47B6DBE8A643CD69173EB599FBE91A");
-			// and begin loading your interstitial
-			interstitial.loadAd(request);
-			interstitialCalled = true;
-			//			}
-			//			else{
-			//				callMobclix = true;
-			//				mobClixFSAdView = new MobclixFullScreenAdView(this);
-			//				mobClixFSAdView.addMobclixAdViewListener(new MobclixFullScreenListener(handlerMobclix));
-			//				//mobClixFSAdView.requestAndDisplayAd();
-			//				mobClixFSAdView.requestAd();
-			//
-			//			}
+		//			}
 
 
 
-		}
+		//		}
 	}
 
 
@@ -383,11 +381,11 @@ public class CreadorGestos extends Activity {
 		super.onBackPressed();
 
 
-//		if(callMobclix && showMobclix){
-//			mobClixFSAdView.displayRequestedAd();
-//		}
-		if (interstitial.isReady())
-			interstitial.show();
+		if(callMobclix && showMobclix){
+			mobClixFSAdView.displayRequestedAd();
+		}
+		//		if (interstitial.isReady())
+		//			interstitial.show();
 	}
 
 

@@ -1,5 +1,8 @@
 package ac.gestureCall.util.smaatoListener;
 
+import android.content.Context;
+
+import com.google.ads.AdView;
 import com.mobclix.android.sdk.MobclixMMABannerXLAdView;
 import com.smaato.SOMA.AdDownloader.MediaType;
 import com.smaato.SOMA.SOMABanner;
@@ -58,6 +61,55 @@ public class PrepareBaner {
                 
         }
         
+        
+        /**
+         * Metodo estatico para configurar la publicidad de 
+         * smaato con ciertos valores preconfigurados, fácil
+         * de mover entre proyectos.
+         * @param sb baner que queremos configurar
+         */
+        public static void prepareAndCall(SOMABanner sb,AdView ad){
+                
+                sb.setPublisherId(PUBLISHERID);
+                sb.setAdSpaceId(ADSSPACE);
+                
+                sb.setLocationUpdateEnabled(true);
+                sb.setMediaType(MediaType.ALL);
+                
+                sb.setAutoRefresh(true);
+                
+                sb.setAnimationType(AnimationType.RANDOM_ANIMATION);
+                
+                sb.addAdListener(new SmaatoListener(sb,ad));
+                
+                sb.asyncLoadNewBanner();
+                
+        }
+        
+        
+        /**
+         * Metodo estatico para configurar la publicidad de 
+         * smaato con ciertos valores preconfigurados, fácil
+         * de mover entre proyectos.
+         * @param sb baner que queremos configurar
+         */
+        public static void prepareAndCall(SOMABanner sb,AdView ad,Context context){
+                
+                sb.setPublisherId(PUBLISHERID);
+                sb.setAdSpaceId(ADSSPACE);
+                
+                sb.setLocationUpdateEnabled(true);
+                sb.setMediaType(MediaType.ALL);
+                
+                sb.setAutoRefresh(true);
+                
+                sb.setAnimationType(AnimationType.RANDOM_ANIMATION);
+                
+                sb.addAdListener(new SmaatoListener(sb,ad,context));
+                
+                sb.asyncLoadNewBanner();
+                
+        }
         
         
 
