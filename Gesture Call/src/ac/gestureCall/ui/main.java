@@ -10,6 +10,8 @@
 package ac.gestureCall.ui;
 
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import ac.gestureCall.R;
@@ -151,7 +153,9 @@ public class main extends Activity  {
 		FlurryAgent.setReportLocation(true);
 		FlurryAgent.logEvent("Portada", true);
 		loggedEvent = true;
-		FlurryAgent.logEvent("Thema " + theme);
+		Map<String,String>thema = new HashMap<String, String>();
+		thema.put("tipo", "" + thema);
+		FlurryAgent.logEvent("Thema", thema);
 		
 	}
 	
@@ -539,7 +543,10 @@ public class main extends Activity  {
 	public void ejecutaAccion(String prediccion){
 		int accionActual = getTipoAccion();
 
-
+		Map<String,String>accion = new HashMap<String, String>();
+		accion.put("Accion", "" + accionActual);
+		FlurryAgent.logEvent("Accion", accion);
+		
 		switch (accionActual) {
 		case ACCION_LLAMAR:			
 			call(prediccion);			
@@ -857,7 +864,6 @@ public class main extends Activity  {
 	}
 
 
-	@SuppressWarnings("static-access")
 	@Override
 	protected void onResume() {
 		super.onResume();
